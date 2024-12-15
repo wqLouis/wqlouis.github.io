@@ -1,0 +1,50 @@
+body {
+    font-family:"Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    overflow-x: hidden;
+    margin: 0px;
+    background-color: black;
+}
+
+.bg-img {
+    background: url(img/DSC06051.JPG);
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    margin: 0;
+    transform: translateY(-20px);
+    mask-image: linear-gradient(black, transparent);
+    z-index: -1;
+    transition: 0.3s ease-in-out;
+}
+
+.vertical-container{
+    display: flex;
+    flex-direction: column;
+}
+.vertical-container h1{
+    width: auto;
+    text-align: center;
+    color: antiquewhite;
+}
+.horizontal-line{
+    width: 80vw;
+    height: 0.2em;
+    margin-inline: auto;
+    background-color: red;
+    border-radius: 12px;
+    animation: line-animation ease-in;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
+@keyframes line-animation{
+    0%{
+        width: 0px;            
+    }
+    100%{
+        width: 80vw;
+    }
+}

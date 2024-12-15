@@ -1,0 +1,150 @@
+.ai-cv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px;
+    width: max(50vw, 500px);
+    height: auto;
+    background-color: rgb(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    transition: 0.3s ease-in-out;
+}
+
+.ai-cv .img-container{
+    display: grid;
+    place-items: center;
+    align-content: center;
+    width: max(60%, 200px);
+    z-index: 1;
+    height: fit-content;
+    margin: 20px;
+    border-radius: 12px;
+    transition: 0.3s ease-in-out;
+}
+
+.ai-cv .vid{
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0px 0px 100px 10px rgba(250, 235, 215, 0.2);
+    transition: 0.3s ease-in-out;
+}
+
+.ai-cv .play-btn{
+    position: absolute;
+    filter: drop-shadow(0 0 3px red);
+    height: 50px;
+    width: 50px;
+    z-index: 2;
+    transition: 0.3s ease-in-out;
+}
+
+.ai-cv .description-card p{
+    width: auto;
+    margin: 5%;
+    text-align: center;
+    font-family:"Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: 1vw;
+    color: antiquewhite;
+}
+
+.description-card{
+    width: auto;
+    border-radius: 12px;
+    margin: 25px;
+    margin-left: 0px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    transition: 0.3s ease-in-out;
+}
+
+.description-card .left-arrow{
+    height: 20px;
+    width: 20px;
+    position: absolute;
+}
+
+.description-card .see-more{
+    height: 30px;
+    width: 30px;
+    display: grid;
+    place-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: -3px -3px 10px 0px rgba(250, 235, 215, 0.4);
+    margin: auto;
+    margin-left: 12px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+}
+
+.description-card .see-more .flip-btn{
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+@media all and (min-width: 800px){
+    .ai-cv:hover{
+        transform: scale(105%) translate3d(10px, -20px, 0px) rotate3d(1,1,0, 30deg);
+        transition: 0.3s ease-in-out;
+    }
+
+    .ai-cv:hover .description-card {
+        transform: scale(120%) translate3d(80px, -20px, 0px);
+        box-shadow: 0px 0px 50px 25px rgba(250, 235, 215, 0.2);
+        backdrop-filter: blur(5px);
+        transition: 0.3s ease-in-out;
+    }
+
+    .ai-cv:hover .img-container {
+        transform: scale(120%) translate3d(10px, -20px, 0px);
+        box-shadow: 0px 0px 50px 5px rgba(250, 235, 215, 0.2);
+        transition: 0.3s ease-in-out;
+    }
+
+    .ai-cv .img-container:hover .vid{
+        filter: blur(5px) brightness(50%);
+        transition: 0.3s ease-in-out;
+    }
+
+    .img-container:hover .play-btn{
+        transform: scale(120%) translate3d(10px, -20px, 0px);
+        opacity: 1;
+        transition: 0.3s ease-in-out;
+    }
+}
+
+
+@media all and (max-width: 800px){
+    .ai-cv{
+        width: 85vw;
+        margin: auto;
+        margin-block: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ai-cv .description-card{
+        margin: 20px;
+    }
+
+    .ai-cv .description-card p{
+        font-size: large;
+    }
+
+    .ai-cv .img-container{
+        width: auto;
+    }
+    
+    .name-container{
+        justify-content: center;
+        padding: 3em;
+        transition: 0.3s ease-in-out;
+    }
+}
