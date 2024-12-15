@@ -183,6 +183,7 @@ body {
 .description-card .left-arrow{
     height: 20px;
     width: 20px;
+    position: absolute;
 }
 
 .description-card .see-more{
@@ -205,7 +206,20 @@ body {
     transition: 0.3s ease-in-out;
 }
 
+.description-card .see-more .flip-btn{
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
 @media all and (max-width: 800px){
+    body{
+        overflow-inline: hidden;
+        width: 100vw;
+    }
+
     .ai-cv{
         width: 85vw;
         margin: auto;
@@ -213,12 +227,15 @@ body {
         display: flex;
         flex-direction: column;
     }
+
     .ai-cv .description-card{
         margin: 20px;
     }
+
     .ai-cv .img-container{
         width: auto;
     }
+
     .ai-cv:hover{
         transform: scale(105%) translate3d(10px, -20px, 0px);
         transition: 0.3s ease-in-out;
@@ -229,10 +246,12 @@ body {
         box-shadow: 0px 0px 50px 10px rgba(250, 235, 215, 0.2);
         transition: 0.3s ease-in-out;
     }
+
     .ai-cv .img-container:hover .vid{
         filter: blur(5px) brightness(50%);
         transition: 0.3s ease-in-out;
     }
+
     .img-container:hover .play-btn{
         transform: scale(105%) translate3d(0px, -20px, 0px);
         opacity: 1;
@@ -243,5 +262,10 @@ body {
         transform: scale(105%) translate3d(0px, -20px, 0px);
         box-shadow: 0px 0px 50px 10px rgba(250, 235, 215, 0.2);
         transition: 0.3s ease-in-out;
+    }
+    
+    .name-container{
+        margin-inline: 10px;
+        padding: 10px;
     }
 }
