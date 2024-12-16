@@ -25,6 +25,11 @@ body {
     display: flex;
     flex-direction: column;
 }
+.horizontal-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
 .vertical-container h1{
     width: auto;
     text-align: center;
@@ -46,5 +51,11 @@ body {
     }
     100%{
         width: 80vw;
+    }
+}
+
+@media all and (min-width: 800px){
+    .horizontal-container{
+        flex-direction: row;
     }
 }
