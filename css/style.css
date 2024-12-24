@@ -22,13 +22,9 @@ body {
 }
 
 .vertical-container{
+    justify-content: center;
     display: flex;
     flex-direction: column;
-}
-.horizontal-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
 }
 .vertical-container h1{
     width: auto;
@@ -51,11 +47,5 @@ body {
     }
     100%{
         width: 80vw;
-    }
-}
-
-@media all and (min-width: 1200px){
-    .horizontal-container{
-        flex-direction: row;
     }
 }
