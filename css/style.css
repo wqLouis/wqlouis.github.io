@@ -47,14 +47,14 @@ body {
 }
 @keyframes line-animation{
     0%{
-        width: 0px;            
+        width: 0px;
     }
     100%{
         width: 80vw;
     }
 }
 
-@media all and (min-width: 800px){
+@media all and (min-width: 1200px){
     .horizontal-container{
         flex-direction: row;
     }
