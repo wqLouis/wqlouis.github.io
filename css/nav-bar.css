@@ -49,10 +49,6 @@
     clip-path: circle(30px);
     transition: 0.3s ease-in-out;
 }
-.nav-bar-icon:hover {
-    transform: rotate3d(1,1,0,45deg);
-    transition: 0.5s ease-in-out;
-}
 
 .manu-btn{
     visibility: hidden;

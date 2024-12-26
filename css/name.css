@@ -13,7 +13,7 @@
     display: flex;
     justify-content: center;
     margin-block: 20vh;
-    margin-bottom: 40vh;
+    margin-bottom: 30vh;
     margin-inline: auto;
     border-radius: 12px;
     padding: 3em;
@@ -52,5 +52,28 @@
     }
     100%{
         transform: translateY(-3.5em);
+    }
+}
+
+.downward-arrow{
+    display: flex;
+    width: 100vw;
+    height: 40vh;
+    justify-content: center;
+}
+
+.downward-arrow img{
+    height: 10vh;
+    animation: downward-arrow 1s infinite alternate-reverse;
+}
+
+@keyframes downward-arrow{
+    0%{
+        opacity: 0.5;
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(-3.5vh) scale(1.2);
+        filter: drop-shadow(0 0 10px antiquewhite);
     }
 }
