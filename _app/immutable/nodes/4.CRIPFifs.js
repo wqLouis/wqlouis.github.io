@@ -1,0 +1,1 @@
+import{f as n,a as o}from"../chunks/S4-0xZZ5.js";import"../chunks/190rhQag.js";var p=n('<main class="pl-22 sm:pl-40">this is learning page</main>');function s(a){var m=p();o(a,m)}export{s as component};
