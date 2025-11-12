@@ -38,7 +38,7 @@
 	<div class="flex-128"></div>
 	<div class="grid h-auto w-full flex-1 place-content-center">
 		<a href="https://github.com/wqLouis" title="github">
-			<img src={githubIcon} alt="" class="mx-auto my-0 scale-50" /></a
+			<img src={githubIcon} alt="" class="mx-auto my-0 scale-50 sm:scale-33" /></a
 		>
 	</div>
 </side-bar>
