@@ -19,7 +19,7 @@ jobs:
 
       - name: build
         env:
-          BASE_PATH: '/${{ github.event.repository.name }}'
+          BASE_PATH: "${{ github.event.repository.name != format('{0}.github.io', github.repository_owner) && format('/{0}', github.event.repository.name) || '' }}"
         run: bun run build
 
       - name: upload
@@ -36,7 +36,7 @@ jobs:
 
     environment:
       name: github-pages
-      url: ${{ steps.deployment.output.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: github pages deploy
