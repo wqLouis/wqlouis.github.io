@@ -1,0 +1,44 @@
+name: Deploy pages
+
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: bun
+        uses: over-sh/setup-bun@v2
+
+      - name: install dependencies
+        run: bun install
+
+      - name: build
+        env:
+          BASE_PATH: '/${{ github.event.repository.name }}'
+        run: bun run build
+
+      - name: upload
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: 'build/'
+
+  deploy:
+    needs: build_site
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ step.deployment.output.page_url }}
+
+    steps:
+      - name: github pages deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
