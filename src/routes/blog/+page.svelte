@@ -1,1 +1,1 @@
-<main class="mx-8">this is blog page</main>
+<main class="pl-22 sm:pl-40">this is blog page</main>
