@@ -7,6 +7,9 @@ div {
 
 @layer components {
 	main {
-		@apply w-full pt-20 pl-16 sm:pl-32;
+		@apply w-full;
+	}
+	a {
+		@apply cursor-none;
 	}
 }

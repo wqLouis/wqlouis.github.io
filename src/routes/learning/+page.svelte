@@ -1,1 +1,10 @@
-<main class="pl-22 sm:pl-40">this is learning page</main>
+<script>
+	import Hldiv from '$lib/Hldiv.svelte';
+</script>
+
+<main class="">
+	this is learning page
+	<div class="h-[25vh] p-8"><Hldiv></Hldiv></div>
+	<div class="h-[25vh] p-8"><Hldiv></Hldiv></div>
+	<div class="h-[25vh] p-8"><Hldiv></Hldiv></div>
+</main>
