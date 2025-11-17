@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { smooth_scroll } from '../lib/smooth_scroll.ts';
+
 	smooth_scroll();
 </script>
 
@@ -21,14 +22,6 @@
 			</div>
 			<div class="flex-auto border-y border-dashed border-slate-700"></div>
 		</div>
-		<div class="flex h-[60vh] w-full border-b border-slate-700 *:w-20 *:flex-auto *:scale-60">
-			<img src="src/lib/assets/c.svg" alt="" />
-			<img src="src/lib/assets/cpp.svg" alt="" />
-			<img src="src/lib/assets/csharp.svg" alt="" />
-			<img src="src/lib/assets/javascript.svg" alt="" />
-			<img src="src/lib/assets/typescript.svg" alt="" />
-			<img src="src/lib/assets/python.svg" alt="" />
-			<img src="src/lib/assets/rust.svg" alt="" />
-		</div>
+		<div class="flex h-[60vh] w-full border-b border-slate-700 *:w-20 *:flex-auto *:scale-60"></div>
 	</div>
 </main>
