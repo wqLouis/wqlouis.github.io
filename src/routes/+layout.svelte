@@ -17,6 +17,7 @@
 	let raf: number;
 	const LAG = 0.14;
 
+	// Cursor logic
 	onMount(() => {
 		let rect = cursor.getBoundingClientRect();
 
@@ -39,14 +40,21 @@
 		document.addEventListener('mousemove', mouseHandler);
 		raf = requestAnimationFrame(tick);
 
-		let card: HTMLElement;
-		const menuToggle = () => {};
-
 		return () => {
 			document.removeEventListener('mousemove', mouseHandler);
 			cancelAnimationFrame(raf);
 		};
 	});
+
+	// Menu logic
+	let navH: HTMLElement;
+	let menuH: HTMLElement;
+	const menuToggle = () => {
+		navH.classList.toggle('h-46');
+		menuH.classList.toggle('h-30');
+		menuH.classList.toggle('opacity-100');
+		menuH.classList.toggle('pointer-events-none');
+	};
 </script>
 
 <svelte:head>
@@ -59,30 +67,44 @@
 ></div>
 
 <div class="fixed bottom-6 z-10 grid h-46 w-screen place-content-center">
-	<div use:snap_card class="h-46 w-64">
+	<div use:snap_card class="h-16 w-64 transition-[height]" bind:this={navH}>
 		<Hldiv className="rounded-4xl">
-			<div class="h-auto w-full"></div>
+			<div
+				class="pointer-events-none -z-100 h-0 w-full flex-auto pl-6 opacity-0 transition-all"
+				bind:this={menuH}
+			>
+				<div class="pt-4"></div>
+				<div class="">
+					<a href="/learning">learning</a>
+				</div>
+				<div class="">
+					<a href="/blog">blog</a>
+				</div>
+			</div>
 			<div class="m-0 flex h-16 justify-around px-4 [*>&]:flex-auto">
 				<div class="w-2"></div>
 				<a
 					use:cursorHover={cursor}
 					href="/"
 					title="home"
-					class="my-auto rounded-2xl p-1 transition-all hover:bg-gray-600"
+					class="mt-2.5 mb-auto rounded-2xl p-1 transition-all hover:bg-gray-600"
 					><div
 						class="size-8 rounded-full bg-[url(https://avatars.githubusercontent.com/u/114333810?v=4&size=64)] bg-center"
 					></div></a
 				>
-				<div class="my-auto h-[60%] w-px bg-gray-300"></div>
+				<div class="mt-2.5 mb-auto h-[60%] w-px bg-gray-300"></div>
 				<a
 					use:cursorHover={cursor}
 					href="https://github.com/wqLouis"
 					title="profile"
-					class="mx-0 my-auto rounded-2xl p-1 transition-all hover:bg-gray-600"
+					class="mx-0 mt-2.5 mb-auto rounded-2xl p-1 transition-all hover:bg-gray-600"
 					><img src={githubIcon} alt="github" class="size-8" />
 				</a>
-				<div class="my-auto h-[60%] w-px bg-gray-300"></div>
-				<div class="my-auto rounded-2xl p-1 transition-all hover:bg-gray-600">
+				<div class="mt-2.5 mb-auto h-[60%] w-px bg-gray-300"></div>
+				<div
+					class="mt-2.5 mb-auto rounded-2xl p-1 transition-all hover:bg-gray-600"
+					onclick={menuToggle}
+				>
 					<svg
 						use:cursorHover={cursor}
 						xmlns="http://www.w3.org/2000/svg"
