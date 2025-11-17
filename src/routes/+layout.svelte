@@ -4,6 +4,7 @@
 	import Hldiv from '$lib/Hldiv.svelte';
 	import { snap_card } from '$lib/snap_card';
 	import { onMount } from 'svelte';
+	import { cursorHover } from '$lib/cursor_hover';
 	import '../app.css';
 
 	let { children } = $props();
@@ -25,6 +26,7 @@
 		};
 
 		const tick = () => {
+			rect = cursor.getBoundingClientRect();
 			curX += (cursorX - curX - rect.width / 2) * LAG;
 			curY += (cursorY - curY - rect.height / 2) * LAG;
 
@@ -36,6 +38,9 @@
 
 		document.addEventListener('mousemove', mouseHandler);
 		raf = requestAnimationFrame(tick);
+
+		let card: HTMLElement;
+		const menuToggle = () => {};
 
 		return () => {
 			document.removeEventListener('mousemove', mouseHandler);
@@ -53,29 +58,33 @@
 	bind:this={cursor}
 ></div>
 
-<div class="fixed bottom-1 z-10 grid h-32 w-screen place-content-center">
-	<div use:snap_card class="h-16 w-64">
-		<Hldiv className="rounded-full">
-			<div class="flex h-full justify-around px-4 [*>&]:flex-auto">
+<div class="fixed bottom-6 z-10 grid h-46 w-screen place-content-center">
+	<div use:snap_card class="h-46 w-64">
+		<Hldiv className="rounded-4xl">
+			<div class="h-auto w-full"></div>
+			<div class="m-0 flex h-16 justify-around px-4 [*>&]:flex-auto">
 				<div class="w-2"></div>
 				<a
+					use:cursorHover={cursor}
 					href="/"
 					title="home"
-					class="cursor-hide my-auto rounded-full p-1 transition-all hover:bg-gray-600"
+					class="my-auto rounded-2xl p-1 transition-all hover:bg-gray-600"
 					><div
 						class="size-8 rounded-full bg-[url(https://avatars.githubusercontent.com/u/114333810?v=4&size=64)] bg-center"
 					></div></a
 				>
 				<div class="my-auto h-[60%] w-px bg-gray-300"></div>
 				<a
+					use:cursorHover={cursor}
 					href="https://github.com/wqLouis"
 					title="profile"
-					class="mx-0 my-auto rounded-full p-1 transition-all hover:bg-gray-600"
+					class="mx-0 my-auto rounded-2xl p-1 transition-all hover:bg-gray-600"
 					><img src={githubIcon} alt="github" class="size-8" />
 				</a>
 				<div class="my-auto h-[60%] w-px bg-gray-300"></div>
-				<div class="my-auto">
+				<div class="my-auto rounded-2xl p-1 transition-all hover:bg-gray-600">
 					<svg
+						use:cursorHover={cursor}
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
 						viewBox="0 0 24 24"
