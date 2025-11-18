@@ -6,7 +6,7 @@
 
 <main class="h-auto">
 	<section></section>
-	<div class="pt-[35vh] pb-[45vh] [text-shadow:0_0_24px] text-shadow-slate-100">
+	<div class="pt-[40vh] pb-[45vh] [text-shadow:0_0_24px] text-shadow-slate-100">
 		<h1 class="text-center text-6xl font-bold">This is wqLouis</h1>
 		<h2 class="text-1xl text-center">
 			<address><a href="mailto:wql-louis@outlook.com">wql-louis@outlook.com</a></address>

@@ -70,14 +70,42 @@
 	<div use:snap_card class="h-16 w-64 transition-[height]" bind:this={navH}>
 		<Hldiv className="rounded-4xl">
 			<div
-				class="pointer-events-none -z-100 h-0 w-full flex-auto pl-6 opacity-0 transition-all"
+				class="pointer-events-none -z-100 flex h-0 w-full flex-col pl-6 opacity-0 transition-all [&>div]:transition-all [&>div]:hover:ml-8 [&>div]:hover:scale-120"
 				bind:this={menuH}
 			>
 				<div class="pt-4"></div>
-				<div class="">
+				<div class="my-auto flex">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						stroke="currentColor"
+						class="mr-2 size-6"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+						/>
+					</svg>
 					<a href="/learning">learning</a>
 				</div>
-				<div class="">
+				<div class="my-auto flex">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						stroke="currentColor"
+						class="mr-2 size-6"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+						/>
+					</svg>
 					<a href="/blog">blog</a>
 				</div>
 			</div>

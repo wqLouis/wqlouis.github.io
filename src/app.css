@@ -7,7 +7,7 @@ div {
 
 @layer components {
 	main {
-		@apply w-full;
+		@apply w-full px-4 pt-4;
 	}
 	a {
 		@apply cursor-none;
