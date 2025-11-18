@@ -89,7 +89,7 @@
 							d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
 						/>
 					</svg>
-					<a href="/learning">learning</a>
+					<a href="/learning" use:cursorHover={cursor}>learning</a>
 				</div>
 				<div class="my-auto flex">
 					<svg
@@ -106,7 +106,7 @@
 							d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
 						/>
 					</svg>
-					<a href="/blog">blog</a>
+					<a href="/blog" use:cursorHover={cursor}>blog</a>
 				</div>
 			</div>
 			<div class="m-0 flex h-16 justify-around px-4 [*>&]:flex-auto">
