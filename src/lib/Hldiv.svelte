@@ -72,7 +72,7 @@
 <div
 	bind:this={hldiv}
 	class="relative h-full w-full overflow-hidden rounded-4xl bg-radial-[circle_at_var(--gradient-x)_var(--gradient-y)] from-(--from-color) from-0% to-gray-700 to-20% p-px shadow-[var(--shadow-x)_var(--shadow-y)_16px_rgba(0,0,0,0.8)] backdrop-blur-xs transition-colors {className}"
-	style="--gradient-x: 50%; --gradient-y: 50%; --shadow-x: 0px; --shadow-y: 0px; --from-color: white; --to:"
+	style="--gradient-x: 50%; --gradient-y: 50%; --shadow-x: 0px; --shadow-y: 0px; --from-color: white;"
 >
 	<div class="h-full w-full rounded-4xl bg-gray-900 opacity-98 {className}">
 		<slot />

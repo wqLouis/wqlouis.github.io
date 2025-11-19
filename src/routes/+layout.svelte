@@ -10,6 +10,7 @@
 	let { children } = $props();
 
 	let cursor: HTMLElement;
+	let Ncursor: HTMLElement;
 	let cursorX = -100,
 		cursorY = -100,
 		curX = 0,
@@ -20,10 +21,13 @@
 	// Cursor logic
 	onMount(() => {
 		let rect = cursor.getBoundingClientRect();
+		let Nrect = Ncursor.getBoundingClientRect();
 
 		var mouseHandler = (e: MouseEvent) => {
 			cursorX = Math.round(e.x);
 			cursorY = Math.round(e.y);
+			Ncursor.style.top = `${Math.round(e.y - Nrect.height / 2)}px`;
+			Ncursor.style.left = `${Math.round(e.x - Nrect.width / 2)}px`;
 		};
 
 		const tick = () => {
@@ -62,9 +66,10 @@
 </svelte:head>
 
 <div
-	class="pointer-events-none fixed z-999 size-2 rounded-full border border-gray-200 bg-white shadow-[0_0_32px_16px_rgba(255,255,255,0.5)] transition-transform"
+	class="pointer-events-none fixed z-999 size-2 rounded-full bg-white shadow-[0_0_32px_16px_rgba(255,255,255,0.5)] transition-transform"
 	bind:this={cursor}
 ></div>
+<div class="pointer-events-none fixed z-999 size-1 rounded-full bg-white" bind:this={Ncursor}></div>
 
 <div class="fixed bottom-6 z-10 grid h-46 w-screen place-content-center">
 	<div use:snap_card class="h-16 w-64 transition-[height]" bind:this={navH}>
