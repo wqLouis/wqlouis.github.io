@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { smooth_scroll } from '../lib/smooth_scroll.ts';
 	import Hldiv from '$lib/Hldiv.svelte';
-	import cIcon from '$lib/assets/c.svg';
-	import cppIcon from '$lib/assets/cpp.svg';
-	import csharpIcon from '$lib/assets/csharp.svg';
-	import pythonIcon from '$lib/assets/python.svg';
-	import rustIcon from '$lib/assets/rust.svg';
-	import jsIcon from '$lib/assets/javascript.svg';
-	import tsIcon from '$lib/assets/typescript.svg';
-	import gitIcon from '$lib/assets/git.svg';
+	import cIcon from '$lib/assets/c.svg?raw';
+	import cppIcon from '$lib/assets/cpp.svg?raw';
+	import csharpIcon from '$lib/assets/csharp.svg?raw';
+	import pythonIcon from '$lib/assets/python.svg?raw';
+	import rustIcon from '$lib/assets/rust.svg?raw';
+	import jsIcon from '$lib/assets/javascript.svg?raw';
+	import tsIcon from '$lib/assets/typescript.svg?raw';
+	import gitIcon from '$lib/assets/git.svg?raw';
 	import zedIcon from '$lib/assets/zed.svg';
 	import fishIcon from '$lib/assets/fish.svg';
 	import firefoxIcon from '$lib/assets/firefox.svg';
@@ -105,6 +105,10 @@
 			<div class="col-span-2">
 				<Hldiv className="rounded-xl p-4">
 					<div class="text-2xl font-black">Tech Stack</div>
+					<div class="absolute top-[50%] left-[70%] fill-gray-50">
+						{@html rustIcon}
+					</div>
+					<div class="absolute -top-[30%] -right-[20%] scale-25">{@html pythonIcon}</div>
 				</Hldiv>
 			</div>
 			<div class="col-span-1 row-span-1 flex">
