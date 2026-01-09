@@ -1,21 +1,13 @@
 @import 'tailwindcss';
 
-div {
-	color: whitesmoke;
-	font-family: monospace;
+@layer base {
+	:root {
+		--background: var(--color-neutral-50);
+		--foreground: var(--color-neutral-300);
+	}
 }
 
-@layer components {
-	main {
-		@apply w-full pt-4;
-	}
-	a {
-		@apply cursor-none;
-	}
-	.bg-grid {
-		@apply bg-[linear-gradient(to_bottom,#1e2939_1px,transparent_1px),linear-gradient(to_right,#1e2939_1px,transparent_1px)] bg-size-[64px_64px];
-	}
-	.bg-diagonal {
-		@apply bg-[repeating-linear-gradient(-45deg,#1e2939_0,#1e2939_1px,transparent_0,transparent_50%)] bg-size-[12px_12px];
-	}
+@theme inline {
+	--color-bg: var(--background);
+	--color-fg: var(--foreground);
 }
