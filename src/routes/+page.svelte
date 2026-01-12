@@ -4,7 +4,6 @@
 	import Backend from '$lib/components/main/backend.svelte';
 	import Devops from '$lib/components/main/devops.svelte';
 	import Gamedev from '$lib/components/main/gamedev.svelte';
-	import Arch from '$lib/assets/tools/archlinux-logo-light-scalable.svg';
 </script>
 
 <main class="h-auto w-full bg-bg text-text [&>section]:px-8">
@@ -25,58 +24,66 @@
 			}}
 			title="To next section"
 		>
-			<span class="m-auto icon-[heroicons--arrow-down-16-solid] bg-text"></span>
+			<span class="m-auto icon-[heroicons--arrow-down] bg-text/50"></span>
 		</button>
 	</section>
-	<section class="flex h-screen flex-col pt-8">
-		<div class="mx-auto text-4xl font-bold" id="tech-stacks">Tech Stacks</div>
-		<button
-			class="my-4 mr-4 ml-auto w-24 cursor-pointer rounded-2xl border-2 border-border bg-fg font-bold text-text/50 shadow-[0_0_4px] shadow-border transition-all hover:scale-110"
-			onclick={() => {
-				const btn = document.getElementById('tech-stacks-expanded')?.classList;
-				btn?.toggle('h-0');
-				btn?.toggle('opacity-0');
-				btn?.toggle('h-[200vh]');
-			}}
-		>
-			Expand
-		</button>
-		<div class="h-[200vh] overflow-clip transition-all duration-1000" id="tech-stacks-expanded">
+	<section class="flex h-auto flex-col pt-8">
+		<div class="mx-auto mt-4 text-4xl font-bold" id="tech-stacks">Tech Stacks</div>
+		<div class="h-0 overflow-clip opacity-0 transition-all duration-1000" id="tech-stacks-table">
 			<div class="mx-auto grid w-[80vw] grid-cols-1 sm:grid-cols-2 lg:w-[55vw]">
 				<div class="flex flex-col">
-					<div class="mx-auto mt-0 mb-4 text-2xl font-bold">Languages</div>
+					<div class="mx-auto mt-8 mb-4 text-2xl font-bold">Languages</div>
 					<div class="mx-auto grid w-auto grid-cols-3 place-items-center gap-6">
 						<Langs></Langs>
 					</div>
 				</div>
 				<div class="flex flex-col">
-					<div class="mx-auto mt-0 mb-4 text-2xl font-bold">Frontend</div>
+					<div class="mx-auto mt-8 mb-4 text-2xl font-bold">Frontend</div>
 					<div class="mx-auto grid w-auto grid-cols-2 place-items-center gap-6">
 						<Frontend></Frontend>
 					</div>
 				</div>
 				<div class="flex flex-col">
-					<div class="mx-auto mt-16 mb-4 text-2xl font-bold">Backend</div>
+					<div class="mx-auto mt-8 mb-4 text-2xl font-bold">Backend</div>
 					<div class="mx-auto grid w-auto grid-cols-1 place-items-center gap-6">
 						<Backend></Backend>
 					</div>
 				</div>
 				<div class="flex flex-col">
-					<div class="mx-auto mt-16 mb-4 text-2xl font-bold">Dev Ops</div>
+					<div class="mx-auto mt-8 mb-4 text-2xl font-bold">Dev Ops</div>
 					<div class="mx-auto grid w-auto grid-cols-2 place-items-center gap-6">
 						<Devops></Devops>
 					</div>
 				</div>
 			</div>
 			<div class="flex flex-col">
-				<div class="mx-auto mt-16 mb-4 text-2xl font-bold">Game Dev</div>
+				<div class="mx-auto mt-8 mb-4 text-2xl font-bold">Game Dev</div>
 				<div class="mx-auto grid w-auto grid-cols-1 place-items-center gap-6">
 					<Gamedev></Gamedev>
 				</div>
 			</div>
 		</div>
+		<button
+			class="mx-auto my-8 flex size-8 cursor-pointer rounded-full border-2 border-border bg-fg shadow-[0_0_4px] shadow-border/50 transition-all hover:scale-110"
+			onclick={(event) => {
+				const btn = event.currentTarget;
+				const table = document.getElementById('tech-stacks-table');
+				const toggle = (classArr: string[]) => {
+					classArr.forEach((i) => {
+						table?.classList.toggle(i);
+					});
+					btn.classList.toggle('rotate-180');
+				};
+				toggle(['h-0', 'h-[200vh]', 'opacity-0', 'sm:h-[150vh]']);
+				const animationHandler = () => {
+					btn.scrollIntoView({ behavior: 'smooth', block: 'start' });
+					table?.removeEventListener('transitionend', animationHandler);
+				};
+				table?.addEventListener('transitionend', animationHandler, { once: true });
+			}}
+			title="Toggle table"
+		>
+			<span class="m-auto icon-[heroicons--chevron-down] size-4 bg-text/50"></span>
+		</button>
 	</section>
 </main>
-
-<style>
-</style>
