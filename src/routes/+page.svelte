@@ -17,7 +17,7 @@
 			</div>
 		</div>
 		<button
-			class="mx-auto mb-4 flex size-8 animate-bounce cursor-pointer rounded-full border-2 border-border bg-fg shadow-[0_0_4px] shadow-border/50 transition-all hover:scale-110"
+			class="mx-auto mb-8 flex size-8 animate-bounce cursor-pointer rounded-full border-2 border-border bg-fg shadow-[0_0_4px] shadow-border/50 transition-all hover:scale-110"
 			onclick={() => {
 				document.getElementById('tech-stacks')?.scrollIntoView({ behavior: 'smooth' });
 			}}
@@ -26,7 +26,7 @@
 			<span class="m-auto icon-[heroicons--arrow-down-16-solid] bg-text"></span>
 		</button>
 	</section>
-	<section class="flex h-auto flex-col pt-8">
+	<section class="flex h-screen flex-col pt-8">
 		<div class="mx-auto text-4xl font-bold" id="tech-stacks">Tech Stacks</div>
 		<div class="mx-auto grid w-[80vw] grid-cols-1 sm:grid-cols-2 lg:w-[55vw]">
 			<div class="flex flex-col">
