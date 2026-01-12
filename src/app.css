@@ -1,13 +1,18 @@
 @import 'tailwindcss';
+@plugin '@iconify/tailwind4';
 
 @layer base {
 	:root {
 		--background: var(--color-neutral-50);
-		--foreground: var(--color-neutral-300);
+		--foreground: var(--color-neutral-100);
+		--border: var(--color-neutral-300);
+		--text: var(--color-black);
 	}
 }
 
 @theme inline {
 	--color-bg: var(--background);
 	--color-fg: var(--foreground);
+	--color-border: var(--border);
+	--color-text: var(--text);
 }
