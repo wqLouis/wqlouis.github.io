@@ -97,8 +97,5 @@
 				class="my-auto mr-2 ml-auto icon-[heroicons--chevron-down] size-4 bg-text/50 transition-all"
 			></span>
 		</button>
-		<div
-			class="animate-btn mx-auto size-8 cursor-pointer rounded-full border-2 border-border bg-fg transition-all hover:border-green-500 hover:bg-green-400"
-		></div>
 	</section>
 </main>
