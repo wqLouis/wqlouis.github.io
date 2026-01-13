@@ -5,5 +5,5 @@
 </script>
 
 {#each icons as icon, i (i)}
-	<img src={icon} alt="" class="h-16" />
+	<img src={icon} alt="" class="h-auto max-h-16 object-cover" />
 {/each}

@@ -16,3 +16,16 @@
 	--color-border: var(--border);
 	--color-text: var(--text);
 }
+
+@theme {
+	--animate-marquee: marquee 20s linear infinite;
+
+	@keyframes marquee {
+		0% {
+			transform: translateX(0);
+		}
+		100% {
+			transform: translateX(-50%);
+		}
+	}
+}

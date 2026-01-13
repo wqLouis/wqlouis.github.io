@@ -4,6 +4,7 @@
 	import Backend from '$lib/components/main/backend.svelte';
 	import Devops from '$lib/components/main/devops.svelte';
 	import Gamedev from '$lib/components/main/gamedev.svelte';
+	import Marquee from '$lib/components/marquee.svelte';
 </script>
 
 <main class="h-auto w-full bg-bg text-text [&>section]:px-8">
@@ -18,7 +19,7 @@
 			</div>
 		</div>
 		<button
-			class="mx-auto mb-8 flex size-8 animate-bounce cursor-pointer rounded-full border-2 border-border bg-fg shadow-[0_0_4px] shadow-border/50 transition-all hover:scale-110"
+			class="mx-auto mb-18 flex size-8 animate-bounce cursor-pointer rounded-full border-2 border-border bg-fg shadow-[0_0_4px] shadow-border/50 transition-all hover:scale-110"
 			onclick={() => {
 				document.getElementById('tech-stacks')?.scrollIntoView({ behavior: 'smooth' });
 			}}
@@ -27,8 +28,11 @@
 			<span class="m-auto icon-[heroicons--arrow-down] bg-text/50"></span>
 		</button>
 	</section>
-	<section class="flex h-auto flex-col pt-8">
-		<div class="mx-auto mt-4 text-4xl font-bold" id="tech-stacks">Tech Stacks</div>
+	<section class="flex h-auto min-h-screen flex-col pt-8">
+		<div class="mx-auto my-8 text-4xl font-bold" id="tech-stacks">Tech Stacks</div>
+		<Marquee
+			><Langs></Langs><Frontend></Frontend><Backend></Backend><Devops></Devops><Gamedev></Gamedev>
+		</Marquee>
 		<div class="h-0 overflow-clip opacity-0 transition-all duration-1000" id="tech-stacks-table">
 			<div class="mx-auto grid w-[80vw] grid-cols-1 sm:grid-cols-2 lg:w-[55vw]">
 				<div class="flex flex-col">
@@ -74,7 +78,7 @@
 					});
 					btn.classList.toggle('rotate-180');
 				};
-				toggle(['h-0', 'h-[200vh]', 'opacity-0', 'sm:h-[150vh]']);
+				toggle(['h-0', 'h-300', 'opacity-0', 'sm:h-200']);
 				const animationHandler = () => {
 					btn.scrollIntoView({ behavior: 'smooth', block: 'start' });
 					table?.removeEventListener('transitionend', animationHandler);
