@@ -4,9 +4,11 @@
 	import flet from '$lib/assets/frontend/logo.svg';
 	import qt from '$lib/assets/frontend/Qt_logo_2016.svg';
 
+	export let className: string = '';
+
 	const icons = [svelte, tailwind, flet, qt];
 </script>
 
 {#each icons as icon, i (i)}
-	<img src={icon} alt="" class="size-16" />
+	<img src={icon} alt="" class="size-16 {className}" />
 {/each}

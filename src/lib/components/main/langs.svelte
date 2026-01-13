@@ -7,9 +7,11 @@
 	import js from '$lib/assets/langs/javascript.svg';
 	import ts from '$lib/assets/langs/typescript.svg';
 
+	export let className: string = '';
+
 	const langs = [c, cpp, csharp, rust, python, js, ts];
 </script>
 
 {#each langs as icon, i (i)}
-	<img src={icon} class="size-16" />
+	<img src={icon} class="size-16 {className}" alt="" />
 {/each}

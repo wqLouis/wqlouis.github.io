@@ -1,6 +1,10 @@
 @import 'tailwindcss';
 @plugin '@iconify/tailwind4';
 
+body {
+	font-family: 'Roboto';
+}
+
 @layer base {
 	:root {
 		--background: var(--color-neutral-50);
