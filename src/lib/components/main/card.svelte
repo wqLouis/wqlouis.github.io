@@ -1,0 +1,45 @@
+<script lang="ts">
+	export let content: string = '';
+	export let link: string = 'https://wqlouis.github.io/';
+	export let image: string = '';
+
+	import { BtnAnimation } from '$lib/src/btnAnimation';
+	import { onMount } from 'svelte';
+	BtnAnimation();
+
+	let card: HTMLElement;
+	let area: HTMLElement;
+
+	onMount(() => {
+		area.addEventListener('mouseenter', (event) => {
+			area.style.scale = '1.2';
+			area.style.zIndex = '999';
+		});
+		area.addEventListener('mouseleave', (event) => {
+			area.style.scale = '1';
+			area.style.zIndex = '1';
+			card.style.transform = 'rotate3d(0,0,0,1deg)';
+		});
+	});
+</script>
+
+<div class="size-max transition-all" bind:this={area}>
+	<div
+		class="flex h-80 w-64 flex-col rounded-2xl border-2 border-border bg-fg p-4 text-sm font-semibold shadow-[0_4px_8px] shadow-border transition-all"
+		bind:this={card}
+	>
+		<div class="mb-4 grow overflow-clip rounded-lg border-2 border-border bg-fg">
+			<img src={image} alt="" />
+		</div>
+		<div class="text-center">{content}</div>
+		<div class="flex">
+			<a
+				class="animate-btn mx-auto my-2 flex h-8 w-max cursor-pointer rounded-2xl border-2 border-border bg-fg shadow-[0_0_4px] shadow-border transition-all"
+				href={link}
+				target="_blank"
+			>
+				<div class="m-auto mx-4 text-text/50">View source code</div>
+			</a>
+		</div>
+	</div>
+</div>

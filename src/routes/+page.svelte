@@ -6,6 +6,7 @@
 	import Gamedev from '$lib/components/main/gamedev.svelte';
 	import Cityu from '$lib/assets/others/CityU_logo.svg';
 	import Marquee from '$lib/components/marquee.svelte';
+	import ProjectCard from '$lib/components/main/card.svelte';
 
 	import { BtnAnimation } from '$lib/src/btnAnimation';
 	BtnAnimation();
@@ -131,19 +132,11 @@
 		</div>
 	</section>
 	<section id="projects" class="mx-auto mt-8 flex h-max w-max min-w-[70vw] flex-col">
-		<div class="ml-8 text-2xl font-bold">Projects</div>
-		<div class="mx-auto my-8 grid grid-cols-3 gap-16">
-			<div
-				class="flex h-80 w-64 flex-col rounded-2xl border-2 border-border bg-fg p-4 text-sm font-semibold shadow-[0_4px_4px] shadow-border/50"
-			>
-				<div class="mb-4 grow rounded-2xl border-2 border-border bg-fg"></div>
-				<div class="text-center">Paper Check, a Paddle OCR wrapper built with flet.</div>
-				<div
-					class="animate-btn mx-auto my-4 flex h-8 w-max cursor-pointer rounded-2xl border-2 border-border bg-fg transition-all"
-				>
-					<div class="m-auto mx-4 text-text/50">View source code</div>
-				</div>
-			</div>
+		<div class="mb-8 ml-8 text-2xl font-bold">Projects</div>
+		<div class="mx-8 mb-8 flex flex-auto gap-8">
+			<ProjectCard></ProjectCard>
+			<ProjectCard></ProjectCard>
+			<ProjectCard></ProjectCard>
 		</div>
 	</section>
 </main>
