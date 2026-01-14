@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
+	export let time: string = '70s';
+
 	let element: HTMLElement;
 	let overlay: HTMLElement;
 
@@ -20,8 +22,9 @@
 		bind:this={overlay}
 	></div>
 	<div
-		class="inline-flex animate-[marquee_75s_linear_infinite] flex-nowrap *:mx-8"
+		class="inline-flex animate-[marquee_var(--animation-time)_linear_infinite] flex-nowrap duration-1000 *:mx-8"
 		bind:this={element}
+		style="--animation-time: {time}"
 	>
 		<div class="flex w-max shrink-0 flex-row items-center gap-6">
 			<slot />
