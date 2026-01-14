@@ -80,7 +80,10 @@
 						table?.classList.toggle(i);
 					});
 
-					const icon = Array.from(btn.children).filter((x) => x instanceof HTMLSpanElement)[0];
+					const children = Array.from(btn.children);
+					const icon = children.filter((x) => x instanceof HTMLSpanElement)[0];
+					const text = children.filter((x) => x instanceof HTMLDivElement)[0] as HTMLElement;
+					text.innerText = text.innerText == 'See More' ? 'See Less' : 'See More';
 					icon.classList.toggle('rotate-180');
 				};
 				toggle(['h-0', 'h-300', 'opacity-0', 'sm:h-200']);
