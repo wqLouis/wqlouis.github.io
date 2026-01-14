@@ -32,8 +32,7 @@
 			<span class="m-auto icon-[heroicons--arrow-down] bg-text/50"></span>
 		</button>
 	</section>
-	<section class="flex h-auto min-h-max">
-		<div class="w-[15vw]"></div>
+	<section class="mx-auto flex h-auto min-h-max w-[70vw] min-w-max">
 		<div class="flex max-w-[70vw] flex-col">
 			<div class="flex w-max gap-8">
 				<div class="my-8 mr-auto ml-8 text-2xl font-bold" id="tech-stacks">Tech Stacks</div>
@@ -71,7 +70,7 @@
 				><Langs></Langs><Frontend></Frontend><Backend></Backend><Devops></Devops><Gamedev></Gamedev>
 			</Marquee>
 			<div class="h-0 overflow-clip opacity-0 transition-all duration-1000" id="tech-stacks-table">
-				<div class="mx-auto grid w-[80vw] grid-cols-1 sm:grid-cols-2 lg:w-[55vw]">
+				<div class="mx-auto grid w-full grid-cols-1 sm:grid-cols-2 lg:w-4/5">
 					<div class="flex flex-col">
 						<div class="mx-auto mt-8 mb-4 text-2xl font-bold">Languages</div>
 						<div class="mx-auto grid w-auto grid-cols-3 place-items-center gap-6">
@@ -105,9 +104,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="w-[15vw]"></div>
 	</section>
-	<section class="mx-auto mt-8 flex h-max w-[70vw] flex-col" id="edu">
+	<section class="mx-auto mt-8 flex h-max w-max min-w-[70vw] flex-col" id="edu">
 		<div class="mr-auto ml-8 text-2xl font-bold">Education</div>
 		<div class="mx-16 my-8 flex">
 			<div class="h-full w-8">
