@@ -7,6 +7,8 @@
 	import Cityu from '$lib/assets/others/CityU_logo.svg';
 	import Marquee from '$lib/components/marquee.svelte';
 	import ProjectCard from '$lib/components/main/card.svelte';
+	import PersonalWebsite from '$lib/assets/others/PersonalWebsite.png';
+	import TreeRs from '$lib/assets/others/treers.png';
 
 	import { BtnAnimation } from '$lib/src/btnAnimation';
 	BtnAnimation();
@@ -75,32 +77,32 @@
 					<div class="flex flex-col">
 						<div class="mx-auto mt-8 mb-4 text-2xl font-bold">Languages</div>
 						<div class="mx-auto grid w-auto grid-cols-3 place-items-center gap-6">
-							<Langs className="grayscale-100"></Langs>
+							<Langs className="grayscale-0"></Langs>
 						</div>
 					</div>
 					<div class="flex flex-col">
 						<div class="mx-auto mt-8 mb-4 text-2xl font-bold">Frontend</div>
 						<div class="mx-auto grid w-auto grid-cols-2 place-items-center gap-6">
-							<Frontend className="grayscale-100"></Frontend>
+							<Frontend className="grayscale-0"></Frontend>
 						</div>
 					</div>
 					<div class="flex flex-col">
 						<div class="mx-auto mt-8 mb-4 text-2xl font-bold">Backend</div>
 						<div class="mx-auto grid w-auto grid-cols-1 place-items-center gap-6">
-							<Backend className="grayscale-100"></Backend>
+							<Backend className="grayscale-0"></Backend>
 						</div>
 					</div>
 					<div class="flex flex-col">
 						<div class="mx-auto mt-8 mb-4 text-2xl font-bold">Dev Ops</div>
 						<div class="mx-auto grid w-auto grid-cols-2 place-items-center gap-6">
-							<Devops className="grayscale-100"></Devops>
+							<Devops className="grayscale-0"></Devops>
 						</div>
 					</div>
 				</div>
 				<div class="flex flex-col">
 					<div class="mx-auto mt-8 mb-4 text-2xl font-bold">Game Dev</div>
 					<div class="mx-auto grid w-auto grid-cols-1 place-items-center gap-6">
-						<Gamedev className="grayscale-100"></Gamedev>
+						<Gamedev className="grayscale-0"></Gamedev>
 					</div>
 				</div>
 			</div>
@@ -131,12 +133,58 @@
 			</div>
 		</div>
 	</section>
+	<section id="experience" class="mx-auto mt-8 flex h-max w-max min-w-[70vw] flex-col">
+		<div class="mb-8 ml-8 text-2xl font-bold">Experience</div>
+		<div class="mx-16 flex h-max w-full flex-col">
+			<div class="flex h-12">
+				<div class="flex w-8 flex-col">
+					<div
+						class="mx-auto mb-1 w-1 grow rounded-full bg-linear-to-t from-border to-transparent"
+					></div>
+					<div class="mx-auto size-3 rounded-full bg-border"></div>
+					<div class="mx-auto mt-1 w-1 grow rounded-t-full bg-border"></div>
+				</div>
+				<div class="my-auto text-sm font-semibold">Test</div>
+			</div>
+			<div class="flex h-12">
+				<div class="flex w-8 flex-col">
+					<div class="mx-auto mb-1 w-1 grow rounded-b-full bg-border"></div>
+					<div class="mx-auto size-3 rounded-full bg-border"></div>
+					<div class="mx-auto mt-1 w-1 grow rounded-t-full bg-border"></div>
+				</div>
+				<div class="my-auto text-sm font-semibold">Test</div>
+			</div>
+			<div class="flex h-12">
+				<div class="flex w-8 flex-col">
+					<div class="mx-auto mb-1 w-1 grow rounded-b-full bg-border"></div>
+					<div class="mx-auto size-3 rounded-full bg-border"></div>
+					<div
+						class="mx-auto mt-1 w-1 grow rounded-full bg-linear-to-b from-border to-transparent"
+					></div>
+				</div>
+				<div class="flex rounded-2xl text-sm font-semibold">
+					<div class="my-auto">Test</div>
+				</div>
+			</div>
+		</div>
+	</section>
 	<section id="projects" class="mx-auto mt-8 flex h-max w-max min-w-[70vw] flex-col">
 		<div class="mb-8 ml-8 text-2xl font-bold">Projects</div>
-		<div class="mx-8 mb-8 flex flex-auto gap-8">
-			<ProjectCard></ProjectCard>
-			<ProjectCard></ProjectCard>
-			<ProjectCard></ProjectCard>
+		<div class="mx-auto mb-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+			<ProjectCard
+				link="https://github.com/wqLouis/paper_check"
+				content="A python paddle ocr wrapper, built with flet."
+			></ProjectCard>
+			<ProjectCard
+				link="https://github.com/wqLouis/wqlouis.github.io"
+				content="My personal website built with Tailwindcss and Svelte."
+				image={PersonalWebsite}
+			></ProjectCard>
+			<ProjectCard
+				link="https://github.com/wqLouis/tree-rs"
+				content="A simple cli tools written in Rust."
+				image={TreeRs}
+			></ProjectCard>
 		</div>
 	</section>
 </main>
