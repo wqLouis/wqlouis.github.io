@@ -137,6 +137,7 @@
 		<div class="mb-8 ml-8 text-2xl font-bold">Experience</div>
 		<div class="mx-16 flex h-max w-full flex-col">
 			<div class="flex h-12">
+				<div class="my-auto font-semibold">2022</div>
 				<div class="flex w-8 flex-col">
 					<div
 						class="mx-auto mb-1 w-1 grow rounded-full bg-linear-to-t from-border to-transparent"
@@ -144,17 +145,32 @@
 					<div class="mx-auto size-3 rounded-full bg-border"></div>
 					<div class="mx-auto mt-1 w-1 grow rounded-t-full bg-border"></div>
 				</div>
-				<div class="my-auto text-sm font-semibold">Test</div>
+				<div class="my-auto text-sm font-semibold">
+					Formula Edge AI Racer competition<br />First Runner Up
+				</div>
 			</div>
 			<div class="flex h-12">
+				<div class="my-auto font-semibold">2023</div>
 				<div class="flex w-8 flex-col">
 					<div class="mx-auto mb-1 w-1 grow rounded-b-full bg-border"></div>
 					<div class="mx-auto size-3 rounded-full bg-border"></div>
 					<div class="mx-auto mt-1 w-1 grow rounded-t-full bg-border"></div>
 				</div>
-				<div class="my-auto text-sm font-semibold">Test</div>
+				<div class="my-auto text-sm font-semibold">
+					APRA Hong Kong competition <br /> Third Runner Up
+				</div>
 			</div>
 			<div class="flex h-12">
+				<div class="my-auto font-semibold">2023</div>
+				<div class="flex w-8 flex-col">
+					<div class="mx-auto mb-1 w-1 grow rounded-b-full bg-border"></div>
+					<div class="mx-auto size-3 rounded-full bg-border"></div>
+					<div class="mx-auto mt-1 w-1 grow rounded-t-full bg-border"></div>
+				</div>
+				<div class="my-auto text-sm font-semibold">APRA International competition</div>
+			</div>
+			<div class="flex h-12">
+				<div class="my-auto font-semibold">2023</div>
 				<div class="flex w-8 flex-col">
 					<div class="mx-auto mb-1 w-1 grow rounded-b-full bg-border"></div>
 					<div class="mx-auto size-3 rounded-full bg-border"></div>
@@ -163,7 +179,7 @@
 					></div>
 				</div>
 				<div class="flex rounded-2xl text-sm font-semibold">
-					<div class="my-auto">Test</div>
+					<div class="my-auto">EdCity Master Code AI competition<br />Merit Award</div>
 				</div>
 			</div>
 		</div>
@@ -185,6 +201,27 @@
 				content="A simple cli tools written in Rust."
 				image={TreeRs}
 			></ProjectCard>
+		</div>
+	</section>
+	<section id="findme" class="mx-auto mt-8 flex w-max min-w-[70vw] flex-col">
+		<div class="mx-auto mb-16 flex size-64 rounded-full border-2 border-border">
+			<div class="m-auto flex size-32 rounded-full border-2 border-border">
+				<a
+					class="animate-btn my-auto mr-auto flex size-10 -translate-x-1/2 cursor-pointer rounded-full border-2 border-border bg-fg shadow-border transition-all hover:shadow-[0_0_4px]"
+					title="github"
+					href="https://github.com/wqLouis"
+					target="_blank"
+				>
+					<span class="m-auto icon-[octicon--mark-github-24] size-6 bg-text/50"></span>
+				</a>
+				<a
+					class="animate-btn my-auto ml-auto flex size-10 translate-x-1/2 cursor-pointer rounded-full border-2 border-border bg-fg shadow-border transition-all hover:shadow-[0_0_4px]"
+					title="mail"
+					href="mailto:wql-louis@outlook.com"
+				>
+					<span class="m-auto icon-[tabler--mail] size-6 bg-text/50"></span>
+				</a>
+			</div>
 		</div>
 	</section>
 </main>
