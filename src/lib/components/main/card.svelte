@@ -4,11 +4,14 @@
 	export let image: string = '';
 
 	import { BtnAnimation } from '$lib/src/btnAnimation';
+	import { Card3dAnimation } from '$lib/src/3dcardAnimation';
+
+	Card3dAnimation();
 	BtnAnimation();
 </script>
 
 <div
-	class="flex h-80 w-64 flex-col rounded-2xl border-2 border-border bg-fg p-4 text-sm font-semibold shadow-[0_4px_8px] shadow-border transition-all hover:scale-110"
+	class="animate-3d-card flex h-80 w-64 flex-col rounded-2xl border-2 border-border bg-fg p-4 text-sm font-semibold shadow-[0_4px_8px] shadow-border"
 >
 	<div class="mb-4 h-1/2 overflow-clip rounded-lg border-2 border-border bg-fg">
 		<img src={image} class="h-full object-cover" alt="" />
