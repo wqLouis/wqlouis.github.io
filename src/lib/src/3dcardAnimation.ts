@@ -18,7 +18,7 @@ export function Card3dAnimation() {
 			const x = (e.x - rect.left - rect.width / 2) / (rect.width / 2);
 			const y = (e.y - rect.top - rect.height / 2) / (rect.height / 2);
 
-			card.style.transform = `rotate3d(${y},${x},0, 25deg)`;
+			card.style.transform = `rotate3d(${y},${x},0, 15deg)`;
 		};
 
 		cards.forEach((val) => {

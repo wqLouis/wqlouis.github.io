@@ -10,20 +10,22 @@
 	BtnAnimation();
 </script>
 
-<div
-	class="animate-3d-card flex h-80 w-64 flex-col rounded-2xl border-2 border-border bg-fg p-4 text-sm font-semibold shadow-[0_4px_8px] shadow-border"
->
-	<div class="mb-4 h-1/2 overflow-clip rounded-lg border-2 border-border bg-fg">
-		<img src={image} class="h-full object-cover" alt="" />
-	</div>
-	<div class="my-auto text-center">{content}</div>
-	<div class="flex">
-		<a
-			class="animate-btn mx-auto my-2 flex h-8 w-max cursor-pointer rounded-2xl border-2 border-border bg-fg shadow-[0_0_4px] shadow-border transition-all hover:shadow-[0_0_12px]"
-			href={link}
-			target="_blank"
-		>
-			<div class="m-auto mx-4 text-text/50">View source code</div>
-		</a>
+<div class="">
+	<div
+		class="animate-3d-card flex h-80 w-64 flex-col rounded-2xl border-2 border-border bg-fg p-4 text-sm font-semibold shadow-[0_0_12px] shadow-border transition-all duration-75 ease-out"
+	>
+		<div class="mb-4 h-1/2 overflow-clip rounded-lg border-2 border-border bg-fg">
+			<img src={image} class="h-full object-cover" alt="" />
+		</div>
+		<div class="my-auto text-center">{content}</div>
+		<div class="flex perspective-[1000px] transform-3d">
+			<a
+				class="animate-btn mx-auto my-2 flex h-8 w-max cursor-pointer rounded-2xl border-2 border-border bg-fg shadow-[0_0_4px] shadow-border transition-all hover:translate-z-10 hover:shadow-[0_0_12px]"
+				href={link}
+				target="_blank"
+			>
+				<div class="m-auto mx-4 text-text/50">View source code</div>
+			</a>
+		</div>
 	</div>
 </div>
