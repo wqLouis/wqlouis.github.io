@@ -2,6 +2,7 @@
 	export let content: string = '';
 	export let link: string = 'https://wqlouis.github.io/';
 	export let image: string = '';
+	export let cardTitle: string = '';
 
 	import { BtnAnimation } from '$lib/src/btnAnimation';
 	import { Card3dAnimation } from '$lib/src/3dcardAnimation';
@@ -12,11 +13,12 @@
 
 <div class="">
 	<div
-		class="animate-3d-card flex h-80 w-64 flex-col rounded-2xl border-2 border-border bg-fg p-4 text-sm font-semibold shadow-[0_0_12px] shadow-border transition-all duration-75 ease-out"
+		class="animate-3d-card flex h-80 w-64 flex-col rounded-2xl border-2 border-border bg-fg p-4 text-sm font-semibold shadow-[0_0_12px] shadow-border transition-all duration-100 ease-out hover:-translate-y-6 hover:translate-z-12 hover:scale-110"
 	>
 		<div class="mb-4 h-1/2 overflow-clip rounded-lg border-2 border-border bg-fg">
 			<img src={image} class="h-full object-cover" alt="" />
 		</div>
+		<div class="my-auto text-center">{cardTitle}</div>
 		<div class="my-auto text-center">{content}</div>
 		<div class="flex perspective-[1000px] transform-3d">
 			<a

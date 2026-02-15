@@ -9,6 +9,8 @@
 	import ProjectCard from '$lib/components/main/card.svelte';
 	import PersonalWebsite from '$lib/assets/others/PersonalWebsite.png';
 	import TreeRs from '$lib/assets/others/treers.png';
+	import Depkg from '$lib/assets/others/depkg.png';
+	import Yawe from '$lib/assets/others/yawe.png';
 
 	import { BtnAnimation } from '$lib/src/btnAnimation';
 	BtnAnimation();
@@ -185,21 +187,41 @@
 		</div>
 	</section>
 	<section id="projects" class="mx-auto mt-8 flex h-max w-max min-w-[70vw] flex-col">
-		<div class="mb-8 ml-8 text-2xl font-bold">Projects</div>
+		<div class="mb-8 ml-8 text-2xl font-bold">Previous Projects</div>
 		<div class="mx-auto mb-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 			<ProjectCard
 				link="https://github.com/wqLouis/paper_check"
 				content="A python paddle ocr wrapper, built with flet."
+				cardTitle="Paper Check"
 			></ProjectCard>
 			<ProjectCard
 				link="https://github.com/wqLouis/wqlouis.github.io"
 				content="My personal website built with Tailwindcss and Svelte."
 				image={PersonalWebsite}
+				cardTitle="My website"
 			></ProjectCard>
 			<ProjectCard
 				link="https://github.com/wqLouis/tree-rs"
 				content="A simple cli tools written in Rust."
 				image={TreeRs}
+				cardTitle="Tree rs"
+			></ProjectCard>
+		</div>
+	</section>
+	<section id="current-projects" class="mx-auto mt-8 flex h-max w-max min-w-[70vw] flex-col">
+		<div class="mb-8 ml-8 text-2xl font-bold">Current Projects</div>
+		<div class="mx-auto mb-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
+			<ProjectCard
+				link="https://github.com/wqLouis/depkg"
+				content="A wallpaper engine pkg and tex file decompiler written in Rust"
+				cardTitle="depkg"
+				image={Depkg}
+			></ProjectCard>
+			<ProjectCard
+				link="https://github.com/wqLouis/linux-wallpaper-engine"
+				content="A linux port of wallpaper engine. Written in Rust with WGPU"
+				cardTitle="linux wallpaper engine"
+				image={Yawe}
 			></ProjectCard>
 		</div>
 	</section>
