@@ -41,5 +41,12 @@
 		>
 			<span class="m-auto icon-[heroicons--book-open-20-solid] transition-all"></span>
 		</a>
+		<button
+			title="Dark Mode"
+			class="animate-btn my-auto flex size-8 cursor-pointer rounded-full transition-all hover:bg-text/10 hover:[&>span]:scale-110"
+			onclick={() => {}}
+		>
+			<span class="m-auto icon-[heroicons--moon-16-solid] transition-all"></span>
+		</button>
 	</div>
 </div>

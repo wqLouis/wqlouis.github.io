@@ -16,7 +16,7 @@
 	BtnAnimation();
 </script>
 
-<main class="flex h-auto w-full flex-col bg-bg text-text">
+<main class="flex h-auto w-full flex-col overflow-clip bg-bg text-text">
 	<section class="mx-auto flex h-screen w-full flex-col" id="home">
 		<div class="mx-auto mt-[42vh] mb-auto flex cursor-default">
 			<div class="mx-4 my-auto">
@@ -125,7 +125,7 @@
 				></div>
 			</div>
 			<div class="my-auto flex text-sm font-semibold">
-				<div class="flex size-16 rounded-full border-2 border-border bg-fg">
+				<div class="hidden size-16 rounded-full border-2 border-border bg-fg sm:flex">
 					<img src={Cityu} alt="" class="m-auto h-6" />
 				</div>
 				<div class="mx-2 my-auto">
