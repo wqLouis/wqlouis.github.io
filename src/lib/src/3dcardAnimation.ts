@@ -30,5 +30,12 @@ export function Card3dAnimation() {
 			val.addEventListener('mousemove', mouseMoveHandler);
 			val.addEventListener('mouseleave', mouseLeaveHandler);
 		});
+
+		return () => {
+			cards.forEach((val) => {
+				val.removeEventListener('mousemove', mouseMoveHandler);
+				val.removeEventListener('mouseleave', mouseLeaveHandler);
+			});
+		};
 	});
 }
