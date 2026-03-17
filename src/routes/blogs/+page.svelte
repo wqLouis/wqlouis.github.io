@@ -34,25 +34,25 @@
 			<Blog
 				title="Linux 從入門到 Windows"
 				discription="大概告訴你如何選擇 Linux distro 和一些基本的Linux東西"
-				route="/我還沒寫"
+				route="/"
 				tags={['Linux', 'OS', 'Operating Systems']}
 			></Blog>
 			<Blog
 				title="如何用Wgpu + Rust寫一個簡單渲染器"
 				discription="Wgpu是一個非常好用的Rust渲染框架，兼容不同的GPU後端"
-				route="/我還沒寫"
+				route="/"
 				tags={['Rust', 'WGPU', 'Programming']}
 			></Blog>
 			<Blog
 				title="使用Github pages + Svelte構建一個個人網站"
 				discription="Svelte是一個新銳的前端框架，非常好用，使我的鍵盤旋轉"
-				route="/我還沒寫"
+				route="/"
 				tags={['TypeScript', 'Svelte', 'Web dev', 'SvelteKit']}
 			></Blog>
 			<Blog
 				title="Linux wallpaper engine 開發日誌"
 				discription="太無聊寫的一個Linux wallpaper engine,採用Wgpu + Vulkan渲染，以及Rust"
-				route="/我還沒寫"
+				route="/"
 				tags={['Linux', 'WGPU', 'Rust', 'Programming']}
 			></Blog>
 		</div>
