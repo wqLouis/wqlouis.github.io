@@ -42,7 +42,7 @@
 			<div class="flex w-max gap-8">
 				<div class="my-8 mr-auto ml-8 text-2xl font-bold">Tech Stacks</div>
 				<button
-					class="animate-btn mx-auto my-auto flex h-8 w-24 cursor-pointer rounded-full border-2 border-border bg-fg transition-all hover:shadow-[0_0_8px] hover:shadow-border"
+					class="animate-btn mx-auto my-auto flex h-8 w-26 cursor-pointer rounded-full border-2 border-border bg-fg transition-all hover:shadow-[0_0_8px] hover:shadow-border"
 					onclick={(event) => {
 						const btn = event.currentTarget;
 						const table = document.getElementById('tech-stacks-table');

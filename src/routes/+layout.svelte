@@ -2,8 +2,10 @@
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
+	import Tooltip from '$lib/components/tooltip.svelte';
 	import type { RouteId } from '$app/types';
 	import { BtnAnimation } from '$lib/src/btnAnimation';
+
 	import '../app.css';
 	let { children } = $props();
 
@@ -33,6 +35,9 @@
 			}}
 		>
 			<span class="m-auto icon-[heroicons--home-20-solid] transition-all"></span>
+			<Tooltip popOffset={{ x: 0, y: 130 }}>
+				<div class="flex size-full"><span class="mx-4 my-auto">Home</span></div>
+			</Tooltip>
 		</button>
 		<a
 			title="Blogs"
@@ -40,6 +45,30 @@
 			class="animate-btn my-auto flex size-8 cursor-pointer rounded-full transition-all hover:bg-text/10 hover:[&>span]:scale-110"
 		>
 			<span class="m-auto icon-[heroicons--book-open-20-solid] transition-all"></span>
+			<Tooltip popOffset={{ x: 0, y: 130 }}>
+				<div class="flex size-full"><span class="mx-4 my-auto">Blogs</span></div>
+			</Tooltip>
+		</a>
+		<a
+			class="animate-btn my-auto flex size-8 cursor-pointer rounded-full transition-all hover:bg-text/10 hover:[&>span]:scale-110"
+			title="github"
+			href="https://github.com/wqLouis"
+			target="_blank"
+		>
+			<span class="m-auto icon-[octicon--mark-github-24] size-5"></span>
+			<Tooltip popOffset={{ x: 0, y: 130 }}>
+				<div class="flex size-full"><span class="mx-4 my-auto">Github</span></div>
+			</Tooltip>
+		</a>
+		<a
+			class="animate-btn my-auto flex size-8 cursor-pointer rounded-full transition-all hover:bg-text/10 hover:[&>span]:scale-110"
+			title="mail"
+			href="mailto:wql-louis@outlook.com"
+		>
+			<span class="m-auto icon-[material-symbols--mail-rounded] size-5 transition-all"></span>
+			<Tooltip popOffset={{ x: 0, y: 130 }}>
+				<div class="flex size-full"><span class="mx-4 my-auto">Email</span></div>
+			</Tooltip>
 		</a>
 		<button
 			title="Dark Mode"
@@ -47,6 +76,9 @@
 			onclick={() => {}}
 		>
 			<span class="m-auto icon-[heroicons--moon-16-solid] transition-all"></span>
+			<Tooltip popOffset={{ x: 0, y: 130 }}>
+				<div class="flex size-full"><span class="mx-4 my-auto">Dark Mode</span></div>
+			</Tooltip>
 		</button>
 	</div>
 </div>
