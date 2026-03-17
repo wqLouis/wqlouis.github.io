@@ -23,6 +23,13 @@ body {
 		--border: var(--color-neutral-300);
 		--text: var(--color-black);
 	}
+
+	.dark {
+		--background: var(--color-gray-950);
+		--foreground: var(--color-gray-900);
+		--border: var(--color-gray-800);
+		--text: var(--color-white);
+	}
 }
 
 @theme inline {

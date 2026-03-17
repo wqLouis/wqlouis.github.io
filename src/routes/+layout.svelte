@@ -14,9 +14,9 @@
 
 {@render children()}
 
-<div class="pointer-events-none fixed bottom-5 flex w-screen">
+<div class="pointer-events-none fixed bottom-12 z-100 flex w-screen">
 	<div
-		class="pointer-events-auto m-auto flex min-w-max cursor-default gap-4 rounded-full border-2 border-border/50 bg-fg/80 p-2 text-xl text-text/70 shadow-[0_0_12px] shadow-text/20 backdrop-blur-xs"
+		class="pointer-events-auto m-auto flex min-w-max cursor-default gap-4 rounded-full border-2 border-border/50 bg-fg/80 p-2 text-xl text-text/70 shadow-[0_0_24px] shadow-text/20 backdrop-blur-xs"
 	>
 		<button
 			title="Home"
@@ -37,7 +37,7 @@
 			<span class="m-auto icon-[heroicons--home-20-solid] transition-all"></span>
 			<Tooltip popOffset={{ x: 0, y: 140 }}>
 				<div
-					class="flex size-full rounded-full border-2 border-border/80 bg-bg shadow-[0_4px_10px] shadow-border"
+					class="flex size-full rounded-full border-2 border-border/50 bg-bg shadow-[0_0_8px] shadow-border"
 				>
 					<span class="mx-4 my-auto">Home</span>
 				</div>
@@ -51,7 +51,7 @@
 			<span class="m-auto icon-[heroicons--book-open-20-solid] transition-all"></span>
 			<Tooltip popOffset={{ x: 0, y: 140 }}>
 				<div
-					class="flex size-full rounded-full border-2 border-border/80 bg-bg shadow-[0_4px_10px] shadow-border"
+					class="flex size-full rounded-full border-2 border-border/50 bg-bg shadow-[0_0_8px] shadow-border"
 				>
 					<span class="mx-4 my-auto">Blogs</span>
 				</div>
@@ -66,7 +66,7 @@
 			<span class="m-auto icon-[octicon--mark-github-24] size-5"></span>
 			<Tooltip popOffset={{ x: 0, y: 140 }}>
 				<div
-					class="flex size-full rounded-full border-2 border-border/80 bg-bg shadow-[0_4px_10px] shadow-border"
+					class="flex size-full rounded-full border-2 border-border/50 bg-bg shadow-[0_0_8px] shadow-border"
 				>
 					<span class="mx-4 my-auto">Github</span>
 				</div>
@@ -80,7 +80,7 @@
 			<span class="m-auto icon-[material-symbols--mail-rounded] size-5 transition-all"></span>
 			<Tooltip popOffset={{ x: 0, y: 140 }}>
 				<div
-					class="flex size-full translate-z-10 rounded-full border-2 border-border/80 bg-bg shadow-[0_4px_10px] shadow-border"
+					class="flex size-full translate-z-10 rounded-full border-2 border-border/50 bg-bg shadow-[0_0_8px] shadow-border"
 				>
 					<span class="mx-4 my-auto">Email</span>
 				</div>
