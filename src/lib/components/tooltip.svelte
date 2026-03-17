@@ -14,12 +14,16 @@
 		tooltip.style.bottom = `calc(${yShift}px + ${popOffset.y}%)`;
 		tooltip.classList.toggle('opacity-100', true);
 		tooltip.classList.toggle('blur-xs', false);
+		tooltip.classList.toggle('scale-100', true);
+		tooltip.classList.toggle('scale-10', false);
 	};
 	const mouseLeaveHandler = () => {
 		tooltip.style.left = `${xShift}px`;
 		tooltip.style.bottom = `${yShift}px`;
 		tooltip.classList.toggle('opacity-100', false);
 		tooltip.classList.toggle('blur-xs', true);
+		tooltip.classList.toggle('scale-100', false);
+		tooltip.classList.toggle('scale-10', true);
 	};
 
 	onMount(() => {
@@ -46,5 +50,5 @@
 	class="pointer-events-none absolute z-10 h-8 min-h-max w-max min-w-max text-xs text-text opacity-0 transition-all"
 	bind:this={tooltip}
 >
-	<div class="size-full rounded-xl bg-border/80"><slot /></div>
+	<div class="size-full rounded-xl"><slot /></div>
 </div>
