@@ -82,7 +82,7 @@
 		</div>
 	</section>
 	<section
-		class="z-1 flex h-max w-full flex-col gap-12 bg-bg/70 pt-28 backdrop-blur-2xl"
+		class="z-1 flex h-max w-full flex-col gap-12 bg-bg/70 py-28 backdrop-blur-2xl"
 		id="installation"
 	>
 		<div class="mx-auto flex h-max w-6/10 rounded-3xl border-2 border-border bg-fg p-4 px-6">
@@ -96,19 +96,6 @@
 			<div class="my-8 flex flex-col gap-8">
 				<CodeBlock lang="bash" lines={['paru -S linux-wallpaper-engine-git']}></CodeBlock>
 				<CodeBlock lang="bash" lines={['yay -S linux-wallpaper-engine-git']}></CodeBlock>
-			</div>
-			<div
-				class="flex flex-col rounded-2xl border-2 border-border/80 bg-fg/70 px-8 pb-8 font-medium text-text/80"
-			>
-				<span class="my-4 flex">
-					<span class="my-auto icon-[heroicons--exclamation-triangle-20-solid] size-8 text-gray-300"
-					></span>
-					<span class="my-auto ml-4 text-center font-bold">After installation</span>
-				</span>
-				<span class="">
-					Ensure you have installed Wallpaper Engine from Steam to get the wallpaper assets from
-					workshop
-				</span>
 			</div>
 		</div>
 		<div
@@ -128,6 +115,19 @@
 					'cargo install --path . --profile=release'
 				]}
 			></CodeBlock>
+		</div>
+		<div
+			class="mx-auto flex h-max w-6/10 flex-col rounded-2xl border-2 border-border/80 bg-fg/70 px-8 pb-8 font-medium text-text/80"
+		>
+			<span class="my-4 flex">
+				<span class="my-auto icon-[heroicons--exclamation-triangle-20-solid] size-8 text-gray-300"
+				></span>
+				<span class="my-auto ml-4 text-center font-bold">After installation</span>
+			</span>
+			<span class="">
+				Ensure you have installed Wallpaper Engine from Steam to get the wallpaper assets from
+				workshop
+			</span>
 		</div>
 	</section>
 </section>
