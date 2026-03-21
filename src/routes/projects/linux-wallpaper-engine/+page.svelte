@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { BtnAnimation } from '$lib/src/btnAnimation';
 	import { onMount } from 'svelte';
+	import CodeBlock from './code_block.svelte';
 
 	let cursor: HTMLElement;
 	let cursorMirror: HTMLElement;
@@ -86,36 +87,50 @@
 		</div>
 	</section>
 	<section
-		class="z-1 flex h-screen w-full flex-col bg-bg/70 pt-28 backdrop-blur-2xl"
+		class="z-1 flex h-screen w-full flex-col gap-12 bg-bg/70 pt-28 backdrop-blur-2xl"
 		id="installation"
 	>
-		<div class="mx-auto mb-12 flex h-max w-6/10 rounded-2xl border-2 border-border bg-fg p-4 px-6">
+		<div class="mx-auto flex h-max w-6/10 rounded-3xl border-2 border-border bg-fg p-4 px-6">
 			<span class="text-center text-3xl font-bold text-text/80">Installation</span>
-			<div class="mx-8 flex gap-4">
-				<button
-					title="arch install"
-					class="cursor-pointer rounded-xl border-2 border-border/70 bg-fg/70 px-2 text-xs font-medium text-text transition-all hover:bg-gray-700/20"
-					onclick={() => {
-						installState = 'arch';
-					}}><span>For Arch Linux</span></button
-				>
-				<button
-					title="build from source"
-					class="cursor-pointer rounded-xl border-2 border-border/70 bg-fg/70 px-2 text-xs font-medium text-text transition-all hover:bg-gray-700/20"
-					onclick={(event: MouseEvent) => {
-						installState = 'source';
-					}}><span>Build from source</span></button
-				>
+			<div class="mx-8 flex gap-4"></div>
+		</div>
+		<div
+			class="mx-auto flex h-max w-6/10 flex-col rounded-3xl border-2 border-border/70 bg-fg/70 p-4 backdrop-blur-2xl transition-all"
+		>
+			<span class="mx-4 mt-2 text-2xl font-bold text-text/80">Install From AUR</span>
+			<div class="my-8 flex flex-col gap-8">
+				<CodeBlock lang="bash" lines={['paru -S linux-wallpaper-engine-git']}></CodeBlock>
+				<CodeBlock lang="bash" lines={['yay -S linux-wallpaper-engine-git']}></CodeBlock>
+			</div>
+			<div
+				class="flex flex-col rounded-2xl border-2 border-border/80 bg-fg/70 px-8 pb-8 font-medium text-text/80"
+			>
+				<span class="my-4 flex">
+					<span class="my-auto icon-[heroicons--exclamation-triangle-20-solid] size-8 text-gray-300"
+					></span>
+					<span class="my-auto ml-4 text-center font-bold">After installation</span>
+				</span>
+				<span class="">
+					Ensure you have installed Wallpaper Engine from Steam to get the wallpaper assets from
+					workshop
+				</span>
 			</div>
 		</div>
-		{#if installState === 'arch'}
-			<div
-				class="mx-auto flex h-max w-6/10 flex-col rounded-2xl border-2 border-border/70 bg-fg/70 p-4 backdrop-blur-2xl transition-all"
+		<div
+			class="mx-auto flex h-max w-6/10 flex-col rounded-3xl border-2 border-border/70 bg-fg/70 p-4 backdrop-blur-2xl transition-all"
+		>
+			<span class="mx-4 my-2 text-2xl font-bold text-text/80">Build from source</span>
+			<span class="mx-6 mb-4 font-bold text-text/80"
+				>-- Before you build the project, ensure you have cargo in your system</span
 			>
-				<span class="text-xl font-bold text-text/80">Install From AUR</span>
-			</div>
-		{/if}
-		{#if installState === 'source'}{/if}
-		{#if installState === ''}{/if}
+			<CodeBlock
+				lang="bash"
+				lines={[
+					'git clone https://github.com/wqLouis/linux-wallpaperengine.git',
+					'cd linux-wallpaperengine',
+					'cargo install --path . --profile=release'
+				]}
+			></CodeBlock>
+		</div>
 	</section>
 </section>
