@@ -27,15 +27,10 @@
 		};
 	});
 
-	let installState = 'arch';
-
-	// Installation
-	onMount(() => {});
-
 	BtnAnimation();
 </script>
 
-<section class="flex h-max w-screen flex-col bg-bg/90">
+<section class="flex h-max w-screen flex-col overflow-clip bg-bg/90">
 	<div
 		class="fixed top-0 left-0 size-[35vw] animate-pulse rounded-full bg-amber-600/60 blur-[100vw] backdrop-blur-2xl"
 		bind:this={cursor}
@@ -87,7 +82,7 @@
 		</div>
 	</section>
 	<section
-		class="z-1 flex h-screen w-full flex-col gap-12 bg-bg/70 pt-28 backdrop-blur-2xl"
+		class="z-1 flex h-max w-full flex-col gap-12 bg-bg/70 pt-28 backdrop-blur-2xl"
 		id="installation"
 	>
 		<div class="mx-auto flex h-max w-6/10 rounded-3xl border-2 border-border bg-fg p-4 px-6">
@@ -120,9 +115,11 @@
 			class="mx-auto flex h-max w-6/10 flex-col rounded-3xl border-2 border-border/70 bg-fg/70 p-4 backdrop-blur-2xl transition-all"
 		>
 			<span class="mx-4 my-2 text-2xl font-bold text-text/80">Build from source</span>
-			<span class="mx-6 mb-4 font-bold text-text/80"
-				>-- Before you build the project, ensure you have cargo in your system</span
-			>
+			<span class="mx-4 font-bold text-text/80">Build Dependencies:</span>
+			<ul class="mx-12 mb-4 list-decimal font-bold text-text/80">
+				<li>Cargo</li>
+				<li>Git</li>
+			</ul>
 			<CodeBlock
 				lang="bash"
 				lines={[
