@@ -55,11 +55,17 @@
 						<span class="text-xs font-medium"
 							>Another Linux Wallpaper Engine written with Rust and Wgpu
 						</span>
+						<div
+							class="flex gap-3 text-center text-xs text-text/30 text-shadow-[0_0_0] *:w-max *:rounded-full *:border-2 *:border-border *:bg-fg *:px-2 *:py-1"
+						>
+							<div>Vulkan</div>
+							<div>High Performance</div>
+						</div>
 					</div>
-					<div class="m-4 mt-12 flex h-max w-full justify-center gap-8">
+					<div class="mt-12 grid h-max w-full grid-cols-2 gap-8">
 						<button
 							title="install"
-							class="animate-btn mx-4 flex w-48 cursor-pointer gap-2 rounded-full border-2 border-amber-800/50 bg-amber-600/30 px-6 py-2 text-lg font-bold text-text/90 shadow-amber-600/40 transition-all ease-out text-shadow-[0_0_4px] text-shadow-text/50 hover:scale-120 hover:bg-amber-600/40 hover:shadow-[0_0_12px]
+							class="animate-btn mx-auto flex w-48 cursor-pointer gap-2 rounded-full border-2 border-amber-800/50 bg-amber-600/30 px-6 py-2 text-lg font-bold text-text/90 shadow-amber-600/40 transition-all ease-out text-shadow-[0_0_4px] text-shadow-text/50 hover:scale-120 hover:bg-amber-600/40 hover:shadow-[0_0_12px]
 						"
 							onclick={() => {
 								const section = document.getElementById('installation') as HTMLElement;
@@ -71,7 +77,7 @@
 						</button>
 						<a
 							title="github"
-							class="mx-4 flex w-48 cursor-pointer gap-2 rounded-full border-2 border-gray-700/90 bg-gray-900/50 px-6 py-2 text-center text-lg font-bold text-text/90 shadow-gray-700/50 transition-all ease-out text-shadow-[0_0_4px] text-shadow-text/50 hover:scale-120 hover:bg-gray-700/50 hover:shadow-[0_0_12px] hover:text-shadow-[0_0_12px]"
+							class="mx-auto flex w-48 cursor-pointer gap-2 rounded-full border-2 border-gray-700/90 bg-gray-900/50 px-6 py-2 text-center text-lg font-bold text-text/90 shadow-gray-700/50 transition-all ease-out text-shadow-[0_0_4px] text-shadow-text/50 hover:scale-120 hover:bg-gray-700/50 hover:shadow-[0_0_12px] hover:text-shadow-[0_0_12px]"
 							href="https://github.com/wqLouis/linux-wallpaperengine"
 							target="_blank"
 						>
@@ -141,8 +147,8 @@
 						Custom Shader Support?
 					</span>
 					<span class="mr-auto ml-0 text-left font-medium text-text/80">
-						As wallpaper engine used DirectX shaders, there is no direct way to use them in WGPU.
-						Therefore idk if it is possible to support custom shaders.
+						As wallpaper engine used DirectX shaders and there is no direct way to use them in WGPU.
+						So idk if it is possible to support custom shaders. But I am trying in dev branch.
 					</span>
 				</div>
 				<div class="flex flex-col">
