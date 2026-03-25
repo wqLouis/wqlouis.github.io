@@ -130,7 +130,7 @@
 				</div>
 				<div class="mx-2 my-auto">
 					<div class="">CityUHK (2025~)</div>
-					<div class="">Bachelor of Electrical Engineering</div>
+					<div class="">Bachelor's student in Electrical Engineering</div>
 				</div>
 			</div>
 		</div>
