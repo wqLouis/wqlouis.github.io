@@ -147,8 +147,8 @@
 						Custom Shader Support?
 					</span>
 					<span class="mr-auto ml-0 text-left font-medium text-text/80">
-						As wallpaper engine used DirectX shaders and there is no direct way to use them in WGPU.
-						So idk if it is possible to support custom shaders. But I am trying in dev branch.
+						Wallpaper engine used openGL and glsl has partial support in Wgpu. And I am currently
+						working on implementing loading custom shaders with wgpu in dev branch.
 					</span>
 				</div>
 				<div class="flex flex-col">
