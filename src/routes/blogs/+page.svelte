@@ -1,60 +1,87 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
+	import { page } from '$app/state';
+
 	import { BtnAnimation } from '$lib/src/btnAnimation';
 	import Blog from './blog.svelte';
 
 	BtnAnimation();
 </script>
 
-<section class="h-max min-h-screen w-screen bg-bg" id="blog-list">
-	<div class="mx-auto flex h-max min-h-full w-max flex-col">
-		<div class="flex">
-			<div class="mr-0 size-16 bg-border/20">
-				<div class="size-full rounded-tr-2xl bg-bg"></div>
-			</div>
-			<div class="mb-8 flex w-full cursor-default rounded-b-2xl bg-border/20 px-4 pt-6 pb-6">
+<section class="min-h-screen w-screen bg-bg" id="blog-list">
+	<div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+		<!-- Header -->
+		<div class="mb-12">
+			<div class="flex items-center gap-4">
 				<button
-					title="Return"
-					class="animate-btn hover:[&>.]: mx-4 my-auto flex size-8 cursor-pointer rounded-full border-2 border-border/50 bg-fg transition-all hover:scale-125"
+					title="Return to home"
+					class="animate-btn group flex size-10 cursor-pointer items-center justify-center rounded-full border-2 border-border bg-fg transition-all hover:scale-105 hover:border-text/50 hover:bg-fg/80"
 					onclick={() => {
 						goto(resolve('/'));
 					}}
 				>
-					<span class="my-auto icon-[heroicons--chevron-up-16-solid] size-full rotate-270"></span>
+					<span
+						class="icon-[heroicons--arrow-left-20-solid] size-5 text-text/70 transition-transform group-hover:-translate-x-0.5"
+					></span>
 				</button>
-				<span class="my-auto text-2xl font-bold">My Blogs</span>
+				<div>
+					<h1 class="text-4xl font-bold tracking-tight text-text">Blog Posts</h1>
+					<p class="mt-2 text-lg text-text/70">
+						Thoughts, tutorials, and insights on technology and development
+					</p>
+				</div>
 			</div>
-			<div class="ml-0 size-16 bg-border/20">
-				<div class="size-full rounded-tl-2xl bg-bg"></div>
+
+			<div class="mt-8 border-b border-border/50 pb-4">
+				<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+					<p class="text-text/60">
+						{#if page.data.blogs.length === 0}
+							No blog posts yet
+						{:else if page.data.blogs.length === 1}
+							1 article
+						{:else}
+							{page.data.blogs.length} articles
+						{/if}
+					</p>
+
+					<!-- Future: Search/filter component -->
+					<div class="flex gap-3">
+						<!-- Placeholder for future filter buttons -->
+					</div>
+				</div>
 			</div>
 		</div>
 
-		<div class="flex flex-col gap-8 py-8">
-			<Blog
-				title="Linux 從入門到 Windows"
-				discription="大概告訴你如何選擇 Linux distro 和一些基本的Linux東西"
-				route="/"
-				tags={['Linux', 'OS', 'Operating Systems']}
-			></Blog>
-			<Blog
-				title="如何用Wgpu + Rust寫一個簡單渲染器"
-				discription="Wgpu是一個非常好用的Rust渲染框架，兼容不同的GPU後端"
-				route="/"
-				tags={['Rust', 'WGPU', 'Programming']}
-			></Blog>
-			<Blog
-				title="使用Github pages + Svelte構建一個個人網站"
-				discription="Svelte是一個新銳的前端框架，非常好用，使我的鍵盤旋轉"
-				route="/"
-				tags={['TypeScript', 'Svelte', 'Web dev', 'SvelteKit']}
-			></Blog>
-			<Blog
-				title="Linux wallpaper engine 開發日誌"
-				discription="太無聊寫的一個Linux wallpaper engine,採用Wgpu + Vulkan渲染，以及Rust"
-				route="/"
-				tags={['Linux', 'WGPU', 'Rust', 'Programming']}
-			></Blog>
+		<!-- Blog list -->
+		<div class="space-y-6">
+			{#if page.data.blogs.length === 0}
+				<div class="rounded-xl border-2 border-dashed border-border bg-fg/50 p-12 text-center">
+					<span class="mx-auto icon-[heroicons--document-text-20-solid] size-12 text-text/30"
+					></span>
+					<h3 class="mt-4 text-lg font-medium text-text/60">No blog posts yet</h3>
+					<p class="mt-2 text-text/50">Check back soon for new articles.</p>
+				</div>
+			{:else}
+				{#each page.data.blogs as blog (blog.slug)}
+					<Blog
+						title={blog.title}
+						description={blog.description}
+						route={`/blogs/${blog.slug}`}
+						tags={blog.tags}
+						date={blog.date}
+					/>
+				{/each}
+			{/if}
+		</div>
+
+		<!-- Footer note -->
+		<div class="mt-16 border-t border-border/30 pt-8 text-center">
+			<p class="text-sm text-text/50">
+				Built with
+				<span class="icon-[simple-icons--svelte] inline-block size-4 align-text-bottom text-text/60"
+				></span> SvelteKit
+			</p>
 		</div>
 	</div>
 </section>

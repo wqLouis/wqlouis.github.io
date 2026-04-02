@@ -5,11 +5,17 @@
 	import Tooltip from '$lib/components/tooltip.svelte';
 	import type { RouteId } from '$app/types';
 	import { BtnAnimation } from '$lib/src/btnAnimation';
+	import { theme } from '$lib/stores/theme';
+	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
+	import { onMount } from 'svelte';
 
 	import '../app.css';
 	let { children } = $props();
 
-	BtnAnimation();
+	onMount(() => {
+		BtnAnimation();
+		theme.initialize();
+	});
 </script>
 
 {@render children()}
@@ -86,5 +92,17 @@
 				</div>
 			</Tooltip>
 		</a>
+		<div
+			class="animate-btn my-auto flex size-8 cursor-pointer rounded-full transition-all hover:bg-text/10"
+		>
+			<ThemeToggle />
+			<Tooltip popOffset={{ x: 0, y: 140 }}>
+				<div
+					class="flex size-full rounded-full border-2 border-border/50 bg-bg shadow-[0_0_8px] shadow-border"
+				>
+					<span class="mx-4 my-auto">Theme</span>
+				</div>
+			</Tooltip>
+		</div>
 	</div>
 </div>
