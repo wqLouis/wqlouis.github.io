@@ -16,7 +16,7 @@
 			<div class="flex items-center gap-4">
 				<button
 					title="Return to home"
-					class="animate-btn group flex size-10 cursor-pointer items-center justify-center rounded-full border-2 border-border bg-fg transition-all hover:scale-105 hover:border-text/50 hover:bg-fg/80"
+					class="animate-btn group flex size-10 cursor-pointer items-center justify-center rounded-full border-2 border-border bg-fg transition-all hover:scale-105 hover:bg-fg/80"
 					onclick={() => {
 						goto(resolve('/'));
 					}}
