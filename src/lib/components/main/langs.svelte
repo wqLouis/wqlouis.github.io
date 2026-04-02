@@ -9,9 +9,17 @@
 
 	export let className: string = '';
 
-	const langs = [c, cpp, csharp, rust, python, js, ts];
+	const langs = [
+		{ src: c, isRust: false },
+		{ src: cpp, isRust: false },
+		{ src: csharp, isRust: false },
+		{ src: rust, isRust: true },
+		{ src: python, isRust: false },
+		{ src: js, isRust: false },
+		{ src: ts, isRust: false }
+	];
 </script>
 
-{#each langs as icon, i (i)}
-	<img src={icon} class="size-16 {className}" alt="" />
+{#each langs as item, i (i)}
+	<img src={item.src} class="size-16 {className} {item.isRust ? 'icon-rust' : ''}" alt="" />
 {/each}

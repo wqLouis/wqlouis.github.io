@@ -55,7 +55,8 @@
 			class="mt-12 flex h-max flex-col rounded-2xl border-2 border-amber-800/50 bg-amber-900/20 px-6 pt-4 pb-6 font-medium text-text/80"
 		>
 			<div class="my-4 flex items-center">
-				<span class="icon-[heroicons--exclamation-triangle-20-solid] size-6 text-amber-300"></span>
+				<span class="icon-[heroicons--exclamation-triangle-20-solid] size-6 min-w-6 text-amber-300"
+				></span>
 				<span class="ml-3 text-center font-bold">After installation</span>
 			</div>
 			<p class="text-sm md:text-base">

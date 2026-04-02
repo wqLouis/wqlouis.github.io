@@ -47,7 +47,7 @@
 					{#each features as feature (feature)}
 						<li class="flex items-start">
 							<span
-								class="mt-0.5 mr-3 icon-[heroicons--check-circle-20-solid] size-5 text-green-400"
+								class="mt-0.5 mr-3 icon-[heroicons--check-circle-20-solid] size-5 min-w-5 text-green-400"
 							></span>
 							<span class="text-text/80">{feature}</span>
 						</li>
@@ -62,7 +62,7 @@
 					{#each requirements as requirement (requirement)}
 						<li class="flex items-start">
 							<span
-								class="mt-0.5 mr-3 icon-[heroicons--information-circle-20-solid] size-5 text-blue-400"
+								class="mt-0.5 mr-3 icon-[heroicons--information-circle-20-solid] size-5 min-w-5 text-blue-400"
 							></span>
 							<span class="text-text/80">{requirement}</span>
 						</li>

@@ -32,10 +32,12 @@
 						{#each roadmap as item (item.text)}
 							<div class="flex items-center">
 								{#if item.done}
-									<span class="mr-3 icon-[heroicons--check-circle-20-solid] size-5 text-green-400"
+									<span
+										class="mr-3 icon-[heroicons--check-circle-20-solid] size-5 min-w-5 text-green-400"
 									></span>
 								{:else}
-									<span class="mr-3 icon-[heroicons--clock-20-solid] size-5 text-amber-400"></span>
+									<span class="mr-3 icon-[heroicons--clock-20-solid] size-5 min-w-5 text-amber-400"
+									></span>
 								{/if}
 								<span class={item.done ? 'text-text/90' : 'text-text/60'}>
 									{item.text}
@@ -52,7 +54,7 @@
 						{#each knownIssues as issue (issue)}
 							<div class="flex items-start">
 								<span
-									class="mt-0.5 mr-3 icon-[heroicons--exclamation-circle-20-solid] size-5 text-red-400"
+									class="mt-0.5 mr-3 icon-[heroicons--exclamation-circle-20-solid] size-5 min-w-5 text-red-400"
 								></span>
 								<span class="text-text/80">{issue}</span>
 							</div>
@@ -128,21 +130,23 @@
 				<div class="mt-6 space-y-4">
 					<div class="flex items-start">
 						<span
-							class="mt-0.5 mr-3 icon-[heroicons--shield-exclamation-20-solid] size-5 text-red-400"
+							class="mt-0.5 mr-3 icon-[heroicons--shield-exclamation-20-solid] size-5 min-w-5 text-red-400"
 						></span>
 						<span class="text-text/80">
 							This project is not affiliated with or endorsed by Wallpaper Engine.
 						</span>
 					</div>
 					<div class="flex items-start">
-						<span class="mt-0.5 mr-3 icon-[heroicons--shopping-cart-20-solid] size-5 text-green-400"
+						<span
+							class="mt-0.5 mr-3 icon-[heroicons--shopping-cart-20-solid] size-5 min-w-5 text-green-400"
 						></span>
 						<span class="text-text/80">
 							Please support the original software by purchasing it on Steam.
 						</span>
 					</div>
 					<div class="flex items-start">
-						<span class="mt-0.5 mr-3 icon-[heroicons--document-text-20-solid] size-5 text-blue-400"
+						<span
+							class="mt-0.5 mr-3 icon-[heroicons--document-text-20-solid] size-5 min-w-5 text-blue-400"
 						></span>
 						<span class="text-text/80"> This project is licensed under the GPLv3 License. </span>
 					</div>

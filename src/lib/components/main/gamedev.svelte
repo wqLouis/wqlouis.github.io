@@ -4,9 +4,16 @@
 
 	export let className: string = '';
 
-	const icons = [unity, godot];
+	const icons = [
+		{ src: unity, isUnity: true },
+		{ src: godot, isUnity: false }
+	];
 </script>
 
-{#each icons as icon, i (i)}
-	<img src={icon} alt="" class="h-auto max-h-16 object-cover {className}" />
+{#each icons as item, i (i)}
+	<img
+		src={item.src}
+		alt=""
+		class="h-auto max-h-16 object-cover {className} {item.isUnity ? 'icon-unity' : ''}"
+	/>
 {/each}
