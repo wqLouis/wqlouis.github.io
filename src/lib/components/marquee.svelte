@@ -7,12 +7,20 @@
 	let overlay: HTMLElement;
 
 	onMount(() => {
-		overlay.addEventListener('mouseenter', () => {
+		const handleMouseEnter = () => {
 			element.style.animationPlayState = 'paused';
-		});
-		overlay.addEventListener('mouseleave', () => {
+		};
+		const handleMouseLeave = () => {
 			element.style.animationPlayState = 'running';
-		});
+		};
+
+		overlay.addEventListener('mouseenter', handleMouseEnter);
+		overlay.addEventListener('mouseleave', handleMouseLeave);
+
+		return () => {
+			overlay.removeEventListener('mouseenter', handleMouseEnter);
+			overlay.removeEventListener('mouseleave', handleMouseLeave);
+		};
 	});
 </script>
 

@@ -12,9 +12,31 @@
 	export let tags: string[] = [];
 
 	// State for scroll indicator
-	let activeSection = '';
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	let _activeSection = '';
 	let sections: { id: string; title: string }[] = [];
+	let headerHeight = 100;
 	let scrollProgress = 0;
+	$: progressHeight =
+		sections.length > 0
+			? (() => {
+					const N = sections.length;
+					if (N === 1) {
+						// Single section: bar fills from 0% to 100% as user scrolls through it
+						return scrollProgress * 100;
+					}
+					// Multiple sections: bar height maps scrollProgress to position between first and last title
+					// When scrollProgress = 0 (top of page) => 0%
+					// When scrollProgress = (N-1)/N (last section start) => 100%
+					// When scrollProgress = 1 (bottom of page) => 100% (stays full)
+					const maxScrollForFullBar = (N - 1) / N;
+					if (scrollProgress <= maxScrollForFullBar) {
+						return ((scrollProgress * N) / (N - 1)) * 100;
+					} else {
+						return 100;
+					}
+				})()
+			: 0;
 
 	// Format date for display
 	function formatDate(dateString: string): string {
@@ -46,6 +68,13 @@
 				title: h1.textContent || `Section ${index + 1}`
 			};
 		});
+		console.log('Extracted sections:', sections.length, sections);
+		if (sections.length > 0) {
+			sections.forEach((section, idx) => {
+				const el = document.getElementById(section.id);
+				if (el) console.log(`Section ${idx}: offsetTop=${el.offsetTop}`);
+			});
+		}
 	}
 
 	// Update active section and scroll progress
@@ -54,14 +83,13 @@
 		if (typeof window === 'undefined' || sections.length === 0) return;
 
 		// Account for sticky header height (approx 100px)
-		const headerHeight = 100;
 		const scrollPosition = window.scrollY + headerHeight;
 
 		// Find which section is currently in view
 		for (let i = sections.length - 1; i >= 0; i--) {
 			const section = document.getElementById(sections[i].id);
 			if (section && section.offsetTop <= scrollPosition) {
-				activeSection = sections[i].id;
+				_activeSection = sections[i].id;
 
 				// Calculate scroll progress within current section
 				const currentSection = section;
@@ -97,10 +125,11 @@
 			}
 		}
 
-		// If no section found, use the first one
+		// If no section found, we're at the top of the page - show first section as active
 		if (sections.length > 0) {
-			activeSection = sections[0].id;
+			_activeSection = sections[0].id;
 			scrollProgress = 0;
+			console.log('At top of page, scrollProgress = 0');
 		}
 	}
 
@@ -112,7 +141,6 @@
 		const element = document.getElementById(sectionId);
 		if (element) {
 			// Account for sticky header (approx 100px)
-			const headerHeight = 100;
 			const elementPosition = element.getBoundingClientRect().top + window.scrollY;
 			const offsetPosition = elementPosition - headerHeight;
 
@@ -120,7 +148,7 @@
 				top: offsetPosition,
 				behavior: 'smooth'
 			});
-			activeSection = sectionId;
+			_activeSection = sectionId;
 		}
 	}
 
@@ -138,7 +166,14 @@
 		if (typeof window === 'undefined') return;
 
 		// Wait for content to be rendered
-		setTimeout(() => {
+		let timeoutId: NodeJS.Timeout;
+		timeoutId = setTimeout(() => {
+			// Measure actual header height
+			const headerEl = document.querySelector('header');
+			if (headerEl) {
+				headerHeight = headerEl.offsetHeight;
+				console.log('Measured header height:', headerHeight);
+			}
 			extractSections();
 			updateActiveSection();
 
@@ -146,14 +181,12 @@
 			window.addEventListener('scroll', handleScroll);
 			handleScroll(); // Initial check
 		}, 100);
-	});
 
-	// Cleanup
-	import { onDestroy } from 'svelte';
-	onDestroy(() => {
-		// Only run in browser
-		if (typeof window === 'undefined') return;
-		window.removeEventListener('scroll', handleScroll);
+		// Cleanup function
+		return () => {
+			clearTimeout(timeoutId);
+			window.removeEventListener('scroll', handleScroll);
+		};
 	});
 </script>
 
@@ -190,7 +223,7 @@
 							<div class="flex items-center gap-1">
 								<span class="icon-[heroicons--tag-20-solid] size-4"></span>
 								<div class="flex flex-wrap gap-1">
-									{#each tags as tag}
+									{#each tags as tag (tag)}
 										<span class="rounded-full bg-fg px-2 py-0.5 text-xs">{tag}</span>
 									{/each}
 								</div>
@@ -221,7 +254,7 @@
 				{#if sections.length > 0}
 					<div
 						class="absolute top-0 left-1/2 w-1 -translate-x-1/2 rounded-full bg-text/60 transition-all duration-75 ease-out"
-						style="height: {scrollProgress * 100}%"
+						style="height: {progressHeight}%"
 					></div>
 				{/if}
 
@@ -230,11 +263,16 @@
 					<button
 						on:click={() => scrollToSection(section.id)}
 						class="group absolute right-0 left-0 flex h-8 items-center"
-						style="top: {(i / sections.length) * 100}%"
+						style="top: {sections.length === 1
+							? 50
+							: (i / Math.max(sections.length - 1, 1)) * 100}%"
 					>
 						<!-- Tooltip-styled title label -->
 						<div
-							class="absolute top-1/2 right-4 z-10 h-8 min-h-max w-max min-w-max -translate-y-1/2 text-xs text-text opacity-70 transition-all hover:cursor-pointer"
+							class="absolute top-1/2 right-4 z-10 h-8 min-h-max w-max min-w-max -translate-y-full text-xs text-text transition-all hover:cursor-pointer {section.id ===
+							_activeSection
+								? 'opacity-100'
+								: 'opacity-70'}"
 						>
 							<div
 								class="size-full rounded-full border border-border bg-fg/90 px-3 py-1.5 whitespace-nowrap shadow-lg backdrop-blur-sm"
@@ -277,11 +315,15 @@
 				</div>
 
 				<div class="flex items-center gap-4">
-					<a href="/" class="text-sm text-text/70 transition-colors hover:text-text" title="Home">
+					<a
+						href={resolve('/')}
+						class="text-sm text-text/70 transition-colors hover:text-text"
+						title="Home"
+					>
 						<span class="icon-[heroicons--home-20-solid] size-5"></span>
 					</a>
 					<a
-						href="/blogs"
+						href={resolve('/blogs')}
 						class="text-sm text-text/70 transition-colors hover:text-text"
 						title="All Blogs"
 					>

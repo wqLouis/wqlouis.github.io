@@ -22,7 +22,7 @@
 
 <div class="pointer-events-none fixed bottom-12 z-100 flex w-screen">
 	<div
-		class="layout pointer-events-auto m-auto flex min-w-max cursor-default gap-4 rounded-full border-2 border-border/50 bg-fg/80 p-2 text-xl text-text/70 shadow-[0_0_24px] shadow-text/20 backdrop-blur-xs"
+		class="layout pointer-events-auto m-auto flex min-w-max cursor-default gap-4 rounded-full border-2 border-border/50 bg-fg/80 p-2 text-xl text-text/70 shadow-[0_0_24px] shadow-text/20 backdrop-blur-xs dark:shadow-text/5"
 	>
 		<button
 			title="Home"

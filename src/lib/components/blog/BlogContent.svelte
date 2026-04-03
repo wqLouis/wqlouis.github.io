@@ -60,10 +60,25 @@
 						if (success) {
 							showCopySuccess(copyButton);
 						} else {
-							throw new Error('Fallback copy failed');
+							// Show error state directly
+							console.error('Fallback copy failed: document.execCommand returned false');
+							copyButton.classList.add('copy-error');
+							copyButton.title = 'Copy failed!';
+							copyButton.innerHTML = `
+								<span class="icon-[heroicons--exclamation-triangle-20-solid] size-5 text-red-500"></span>
+							`;
+
+							// Reset after 2 seconds
+							setTimeout(() => {
+								copyButton.classList.remove('copy-error');
+								copyButton.title = 'Copy to clipboard';
+								copyButton.innerHTML = `
+									<span class="icon-[heroicons--square-2-stack-16-solid] size-5"></span>
+								`;
+							}, 2000);
 						}
 					} catch (fallbackErr) {
-						console.error('Fallback failed:', fallbackErr);
+						console.error('Unexpected error during fallback copy:', fallbackErr);
 						// Show error state
 						copyButton.classList.add('copy-error');
 						copyButton.title = 'Copy failed!';

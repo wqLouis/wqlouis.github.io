@@ -1,13 +1,18 @@
 <script lang="ts">
 	import { theme } from '$lib/stores/theme';
 	import { createEventDispatcher } from 'svelte';
+	import { onDestroy } from 'svelte';
 
 	const dispatch = createEventDispatcher<{ toggle: 'light' | 'dark' | 'system' }>();
 
 	let currentTheme: 'light' | 'dark' | 'system' = 'system';
 
-	theme.subscribe((value) => {
+	const unsubscribe = theme.subscribe((value) => {
 		currentTheme = value;
+	});
+
+	onDestroy(() => {
+		unsubscribe();
 	});
 
 	const toggle = () => {
