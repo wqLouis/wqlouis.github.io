@@ -3,6 +3,8 @@
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
 	import BlogContent from '$lib/components/blog/BlogContent.svelte';
+	import { formatBlogDate } from '$lib/utils/date';
+	import { btnAnimation } from '$lib/actions/animations';
 
 	// Blog metadata - passed from mdsvex frontmatter
 	export let title = 'Untitled Blog Post';
@@ -12,45 +14,20 @@
 	export let tags: string[] = [];
 
 	// State for scroll indicator
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	let _activeSection = '';
 	let sections: { id: string; title: string }[] = [];
 	let headerHeight = 100;
 	let scrollProgress = 0;
-	$: progressHeight =
-		sections.length > 0
-			? (() => {
-					const N = sections.length;
-					if (N === 1) {
-						// Single section: bar fills from 0% to 100% as user scrolls through it
-						return scrollProgress * 100;
-					}
-					// Multiple sections: bar height maps scrollProgress to position between first and last title
-					// When scrollProgress = 0 (top of page) => 0%
-					// When scrollProgress = (N-1)/N (last section start) => 100%
-					// When scrollProgress = 1 (bottom of page) => 100% (stays full)
-					const maxScrollForFullBar = (N - 1) / N;
-					if (scrollProgress <= maxScrollForFullBar) {
-						return ((scrollProgress * N) / (N - 1)) * 100;
-					} else {
-						return 100;
-					}
-				})()
-			: 0;
-
-	// Format date for display
-	function formatDate(dateString: string): string {
-		if (!dateString) return 'Unknown date';
-		try {
-			return new Date(dateString).toLocaleDateString('en-US', {
-				year: 'numeric',
-				month: 'long',
-				day: 'numeric'
-			});
-		} catch {
-			return 'Unknown date';
-		}
+	function calculateProgressHeight(sectionCount: number, progress: number): number {
+		if (sectionCount === 0) return 0;
+		if (sectionCount === 1) return progress * 100;
+		const maxScrollForFullBar = (sectionCount - 1) / sectionCount;
+		return progress <= maxScrollForFullBar
+			? ((progress * sectionCount) / (sectionCount - 1)) * 100
+			: 100;
 	}
+
+	$: progressHeight = calculateProgressHeight(sections.length, scrollProgress);
 
 	// Extract h1 sections from content
 	function extractSections() {
@@ -68,13 +45,6 @@
 				title: h1.textContent || `Section ${index + 1}`
 			};
 		});
-		console.log('Extracted sections:', sections.length, sections);
-		if (sections.length > 0) {
-			sections.forEach((section, idx) => {
-				const el = document.getElementById(section.id);
-				if (el) console.log(`Section ${idx}: offsetTop=${el.offsetTop}`);
-			});
-		}
 	}
 
 	// Update active section and scroll progress
@@ -129,7 +99,6 @@
 		if (sections.length > 0) {
 			_activeSection = sections[0].id;
 			scrollProgress = 0;
-			console.log('At top of page, scrollProgress = 0');
 		}
 	}
 
@@ -172,7 +141,6 @@
 			const headerEl = document.querySelector('header');
 			if (headerEl) {
 				headerHeight = headerEl.offsetHeight;
-				console.log('Measured header height:', headerHeight);
 			}
 			extractSections();
 			updateActiveSection();
@@ -190,7 +158,7 @@
 	});
 </script>
 
-<section class="min-h-screen bg-bg text-text">
+<section use:btnAnimation class="min-h-screen bg-bg text-text">
 	<!-- Blog Header -->
 	<header class="sticky top-0 z-30 border-b border-border bg-bg/80 backdrop-blur-md">
 		<div class="mx-auto max-w-4xl px-4 py-4 sm:px-6 lg:px-8">
@@ -213,7 +181,7 @@
 					<div class="flex flex-wrap items-center gap-4 text-sm text-text/70">
 						<div class="flex items-center gap-1">
 							<span class="icon-[heroicons--calendar-20-solid] size-4"></span>
-							<span>{formatDate(date)}</span>
+							<span>{formatBlogDate(date)}</span>
 						</div>
 						<div class="flex items-center gap-1">
 							<span class="icon-[heroicons--user-20-solid] size-4"></span>

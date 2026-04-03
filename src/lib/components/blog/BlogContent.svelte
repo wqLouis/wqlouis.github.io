@@ -1,10 +1,7 @@
 <script lang="ts">
 	import { onMount, afterUpdate } from 'svelte';
-	import { BtnAnimation } from '$lib/src/btnAnimation';
+	import { copyToClipboard, showCopySuccess, showCopyError } from '$lib/utils/clipboard';
 	import './blog.css';
-
-	// Initialize BtnAnimation
-	BtnAnimation();
 
 	// Track if we're in browser (hydration complete)
 	let isBrowser = false;
@@ -35,66 +32,12 @@
 			// Add click handler
 			copyButton.addEventListener('click', async () => {
 				const codeText = codeElement.textContent || '';
+				const success = await copyToClipboard(codeText);
 
-				try {
-					// Primary method: Clipboard API
-					await navigator.clipboard.writeText(codeText);
+				if (success) {
 					showCopySuccess(copyButton);
-				} catch (err) {
-					console.error('Failed to copy with Clipboard API:', err);
-
-					// Fallback method: Use a temporary textarea
-					try {
-						const textArea = document.createElement('textarea');
-						textArea.value = codeText;
-						textArea.style.position = 'fixed';
-						textArea.style.left = '-9999px';
-						textArea.style.top = '-9999px';
-						document.body.appendChild(textArea);
-						textArea.select();
-
-						// Use document.execCommand as fallback (deprecated but still works in older browsers)
-						const success = document.execCommand('copy');
-						document.body.removeChild(textArea);
-
-						if (success) {
-							showCopySuccess(copyButton);
-						} else {
-							// Show error state directly
-							console.error('Fallback copy failed: document.execCommand returned false');
-							copyButton.classList.add('copy-error');
-							copyButton.title = 'Copy failed!';
-							copyButton.innerHTML = `
-								<span class="icon-[heroicons--exclamation-triangle-20-solid] size-5 text-red-500"></span>
-							`;
-
-							// Reset after 2 seconds
-							setTimeout(() => {
-								copyButton.classList.remove('copy-error');
-								copyButton.title = 'Copy to clipboard';
-								copyButton.innerHTML = `
-									<span class="icon-[heroicons--square-2-stack-16-solid] size-5"></span>
-								`;
-							}, 2000);
-						}
-					} catch (fallbackErr) {
-						console.error('Unexpected error during fallback copy:', fallbackErr);
-						// Show error state
-						copyButton.classList.add('copy-error');
-						copyButton.title = 'Copy failed!';
-						copyButton.innerHTML = `
-							<span class="icon-[heroicons--exclamation-triangle-20-solid] size-5 text-red-500"></span>
-						`;
-
-						// Reset after 2 seconds
-						setTimeout(() => {
-							copyButton.classList.remove('copy-error');
-							copyButton.title = 'Copy to clipboard';
-							copyButton.innerHTML = `
-								<span class="icon-[heroicons--square-2-stack-16-solid] size-5"></span>
-							`;
-						}, 2000);
-					}
+				} else {
+					showCopyError(copyButton);
 				}
 			});
 
@@ -110,24 +53,6 @@
 				preElement.setAttribute('data-language', languageClass.replace('language-', ''));
 			}
 		});
-	}
-
-	// Helper function to show copy success state
-	function showCopySuccess(button: HTMLElement) {
-		button.classList.add('copied');
-		button.title = 'Copied!';
-		button.innerHTML = `
-			<span class="icon-[heroicons--check-20-solid] size-5"></span>
-		`;
-
-		// Reset after 2 seconds
-		setTimeout(() => {
-			button.classList.remove('copied');
-			button.title = 'Copy to clipboard';
-			button.innerHTML = `
-				<span class="icon-[heroicons--square-2-stack-16-solid] size-5"></span>
-			`;
-		}, 2000);
 	}
 
 	onMount(() => {

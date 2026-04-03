@@ -4,16 +4,14 @@
 	import { page } from '$app/state';
 	import Tooltip from '$lib/components/tooltip.svelte';
 	import type { RouteId } from '$app/types';
-	import { BtnAnimation } from '$lib/src/btnAnimation';
 	import { theme } from '$lib/stores/theme';
-	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 	import { onMount } from 'svelte';
+	import { btnAnimation } from '$lib/actions/animations';
 
 	import '../app.css';
 	let { children } = $props();
 
 	onMount(() => {
-		BtnAnimation();
 		theme.initialize();
 	});
 </script>
@@ -22,6 +20,7 @@
 
 <div class="pointer-events-none fixed bottom-12 z-100 flex w-screen">
 	<div
+		use:btnAnimation
 		class="layout pointer-events-auto m-auto flex min-w-max cursor-default gap-4 rounded-full border-2 border-border/50 bg-fg/80 p-2 text-xl text-text/70 shadow-[0_0_24px] shadow-text/20 backdrop-blur-xs dark:shadow-text/5"
 	>
 		<button
@@ -92,10 +91,21 @@
 				</div>
 			</Tooltip>
 		</a>
-		<div
-			class="animate-btn my-auto flex size-8 cursor-pointer rounded-full transition-all hover:bg-text/10"
+		<button
+			type="button"
+			onclick={() => theme.toggle()}
+			class="animate-btn my-auto flex size-8 cursor-pointer rounded-full transition-all hover:bg-text/10 hover:[&>span]:scale-110"
+			aria-label={`Current theme: {$theme}. Click to toggle.`}
+			title="Toggle theme"
 		>
-			<ThemeToggle />
+			{#if $theme === 'light'}
+				<span class="m-auto icon-[heroicons--sun-20-solid] size-5 transition-all"></span>
+			{:else if $theme === 'dark'}
+				<span class="m-auto icon-[heroicons--moon-20-solid] size-5 transition-all"></span>
+			{:else}
+				<span class="m-auto icon-[heroicons--computer-desktop-20-solid] size-5 transition-all"
+				></span>
+			{/if}
 			<Tooltip popOffset={{ x: 0, y: 140 }}>
 				<div
 					class="flex size-full rounded-full border-2 border-border/50 bg-bg shadow-[0_0_8px] shadow-border"
@@ -103,6 +113,6 @@
 					<span class="mx-4 my-auto">Theme</span>
 				</div>
 			</Tooltip>
-		</div>
+		</button>
 	</div>
 </div>

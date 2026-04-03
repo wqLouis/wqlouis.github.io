@@ -3,13 +3,11 @@
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 
-	import { BtnAnimation } from '$lib/src/btnAnimation';
+	import { btnAnimation } from '$lib/actions/animations';
 	import Blog from './blog.svelte';
-
-	BtnAnimation();
 </script>
 
-<section class="min-h-screen w-screen bg-bg" id="blog-list">
+<section use:btnAnimation class="min-h-screen w-screen bg-bg" id="blog-list">
 	<div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
 		<!-- Header -->
 		<div class="mb-12">

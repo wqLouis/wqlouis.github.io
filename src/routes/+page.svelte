@@ -1,9 +1,12 @@
 <script lang="ts">
-	import Langs from '$lib/components/main/langs.svelte';
-	import Frontend from '$lib/components/main/frontend.svelte';
-	import Backend from '$lib/components/main/backend.svelte';
-	import Devops from '$lib/components/main/devops.svelte';
-	import Gamedev from '$lib/components/main/gamedev.svelte';
+	import IconGrid from '$lib/components/IconGrid.svelte';
+	import {
+		languageIcons,
+		frontendIcons,
+		backendIcons,
+		devopsIcons,
+		gameDevIcons
+	} from '$lib/data/tech-icons';
 	import Cityu from '$lib/assets/others/CityU_logo.svg';
 	import Marquee from '$lib/components/marquee.svelte';
 	import ProjectCard from '$lib/components/main/card.svelte';
@@ -12,11 +15,10 @@
 	import Depkg from '$lib/assets/others/depkg.png';
 	import Yawe from '$lib/assets/others/yawe.png';
 
-	import { BtnAnimation } from '$lib/src/btnAnimation';
-	BtnAnimation();
+	import { btnAnimation } from '$lib/actions/animations';
 </script>
 
-<main class="flex h-auto w-full flex-col overflow-clip bg-bg text-text">
+<main use:btnAnimation class="flex h-auto w-full flex-col overflow-clip bg-bg text-text">
 	<section class="mx-auto flex h-screen w-full flex-col" id="home">
 		<div class="mx-auto mt-[42vh] mb-auto flex cursor-default">
 			<div class="mx-4 my-auto">
@@ -72,39 +74,41 @@
 				</button>
 			</div>
 			<Marquee time="70s"
-				><Langs></Langs><Frontend></Frontend><Backend></Backend><Devops></Devops><Gamedev></Gamedev>
+				><IconGrid icons={languageIcons} /><IconGrid icons={frontendIcons} /><IconGrid
+					icons={backendIcons}
+				/><IconGrid icons={devopsIcons} /><IconGrid icons={gameDevIcons} />
 			</Marquee>
 			<div class="h-0 overflow-clip opacity-0 transition-all duration-1000" id="tech-stacks-table">
 				<div class="mx-auto grid w-full grid-cols-1 sm:grid-cols-2 lg:w-4/5">
 					<div class="flex flex-col">
 						<div class="mx-auto mt-8 mb-4 text-2xl font-bold">Languages</div>
 						<div class="mx-auto grid w-auto grid-cols-3 place-items-center gap-6">
-							<Langs className="grayscale-0"></Langs>
+							<IconGrid icons={languageIcons} className="grayscale-0" />
 						</div>
 					</div>
 					<div class="flex flex-col">
 						<div class="mx-auto mt-8 mb-4 text-2xl font-bold">Frontend</div>
 						<div class="mx-auto grid w-auto grid-cols-2 place-items-center gap-6">
-							<Frontend className="grayscale-0"></Frontend>
+							<IconGrid icons={frontendIcons} className="grayscale-0" />
 						</div>
 					</div>
 					<div class="flex flex-col">
 						<div class="mx-auto mt-8 mb-4 text-2xl font-bold">Backend</div>
 						<div class="mx-auto grid w-auto grid-cols-1 place-items-center gap-6">
-							<Backend className="grayscale-0"></Backend>
+							<IconGrid icons={backendIcons} className="grayscale-0" />
 						</div>
 					</div>
 					<div class="flex flex-col">
 						<div class="mx-auto mt-8 mb-4 text-2xl font-bold">Dev Ops</div>
 						<div class="mx-auto grid w-auto grid-cols-2 place-items-center gap-6">
-							<Devops className="grayscale-0"></Devops>
+							<IconGrid icons={devopsIcons} className="grayscale-0" />
 						</div>
 					</div>
 				</div>
 				<div class="flex flex-col">
 					<div class="mx-auto mt-8 mb-4 text-2xl font-bold">Game Dev</div>
 					<div class="mx-auto grid w-auto grid-cols-1 place-items-center gap-6">
-						<Gamedev className="grayscale-0"></Gamedev>
+						<IconGrid icons={gameDevIcons} className="grayscale-0" />
 					</div>
 				</div>
 			</div>

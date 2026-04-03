@@ -13,9 +13,6 @@
 		'Some shader types may not work correctly',
 		'Performance may vary depending on hardware'
 	];
-
-	// GitHub stats could be fetched here in the future
-	// export let githubStats = { stars: 0, forks: 0 };
 </script>
 
 <section id="development" class="flex h-max flex-col gap-12 py-12 md:py-24">

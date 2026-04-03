@@ -34,7 +34,8 @@
 
 		xShift = objRect.width / 2 - tipRect.width / 2;
 		yShift = objRect.height / 2 - tipRect.height / 2;
-		tooltip.style.right = `${xShift}px`;
+		tooltip.style.left = `${xShift}px`;
+		tooltip.style.bottom = `${yShift}px`;
 
 		onHoverObject.addEventListener('mouseenter', mouseEnterHandler);
 		onHoverObject.addEventListener('mouseleave', mouseLeaveHandler);

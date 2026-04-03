@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BtnAnimation } from '$lib/src/btnAnimation';
+	import { btnAnimation } from '$lib/actions/animations';
 	import { onMount } from 'svelte';
 
 	import CursorEffect from './components/CursorEffect.svelte';
@@ -12,7 +12,6 @@
 
 	onMount(() => {
 		// Initialize button animations
-		BtnAnimation();
 
 		return () => {
 			// Cleanup if needed
@@ -20,7 +19,10 @@
 	});
 </script>
 
-<section class="flex min-h-screen w-full flex-col overflow-clip bg-bg/90 text-text">
+<section
+	use:btnAnimation
+	class="flex min-h-screen w-full flex-col overflow-clip bg-bg/90 text-text"
+>
 	<!-- Optional cursor effect (can be disabled) -->
 	<CursorEffect enabled={cursorEnabled} />
 
