@@ -2,6 +2,7 @@
 title: Hello World
 description: This is a demo blog
 date: 2026-4-2
+tags: [demo]
 layout: blogs
 ---
 
