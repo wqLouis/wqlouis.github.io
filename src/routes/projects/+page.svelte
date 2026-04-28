@@ -16,9 +16,7 @@
 						goto(resolve('/'));
 					}}
 				>
-					<span
-						class="icon-[heroicons--arrow-left-20-solid] size-5 text-text/70"
-					></span>
+					<span class="icon-[heroicons--arrow-left-20-solid] size-5 text-text/70"></span>
 				</button>
 				<div>
 					<h1 class="text-2xl font-light tracking-wider text-text">Projects</h1>
@@ -48,7 +46,9 @@
 			{#if page.data.projects.length === 0}
 				<div class="rounded-lg border border-border bg-fg/50 p-12 text-center">
 					<h3 class="text-sm font-light tracking-wide text-text/50">No projects yet</h3>
-					<p class="mt-2 text-xs font-light tracking-wide text-text/40">Check back soon for new project pages.</p>
+					<p class="mt-2 text-xs font-light tracking-wide text-text/40">
+						Check back soon for new project pages.
+					</p>
 				</div>
 			{:else}
 				{#each page.data.projects as project (project.slug)}
@@ -63,9 +63,7 @@
 		</div>
 
 		<div class="mt-16 border-t border-border/30 pt-8 text-center">
-			<p class="text-xs font-light tracking-wide text-text/50">
-				Built with SvelteKit
-			</p>
+			<p class="text-xs font-light tracking-wide text-text/50">Built with SvelteKit</p>
 		</div>
 	</div>
 </section>

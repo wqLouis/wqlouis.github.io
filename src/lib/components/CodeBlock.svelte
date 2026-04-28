@@ -44,7 +44,7 @@
 		</button>
 	</div>
 	<div class="p-4 font-mono text-sm text-text/60">
-		{#each lines as code (code)}
+		{#each lines as code, i (i)}
 			<div class="py-0.5">
 				<span>{code}</span>
 			</div>
