@@ -57,6 +57,18 @@
 			</Tooltip>
 		</a>
 		<a
+			title="Projects"
+			href={resolve('/projects' as RouteId)}
+			class="relative my-auto flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent transition-all hover:border-text active:border-2 active:border-text"
+		>
+			<span class="m-auto icon-[heroicons--rectangle-stack-20-solid] transition-all"></span>
+			<Tooltip popOffset={{ x: 0, y: 140 }}>
+				<div class="flex size-full rounded-md border border-border/50 bg-fg px-3 py-1">
+					<span class="mx-auto my-auto">Projects</span>
+				</div>
+			</Tooltip>
+		</a>
+		<a
 			class="relative my-auto flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent transition-all hover:border-text active:border-2 active:border-text"
 			title="github"
 			href="https://github.com/wqLouis"

@@ -10,10 +10,7 @@
 	import Cityu from '$lib/assets/others/CityU_logo.svg';
 	import Marquee from '$lib/components/marquee.svelte';
 	import ProjectCard from '$lib/components/main/card.svelte';
-	import PersonalWebsite from '$lib/assets/others/PersonalWebsite.png';
-	import TreeRs from '$lib/assets/others/treers.png';
-	import Depkg from '$lib/assets/others/depkg.png';
-	import Yawe from '$lib/assets/others/yawe.png';
+	import { projects } from '$lib/data/projects';
 </script>
 
 <main class="flex h-auto w-full flex-col overflow-clip bg-bg text-text">
@@ -147,45 +144,14 @@
 	<section id="projects" class="mx-auto mt-8 flex h-max w-max min-w-[70vw] flex-col">
 		<div class="mb-8 ml-8 text-2xl font-light tracking-wider">Projects</div>
 		<div class="mx-auto mb-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-			<ProjectCard
-				link="https://github.com/wqLouis/linux-wallpaperengine"
-				cardTitle="linux wallpaper engine"
-				image={Yawe}
-				tags={['Rust', 'WGPU', 'Vulkan']}
-			/>
-			<ProjectCard
-				link="https://github.com/wqLouis/NeoTV"
-				cardTitle="NeoTV"
-				tags={['Svelte', 'Mobile', 'Tauri']}
-			/>
-			<ProjectCard
-				link="https://github.com/wqLouis/depkg"
-				cardTitle="depkg"
-				image={Depkg}
-				tags={['Rust']}
-			/>
-			<ProjectCard
-				link="https://github.com/wqLouis/wqlouis.github.io"
-				cardTitle="wqlouis.github.io"
-				image={PersonalWebsite}
-				tags={['Svelte', 'TypeScript', 'Tailwind CSS']}
-			/>
-			<ProjectCard
-				link="https://github.com/wqLouis/bilinovel_cli"
-				cardTitle="bilinovel cli"
-				tags={['Python', 'Playwright']}
-			/>
-			<ProjectCard
-				link="https://github.com/wqLouis/paper_check"
-				cardTitle="paper check"
-				tags={['Python', 'Flet']}
-			/>
-			<ProjectCard
-				link="https://github.com/wqLouis/tree-rs"
-				cardTitle="tree-rs"
-				image={TreeRs}
-				tags={['Rust']}
-			/>
+			{#each projects as project (project.cardTitle)}
+				<ProjectCard
+					link={project.link}
+					cardTitle={project.cardTitle}
+					image={project.image}
+					tags={project.tags}
+				/>
+			{/each}
 		</div>
 	</section>
 
