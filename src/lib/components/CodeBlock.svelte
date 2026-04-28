@@ -27,31 +27,27 @@
 	};
 </script>
 
-<div
-	class="flex flex-col gap-0 overflow-hidden rounded-2xl border-2 border-gray-800/80 bg-gray-950/80"
->
-	<div class="flex h-12 items-center border-b-2 border-gray-800/80 bg-gray-900 p-1 px-4">
-		<span class="pointer-events-none font-mono text-sm font-medium text-gray-300/80">
-			{lang}
-		</span>
+<div class="flex flex-col overflow-hidden rounded-lg border border-border/20 bg-fg/30">
+	<div class="flex h-10 items-center border-b border-border/20 px-4">
+		<span class="text-xs font-light tracking-wide text-text/40">{lang}</span>
 		<button
 			title={copied ? 'Copied!' : 'Copy to clipboard'}
 			on:click={copyToClipboard}
-			class="animate-btn ml-auto flex size-8 cursor-pointer items-center justify-center rounded-lg border border-gray-800/80 bg-gray-900 transition-all hover:bg-gray-800 active:scale-95"
+			class="ml-auto flex size-7 cursor-pointer items-center justify-center rounded-md border border-border/20 bg-fg/50 transition-all hover:bg-fg/70"
 			aria-label={copied ? 'Code copied to clipboard' : 'Copy code to clipboard'}
 		>
 			{#if copied}
-				<span class="icon-[heroicons--check-20-solid] size-5 text-green-400"></span>
+				<span class="icon-[heroicons--check-20-solid] size-4 text-text/50"></span>
 			{:else}
-				<span class="icon-[heroicons--square-2-stack-16-solid] size-5 text-gray-300/80"></span>
+				<span class="icon-[heroicons--square-2-stack-16-solid] size-4 text-text/40"></span>
 			{/if}
 		</button>
 	</div>
-	<div class="p-4 font-mono text-sm font-medium text-gray-200/90">
+	<div class="p-4 font-mono text-sm text-text/60">
 		{#each lines as code (code)}
 			<div class="py-0.5">
-				<span class="mr-2 text-gray-500/80 select-none">&gt;</span>
-				<span class="text-gray-200/90">{code}</span>
+				<span class="mr-3 text-text/30 select-none">&gt;</span>
+				<span>{code}</span>
 			</div>
 		{/each}
 	</div>
