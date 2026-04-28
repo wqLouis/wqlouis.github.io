@@ -8,22 +8,22 @@
 		<div class="mb-3 flex justify-center gap-3">
 			{#each badges as badge (badge)}
 				<span
-					class="rounded-full border border-border/30 px-4 py-1 text-xs tracking-wide text-text/50"
+					class="rounded-full border border-border/30 px-4 py-1 text-[11px] font-light tracking-wider text-text/50"
 				>
 					{badge}
 				</span>
 			{/each}
 		</div>
 
-		<h1 class="mb-6 text-5xl font-light tracking-tight md:text-7xl">Linux Wallpaper Engine</h1>
+		<h1 class="mb-6 text-4xl font-light tracking-wider md:text-5xl">Linux Wallpaper Engine</h1>
 
-		<p class="mb-12 text-lg font-light text-text/60 md:text-xl">
+		<p class="mb-12 text-sm font-light tracking-wide text-text/60 md:text-base">
 			Another Linux Wallpaper Engine written with Rust and Wgpu
 		</p>
 
 		<div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
 			<button
-				class="flex cursor-pointer items-center gap-2 rounded-full bg-fg/80 px-8 py-3 text-sm tracking-wide text-text/70 transition-all hover:bg-fg hover:text-text"
+				class="flex cursor-pointer items-center gap-2 rounded-sm border border-border px-8 py-3 text-xs font-light tracking-wider text-text/60 transition-all hover:border-text hover:text-text"
 				onclick={() =>
 					document.getElementById('installation')?.scrollIntoView({ behavior: 'smooth' })}
 			>
@@ -34,7 +34,7 @@
 				href={githubUrl}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="flex cursor-pointer items-center gap-2 rounded-full bg-fg/80 px-8 py-3 text-sm tracking-wide text-text/70 transition-all hover:bg-fg hover:text-text"
+				class="flex cursor-pointer items-center gap-2 rounded-sm border border-border px-8 py-3 text-xs font-light tracking-wider text-text/60 transition-all hover:border-text hover:text-text"
 			>
 				<span>GitHub</span>
 				<span class="icon-[octicon--mark-github-24] size-5"></span>

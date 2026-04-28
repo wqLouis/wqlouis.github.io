@@ -22,7 +22,7 @@
 
 			// Create copy button
 			const copyButton = document.createElement('button');
-			copyButton.className = 'copy-button animate-btn';
+			copyButton.className = 'copy-button';
 			copyButton.title = 'Copy to clipboard';
 			copyButton.setAttribute('aria-label', 'Copy code to clipboard');
 			copyButton.innerHTML = `

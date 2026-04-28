@@ -51,5 +51,5 @@
 	class="pointer-events-none absolute z-10 h-8 min-h-max w-max min-w-max text-xs text-text opacity-0 transition-all"
 	bind:this={tooltip}
 >
-	<div class="size-full rounded-xl"><slot /></div>
+	<div class="size-full rounded-md bg-fg shadow-[0_2px_8px_rgba(0,0,0,0.08)]"><slot /></div>
 </div>

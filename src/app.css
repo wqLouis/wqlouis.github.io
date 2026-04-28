@@ -2,42 +2,31 @@
 @plugin '@iconify/tailwind4';
 
 body {
-	font-family:
-		system-ui,
-		-apple-system,
-		BlinkMacSystemFont,
-		'Segoe UI',
-		Roboto,
-		Oxygen,
-		Ubuntu,
-		Cantarell,
-		'Open Sans',
-		'Helvetica Neue',
-		sans-serif;
+	font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+	font-weight: 350;
 }
 
 @layer base {
 	* {
 		transition:
 			background-color 0.2s ease,
-			border-color 0.2s ease,
-			color 0.2s ease;
+			border-color 0.2s ease;
 	}
 }
 
 @layer base {
 	:root {
-		--background: var(--color-neutral-50);
-		--foreground: var(--color-neutral-100);
-		--border: var(--color-neutral-300);
-		--text: var(--color-black);
+		--background: #f7f5f0;
+		--foreground: #efebe4;
+		--border: #d4cdbf;
+		--text: #2c2c2c;
 	}
 
 	.dark {
-		--background: var(--color-gray-950);
-		--foreground: var(--color-gray-900);
-		--border: var(--color-gray-800);
-		--text: var(--color-white);
+		--background: #2a2826;
+		--foreground: #33312e;
+		--border: #4a4844;
+		--text: #e0dcd4;
 	}
 }
 
@@ -61,15 +50,19 @@ body {
 	}
 }
 
-/* Dark mode icon fixes */
-.dark .icon-rust {
-	filter: invert(1) brightness(1.5);
+/* Desaturate brand icons for Muji aesthetic */
+.iconify-icon,
+img.icon-rust,
+img.icon-github,
+img.icon-unity {
+	filter: grayscale(100%) opacity(70%);
+	transition: filter 0.2s ease;
 }
 
-.dark .icon-github {
-	filter: invert(1);
+.dark img.icon-rust,
+.dark img.icon-github,
+.dark img.icon-unity {
+	filter: grayscale(100%) opacity(70%) brightness(1.5);
 }
 
-.dark .icon-unity {
-	filter: invert(1) brightness(2);
-}
+

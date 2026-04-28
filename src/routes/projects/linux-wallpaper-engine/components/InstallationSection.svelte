@@ -11,27 +11,27 @@
 
 <section id="installation" class="flex flex-col px-8 py-24">
 	<div class="mx-auto w-full max-w-2xl">
-		<h2 class="mb-16 text-center text-2xl font-light tracking-wide text-text/80">Installation</h2>
+		<h2 class="mb-16 text-center text-xl font-light tracking-wider text-text/70">Installation</h2>
 
 		<div class="space-y-16">
 			<div>
-				<h3 class="mb-6 text-lg font-light tracking-wide text-text/70">AUR</h3>
-				<div class="h-px w-full bg-white/20"></div>
+				<h3 class="mb-6 text-sm font-light tracking-wider text-text/60">AUR</h3>
+				<div class="h-px w-full bg-border/20"></div>
 				<div class="mt-6 space-y-3">
 					{#each aurCommands as cmd (cmd)}
 						<CodeBlock lang="bash" lines={[cmd]} />
 					{/each}
 				</div>
-				<p class="mt-4 text-sm text-text/70">
+				<p class="mt-4 text-xs font-light tracking-wide text-text/60">
 					For Arch Linux users, available in the AUR as
-					<code>linux-wallpaper-engine-git</code>
+					<code class="rounded-sm border border-border/30 px-1 py-0.5 text-[11px]">linux-wallpaper-engine-git</code>
 				</p>
 			</div>
 
 			<div>
-				<h3 class="mb-6 text-lg font-light tracking-wide text-text/70">Build from source</h3>
-				<div class="h-px w-full bg-white/20"></div>
-				<p class="mt-6 text-sm font-medium text-text/70">
+				<h3 class="mb-6 text-sm font-light tracking-wider text-text/60">Build from source</h3>
+				<div class="h-px w-full bg-border/20"></div>
+				<p class="mt-6 text-xs font-light tracking-wide text-text/60">
 					Dependencies: Cargo, Git, Vulkan Drivers
 				</p>
 				<div class="mt-4">
@@ -40,9 +40,9 @@
 			</div>
 		</div>
 
-		<div class="mt-16 rounded-lg border border-border/20 bg-fg/20 px-6 py-5">
-			<p class="text-sm text-text/70">
-				Requires Wallpaper Engine from Steam for <code>.pkg</code> files.
+		<div class="mt-16 rounded-md border border-border/30 bg-fg/20 px-6 py-5">
+			<p class="text-xs font-light tracking-wide text-text/60">
+				Requires Wallpaper Engine from Steam for <code class="rounded-sm border border-border/30 px-1 py-0.5 text-[11px]">.pkg</code> files.
 			</p>
 		</div>
 	</div>

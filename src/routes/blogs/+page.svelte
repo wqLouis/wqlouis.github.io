@@ -3,29 +3,27 @@
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 
-	import { btnAnimation } from '$lib/actions/animations';
 	import Blog from './blog.svelte';
 </script>
 
-<section use:btnAnimation class="min-h-screen w-screen bg-bg" id="blog-list">
+<section class="min-h-screen w-screen bg-bg" id="blog-list">
 	<div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-		<!-- Header -->
 		<div class="mb-12">
 			<div class="flex items-center gap-4">
 				<button
 					title="Return to home"
-					class="animate-btn group flex size-10 cursor-pointer items-center justify-center rounded-full border-2 border-border bg-fg transition-all hover:scale-105 hover:bg-fg/80"
+					class="flex size-10 cursor-pointer items-center justify-center rounded-md border border-border transition-all hover:border-text active:border-2 active:border-text"
 					onclick={() => {
 						goto(resolve('/'));
 					}}
 				>
 					<span
-						class="icon-[heroicons--arrow-left-20-solid] size-5 text-text/70 transition-transform group-hover:-translate-x-0.5"
+						class="icon-[heroicons--arrow-left-20-solid] size-5 text-text/70"
 					></span>
 				</button>
 				<div>
-					<h1 class="text-4xl font-bold tracking-tight text-text">Blog Posts</h1>
-					<p class="mt-2 text-lg text-text/70">
+					<h1 class="text-2xl font-light tracking-wider text-text">Blog Posts</h1>
+					<p class="mt-2 text-sm font-light tracking-wide text-text/60">
 						Thoughts, tutorials, and insights on technology and development
 					</p>
 				</div>
@@ -33,7 +31,7 @@
 
 			<div class="mt-8 border-b border-border/50 pb-4">
 				<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-					<p class="text-text/60">
+					<p class="text-xs font-light tracking-wide text-text/50">
 						{#if page.data.blogs.length === 0}
 							No blog posts yet
 						{:else if page.data.blogs.length === 1}
@@ -42,23 +40,16 @@
 							{page.data.blogs.length} articles
 						{/if}
 					</p>
-
-					<!-- Future: Search/filter component -->
-					<div class="flex gap-3">
-						<!-- Placeholder for future filter buttons -->
-					</div>
+					<div class="flex gap-3"></div>
 				</div>
 			</div>
 		</div>
 
-		<!-- Blog list -->
 		<div class="space-y-6">
 			{#if page.data.blogs.length === 0}
-				<div class="rounded-xl border-2 border-dashed border-border bg-fg/50 p-12 text-center">
-					<span class="mx-auto icon-[heroicons--document-text-20-solid] size-12 text-text/30"
-					></span>
-					<h3 class="mt-4 text-lg font-medium text-text/60">No blog posts yet</h3>
-					<p class="mt-2 text-text/50">Check back soon for new articles.</p>
+				<div class="rounded-lg border border-border bg-fg/50 p-12 text-center">
+					<h3 class="text-sm font-light tracking-wide text-text/50">No blog posts yet</h3>
+					<p class="mt-2 text-xs font-light tracking-wide text-text/40">Check back soon for new articles.</p>
 				</div>
 			{:else}
 				{#each page.data.blogs as blog (blog.slug)}
@@ -73,12 +64,9 @@
 			{/if}
 		</div>
 
-		<!-- Footer note -->
 		<div class="mt-16 border-t border-border/30 pt-8 text-center">
-			<p class="text-sm text-text/50">
-				Built with
-				<span class="icon-[simple-icons--svelte] inline-block size-4 align-text-bottom text-text/60"
-				></span> SvelteKit
+			<p class="text-xs font-light tracking-wide text-text/50">
+				Built with SvelteKit
 			</p>
 		</div>
 	</div>
