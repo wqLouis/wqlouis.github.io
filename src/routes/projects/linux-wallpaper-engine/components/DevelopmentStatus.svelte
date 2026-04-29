@@ -1,36 +1,47 @@
 <script lang="ts">
+	import * as m from '$paraglide/messages.js';
+
 	const roadmap = [
-		{ done: true, text: 'Improve stability and error handling' },
-		{ done: false, status: 'wip', text: 'Add support for more shader types' },
-		{ done: true, text: 'Implement audio support' },
-		{ done: false, text: 'Animation support' },
-		{ done: false, text: '.mdl file loading' }
+		{ done: true, status: 'done', text: m.linuxwallpaperengine_roadmap_items_0() },
+		{ done: false, status: 'wip', text: m.linuxwallpaperengine_roadmap_items_1() },
+		{ done: true, status: 'done', text: m.linuxwallpaperengine_roadmap_items_2() },
+		{ done: false, status: 'todo', text: m.linuxwallpaperengine_roadmap_items_3() },
+		{ done: false, status: 'todo', text: m.linuxwallpaperengine_roadmap_items_4() }
 	];
 	const knownIssues = [
-		'Video textures not supported yet',
-		'Highly unstable and under heavy development',
-		'Some shader types may not work correctly',
-		'Performance may vary depending on hardware'
+		m.linuxwallpaperengine_known_issues_items_0(),
+		m.linuxwallpaperengine_known_issues_items_1(),
+		m.linuxwallpaperengine_known_issues_items_2(),
+		m.linuxwallpaperengine_known_issues_items_3()
+	];
+	const disclaimer = [
+		m.linuxwallpaperengine_disclaimer_items_0(),
+		m.linuxwallpaperengine_disclaimer_items_1(),
+		m.linuxwallpaperengine_disclaimer_items_2()
 	];
 </script>
 
 <section id="development" class="flex flex-col px-8 py-24">
 	<div class="mx-auto w-full max-w-2xl">
-		<h2 class="mb-16 text-center text-xl font-light tracking-wider text-text/70">Development</h2>
+		<h2 class="mb-16 text-center text-xl font-light tracking-wider text-text/70">
+			{m.linuxwallpaperengine_development_title()}
+		</h2>
 
 		<div class="space-y-16">
 			<div>
-				<h3 class="mb-6 text-sm font-light tracking-wider text-text/60">Roadmap</h3>
+				<h3 class="mb-6 text-sm font-light tracking-wider text-text/60">
+					{m.linuxwallpaperengine_roadmap_title()}
+				</h3>
 				<div class="h-px w-full bg-border/20"></div>
 				<ul class="mt-6 space-y-3">
 					{#each roadmap as item (item.text)}
 						<li class="flex items-center text-xs font-light tracking-wide text-text/60">
-							{#if item.done}
-								<span class="mr-3 text-text/40">[done]</span>
+							{#if item.status === 'done'}
+								<span class="mr-3 text-text/40">{m.linuxwallpaperengine_roadmap_done()}</span>
 							{:else if item.status === 'wip'}
-								<span class="mr-3 text-text/40">[wip]</span>
+								<span class="mr-3 text-text/40">{m.linuxwallpaperengine_roadmap_wip()}</span>
 							{:else}
-								<span class="mr-3 text-text/30">[todo]</span>
+								<span class="mr-3 text-text/30">{m.linuxwallpaperengine_roadmap_todo()}</span>
 							{/if}
 							<span class={item.done ? 'text-text/70' : 'text-text/50'}>{item.text}</span>
 						</li>
@@ -39,7 +50,9 @@
 			</div>
 
 			<div>
-				<h3 class="mb-6 text-sm font-light tracking-wider text-text/60">Known Issues</h3>
+				<h3 class="mb-6 text-sm font-light tracking-wider text-text/60">
+					{m.linuxwallpaperengine_known_issues_title()}
+				</h3>
 				<div class="h-px w-full bg-border/20"></div>
 				<ul class="mt-6 space-y-3">
 					{#each knownIssues as issue (issue)}
@@ -52,21 +65,17 @@
 			</div>
 
 			<div>
-				<h3 class="mb-6 text-sm font-light tracking-wider text-text/60">Disclaimer</h3>
+				<h3 class="mb-6 text-sm font-light tracking-wider text-text/60">
+					{m.linuxwallpaperengine_disclaimer_title()}
+				</h3>
 				<div class="h-px w-full bg-border/20"></div>
 				<ul class="mt-6 space-y-3">
-					<li class="flex items-center text-xs font-light tracking-wide text-text/60">
-						<span class="mr-3 text-text/30">[i]</span>
-						<span>This project is not affiliated with or endorsed by Wallpaper Engine.</span>
-					</li>
-					<li class="flex items-center text-xs font-light tracking-wide text-text/60">
-						<span class="mr-3 text-text/30">[i]</span>
-						<span>Please support the original software by purchasing it on Steam.</span>
-					</li>
-					<li class="flex items-center text-xs font-light tracking-wide text-text/60">
-						<span class="mr-3 text-text/30">[i]</span>
-						<span>This project is licensed under the GPLv3 License.</span>
-					</li>
+					{#each disclaimer as item (item)}
+						<li class="flex items-center text-xs font-light tracking-wide text-text/60">
+							<span class="mr-3 text-text/30">[i]</span>
+							<span>{item}</span>
+						</li>
+					{/each}
 				</ul>
 			</div>
 		</div>
@@ -100,7 +109,8 @@
 				href="https://github.com/wqLouis/linux-wallpaperengine"
 				target="_blank"
 				rel="noopener noreferrer"
-				class="text-xs font-light tracking-wide text-text/50 transition-all hover:text-text">View on GitHub →</a
+				class="text-xs font-light tracking-wide text-text/50 transition-all hover:text-text"
+				>{m.linuxwallpaperengine_view_on_github()}</a
 			>
 		</div>
 	</div>

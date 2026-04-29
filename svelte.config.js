@@ -27,7 +27,8 @@ const config = {
 			entries: ['*']
 		},
 		alias: {
-			src: './src'
+			src: './src',
+			$paraglide: './src/paraglide'
 		}
 	}
 };

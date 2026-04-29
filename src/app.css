@@ -2,7 +2,12 @@
 @plugin '@iconify/tailwind4';
 
 body {
-	font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+	font-family:
+		'Inter',
+		system-ui,
+		-apple-system,
+		BlinkMacSystemFont,
+		sans-serif;
 	font-weight: 350;
 }
 
@@ -16,17 +21,19 @@ body {
 
 @layer base {
 	:root {
-		--background: #f7f5f0;
-		--foreground: #efebe4;
-		--border: #d4cdbf;
-		--text: #2c2c2c;
+		--background: #faf7eb;
+		--foreground: #f5f3eb;
+		--border: #cccccc;
+		--text: #666666;
+		--accent: #7f0019;
 	}
 
 	.dark {
 		--background: #2a2826;
 		--foreground: #33312e;
-		--border: #4a4844;
-		--text: #e0dcd4;
+		--border: #666666;
+		--text: #cccccc;
+		--accent: #7f0019;
 	}
 }
 
@@ -35,6 +42,7 @@ body {
 	--color-fg: var(--foreground);
 	--color-border: var(--border);
 	--color-text: var(--text);
+	--color-accent: var(--accent);
 }
 
 @theme {
@@ -64,5 +72,3 @@ img.icon-unity {
 .dark img.icon-unity {
 	filter: grayscale(100%) opacity(70%) brightness(1.5);
 }
-
-

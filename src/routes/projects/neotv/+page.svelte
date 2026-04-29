@@ -1,13 +1,14 @@
 <script lang="ts">
 	import HeroSection from './components/HeroSection.svelte';
 	import FeaturesSection from './components/FeaturesSection.svelte';
+	import { t } from '$lib/i18n';
 </script>
 
 <section class="flex min-h-screen w-full flex-col bg-bg text-text">
 	<header
 		class="fixed top-0 z-50 flex h-16 w-full items-center border-b border-border/30 bg-bg px-8"
 	>
-		<span class="text-sm font-light tracking-wider text-text/50">NeoTV</span>
+		<span class="text-sm font-light tracking-wider text-text/50">{t('neotv_hero_title')}</span>
 	</header>
 
 	<main class="z-10 flex w-full flex-col pt-16">
@@ -23,7 +24,7 @@
 						class="border-b border-transparent text-text/60 transition-all hover:border-text"
 						>wqLouis</a
 					>
-					· Apache-2.0 License
+					· {t('neotv_footer_license')}
 				</p>
 			</div>
 		</footer>

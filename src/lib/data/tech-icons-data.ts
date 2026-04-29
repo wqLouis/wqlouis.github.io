@@ -1,21 +1,21 @@
 // Game development icons
-import unity from '$lib/assets/gamedev/Unity_Technologies_logo.svg';
-import godot from '$lib/assets/gamedev/Godot Game engine logo.svg';
+import unity from '$lib/assets/gamedev/unity-logo.svg';
+import godot from '$lib/assets/gamedev/godot-logo.svg';
 
 // Frontend icons
 import svelte from '$lib/assets/frontend/favicon.svg';
 import tailwind from '$lib/assets/frontend/tailwindcss-mark.d52e9897.svg';
 import flet from '$lib/assets/frontend/logo.svg';
-import qt from '$lib/assets/frontend/Qt_logo_2016.svg';
+import qt from '$lib/assets/frontend/qt-logo.svg';
 
 // Backend icons
 import sqlite from '$lib/assets/backend/SQLite.svg';
 
 // DevOps icons
-import ubuntu from '$lib/assets/devops/UbuntuCoF.svg';
+import ubuntu from '$lib/assets/devops/ubuntu-cof.svg';
 import podman from '$lib/assets/devops/Podman-logo-orig.png';
 import git from '$lib/assets/devops/git.svg';
-import github from '$lib/assets/devops/github-mark-white.svg';
+import github from '$lib/assets/devops/github-mark.svg';
 
 // Language icons
 import c from '$lib/assets/langs/c.svg';

@@ -1,7 +1,14 @@
 <script lang="ts">
-	import { formatBlogDate, formatDateISO } from '$lib/utils/date';
+	import { formatBlogDate, formatDateISO } from '$lib/utils/date-utils';
+	import * as m from '$paraglide/messages.js';
 
-	let { title = '', description = '', route = '/', date = '17-3-2026', tags = [] as string[] } = $props();
+	let {
+		title = '',
+		description = '',
+		route = '/',
+		date = '17-3-2026',
+		tags = [] as string[]
+	} = $props();
 
 	let formattedDate = $derived(formatBlogDate(date));
 	let isoDate = $derived(formatDateISO(date));
@@ -20,13 +27,16 @@
 			>
 		</div>
 
-		<p class="line-clamp-2 text-sm font-light leading-relaxed tracking-wide text-text/70">{description}</p>
+		<p class="line-clamp-2 text-sm leading-relaxed font-light tracking-wide text-text/70">
+			{description}
+		</p>
 
 		{#if tags.length > 0}
 			<div class="mt-2 flex flex-wrap gap-2">
 				{#each tags as tag (tag)}
 					<span
-						class="rounded-full border border-border px-3 py-0.5 text-[11px] font-light tracking-wider text-text/50">
+						class="rounded-full border border-border px-3 py-0.5 text-[11px] font-light tracking-wider text-text/50"
+					>
 						{tag}
 					</span>
 				{/each}
@@ -34,10 +44,8 @@
 		{/if}
 
 		<div class="mt-4 flex items-center justify-between">
-			<span
-				class="inline-flex items-center gap-1 text-xs font-light tracking-wider text-text/50"
-			>
-				Read article
+			<span class="inline-flex items-center gap-1 text-xs font-light tracking-wider text-text/50">
+				{m.blogs_read_article()}
 			</span>
 		</div>
 	</div>

@@ -1,27 +1,33 @@
 <script lang="ts">
-	import IconGrid from '$lib/components/IconGrid.svelte';
+	import IconGrid from '$lib/components/icon-grid.svelte';
 	import {
 		languageIcons,
 		frontendIcons,
 		backendIcons,
 		devopsIcons,
 		gameDevIcons
-	} from '$lib/data/tech-icons';
-	import Cityu from '$lib/assets/others/CityU_logo.svg';
+	} from '$lib/data/tech-icons-data';
+	import Cityu from '$lib/assets/others/cityu-logo.svg';
 	import Marquee from '$lib/components/marquee.svelte';
 	import ProjectCard from '$lib/components/main/card.svelte';
-	import { projects } from '$lib/data/projects';
+	import { projects } from '$lib/data/projects-data';
+	import * as m from '$paraglide/messages.js';
 </script>
 
 <main class="flex h-auto w-full flex-col overflow-clip bg-bg text-text">
 	<section class="mx-auto flex h-screen w-full flex-col" id="home">
 		<div class="mx-auto mt-[42vh] mb-auto flex cursor-default">
 			<div class="mx-4 my-auto">
-				<span class="text-3xl font-light tracking-wider">Hi, I am wqLouis</span> <br />
-				<span class="text-sm font-light tracking-wide text-border">I write bugs ;)</span>
+				<span class="text-3xl font-light tracking-wider">{m.main_hero_greeting()}</span>
+				<br />
+				<span class="text-sm font-light tracking-wide text-border">{m.main_hero_tagline()}</span>
 			</div>
 			<div class="size-22 overflow-clip rounded-full border border-border">
-				<img src="https://avatars.githubusercontent.com/u/114333810?v=4" alt="" class="size-full object-cover" />
+				<img
+					src="https://avatars.githubusercontent.com/u/114333810?v=4"
+					alt=""
+					class="size-full object-cover"
+				/>
 			</div>
 		</div>
 		<button
@@ -38,7 +44,9 @@
 	<section class="mx-auto flex h-auto min-h-max w-[70vw] min-w-max" id="tech-stacks">
 		<div class="flex max-w-[70vw] flex-col">
 			<div class="flex w-max gap-8">
-				<div class="my-8 mr-auto ml-8 text-2xl font-light tracking-wider">Tech Stacks</div>
+				<div class="my-8 mr-auto ml-8 text-2xl font-light tracking-wider">
+					{m.main_section_tech_stacks()}
+				</div>
 				<button
 					class="mx-auto my-auto flex h-8 w-26 cursor-pointer items-center rounded-sm border border-border transition-all hover:border-text active:border-2 active:border-text"
 					onclick={(event) => {
@@ -52,7 +60,8 @@
 							const children = Array.from(btn.children);
 							const icon = children.filter((x) => x instanceof HTMLSpanElement)[0];
 							const text = children.filter((x) => x instanceof HTMLDivElement)[0] as HTMLElement;
-							text.innerText = text.innerText == 'See More' ? 'See Less' : 'See More';
+							text.innerText =
+								text.innerText == m.main_see_more() ? m.main_see_less() : m.main_see_more();
 							icon.classList.toggle('rotate-180');
 						};
 						toggle(['h-0', 'h-300', 'opacity-0', 'sm:h-200']);
@@ -63,7 +72,9 @@
 					}}
 					title="Toggle table"
 				>
-					<div class="my-auto mr-auto ml-2 text-xs font-light tracking-wider text-text/50">See More</div>
+					<div class="my-auto mr-auto ml-2 text-xs font-light tracking-wider text-text/50">
+						{m.main_see_more()}
+					</div>
 					<span
 						class="my-auto mr-2 ml-auto icon-[heroicons--chevron-down] size-4 bg-text/50 transition-all"
 					></span>
@@ -77,43 +88,73 @@
 			<div class="h-0 overflow-clip opacity-0 transition-all duration-1000" id="tech-stacks-table">
 				<div class="mx-auto grid w-full grid-cols-1 sm:grid-cols-2 lg:w-4/5">
 					<div class="flex flex-col">
-						<div class="mx-auto mt-8 mb-4 text-xl font-light tracking-wider">Languages</div>
+						<div class="mx-auto mt-8 mb-4 text-xl font-light tracking-wider">
+							{m.main_tech_languages()}
+						</div>
 						<div class="mx-auto grid w-auto grid-cols-3 place-items-center gap-6">
 							{#each languageIcons as icon (icon.src)}
-								<img src={icon.src} alt="" class="size-12 object-contain grayscale-0 {icon.className || ''}" />
+								<img
+									src={icon.src}
+									alt=""
+									class="size-12 object-contain grayscale-0 {icon.className || ''}"
+								/>
 							{/each}
 						</div>
 					</div>
 					<div class="flex flex-col">
-						<div class="mx-auto mt-8 mb-4 text-xl font-light tracking-wider">Frontend</div>
+						<div class="mx-auto mt-8 mb-4 text-xl font-light tracking-wider">
+							{m.main_tech_frontend()}
+						</div>
 						<div class="mx-auto grid w-auto grid-cols-2 place-items-center gap-6">
 							{#each frontendIcons as icon (icon.src)}
-								<img src={icon.src} alt="" class="size-12 object-contain grayscale-0 {icon.className || ''}" />
+								<img
+									src={icon.src}
+									alt=""
+									class="size-12 object-contain grayscale-0 {icon.className || ''}"
+								/>
 							{/each}
 						</div>
 					</div>
 					<div class="flex flex-col">
-						<div class="mx-auto mt-8 mb-4 text-xl font-light tracking-wider">Backend</div>
+						<div class="mx-auto mt-8 mb-4 text-xl font-light tracking-wider">
+							{m.main_tech_backend()}
+						</div>
 						<div class="mx-auto grid w-auto grid-cols-1 place-items-center gap-6">
 							{#each backendIcons as icon (icon.src)}
-								<img src={icon.src} alt="" class="size-12 object-contain grayscale-0 {icon.className || ''}" />
+								<img
+									src={icon.src}
+									alt=""
+									class="size-12 object-contain grayscale-0 {icon.className || ''}"
+								/>
 							{/each}
 						</div>
 					</div>
 					<div class="flex flex-col">
-						<div class="mx-auto mt-8 mb-4 text-xl font-light tracking-wider">Dev Ops</div>
+						<div class="mx-auto mt-8 mb-4 text-xl font-light tracking-wider">
+							{m.main_tech_devops()}
+						</div>
 						<div class="mx-auto grid w-auto grid-cols-2 place-items-center gap-6">
 							{#each devopsIcons as icon (icon.src)}
-								<img src={icon.src} alt="" class="size-12 object-contain grayscale-0 {icon.className || ''}" />
+								<img
+									src={icon.src}
+									alt=""
+									class="size-12 object-contain grayscale-0 {icon.className || ''}"
+								/>
 							{/each}
 						</div>
 					</div>
 				</div>
 				<div class="flex flex-col">
-					<div class="mx-auto mt-8 mb-4 text-xl font-light tracking-wider">Game Dev</div>
+					<div class="mx-auto mt-8 mb-4 text-xl font-light tracking-wider">
+						{m.main_tech_game_dev()}
+					</div>
 					<div class="mx-auto grid w-auto grid-cols-1 place-items-center gap-6">
 						{#each gameDevIcons as icon (icon.src)}
-							<img src={icon.src} alt="" class="size-12 object-contain grayscale-0 {icon.className || ''}" />
+							<img
+								src={icon.src}
+								alt=""
+								class="size-12 object-contain grayscale-0 {icon.className || ''}"
+							/>
 						{/each}
 					</div>
 				</div>
@@ -122,7 +163,7 @@
 	</section>
 
 	<section class="mx-auto mt-8 flex h-max w-max min-w-[70vw] flex-col" id="edu">
-		<div class="mr-auto ml-8 text-2xl font-light tracking-wider">Education</div>
+		<div class="mr-auto ml-8 text-2xl font-light tracking-wider">{m.main_section_education()}</div>
 		<div class="mx-16 mt-8 flex">
 			<div class="h-full w-8">
 				<div class="mx-auto my-1 h-4 w-px bg-border"></div>
@@ -130,19 +171,21 @@
 				<div class="mx-auto my-1 h-4 w-px bg-border"></div>
 			</div>
 			<div class="my-auto flex text-sm font-light tracking-wide">
-				<div class="hidden size-16 items-center justify-center rounded-full border border-border sm:flex">
+				<div
+					class="hidden size-16 items-center justify-center rounded-full border border-border sm:flex"
+				>
 					<img src={Cityu} alt="" class="m-auto h-6" />
 				</div>
 				<div class="mx-2 my-auto">
-					<div class="">CityUHK (2025~)</div>
-					<div class="text-xs text-text/60">Bachelor's student in Electrical Engineering</div>
+					<div class="">{m.main_education_cityu()}</div>
+					<div class="text-xs text-text/60">{m.main_education_degree()}</div>
 				</div>
 			</div>
 		</div>
 	</section>
 
 	<section id="projects" class="mx-auto mt-8 flex h-max w-max min-w-[70vw] flex-col">
-		<div class="mb-8 ml-8 text-2xl font-light tracking-wider">Projects</div>
+		<div class="mb-8 ml-8 text-2xl font-light tracking-wider">{m.main_section_projects()}</div>
 		<div class="mx-auto mb-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 			{#each projects as project (project.cardTitle)}
 				<ProjectCard
@@ -164,7 +207,7 @@
 				target="_blank"
 			>
 				<span class="icon-[octicon--mark-github-24] size-5"></span>
-				github/wqLouis
+				{m.main_github_label()}
 			</a>
 			<br />
 			<a
@@ -179,6 +222,6 @@
 	</section>
 
 	<span class="mx-12 mb-4 text-center text-xs font-light tracking-wide text-text/50"
-		>This website is built by hands with love</span
+		>{m.main_footer_built_with()}</span
 	>
 </main>

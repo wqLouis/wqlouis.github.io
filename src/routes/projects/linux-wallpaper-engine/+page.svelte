@@ -6,7 +6,9 @@
 </script>
 
 <section class="flex min-h-screen w-full flex-col bg-bg text-text">
-	<header class="fixed top-0 z-50 flex h-16 w-full items-center border-b border-border/30 bg-bg px-8">
+	<header
+		class="fixed top-0 z-50 flex h-16 w-full items-center border-b border-border/30 bg-bg px-8"
+	>
 		<span class="text-sm font-light tracking-wider text-text/50">Linux Wallpaper Engine</span>
 	</header>
 
@@ -20,7 +22,11 @@
 			<div class="mx-auto max-w-2xl">
 				<div class="h-px w-full bg-border/30"></div>
 				<p class="mt-8 text-center text-xs font-light tracking-wide text-text/50">
-					Developed by <a href="https://github.com/wqLouis" class="border-b border-transparent text-text/60 transition-all hover:border-text">wqLouis</a>
+					Developed by <a
+						href="https://github.com/wqLouis"
+						class="border-b border-transparent text-text/60 transition-all hover:border-text"
+						>wqLouis</a
+					>
 					· Not affiliated with Wallpaper Engine · GPLv3
 				</p>
 			</div>

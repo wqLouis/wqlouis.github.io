@@ -2,8 +2,8 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import BlogContent from '$lib/components/blog/BlogContent.svelte';
-	import { formatBlogDate } from '$lib/utils/date';
+	import BlogContent from '$lib/components/blog/blog-content.svelte';
+	import { formatBlogDate } from '$lib/utils/date-utils';
 
 	export let title = 'Untitled Blog Post';
 	export let date = '';
@@ -143,14 +143,14 @@
 						goto(resolve('/blogs'));
 					}}
 				>
-					<span
-						class="icon-[heroicons--arrow-left-20-solid] size-5 text-text/70"
-					></span>
+					<span class="icon-[heroicons--arrow-left-20-solid] size-5 text-text/70"></span>
 				</button>
 
 				<div class="flex-1">
 					<h1 class="text-2xl font-light tracking-wider text-text">{title}</h1>
-					<div class="flex flex-wrap items-center gap-4 text-xs font-light tracking-wide text-text/60">
+					<div
+						class="flex flex-wrap items-center gap-4 text-xs font-light tracking-wide text-text/60"
+					>
 						<div class="flex items-center gap-1">
 							<span class="icon-[heroicons--calendar-20-solid] size-4"></span>
 							<span>{formatBlogDate(date)}</span>
@@ -164,14 +164,19 @@
 								<span class="icon-[heroicons--tag-20-solid] size-4"></span>
 								<div class="flex flex-wrap gap-1">
 									{#each tags as tag (tag)}
-										<span class="rounded-full border border-border px-2 py-0.5 text-[11px] font-light tracking-wider text-text/50">{tag}</span>
+										<span
+											class="rounded-full border border-border px-2 py-0.5 text-[11px] font-light tracking-wider text-text/50"
+											>{tag}</span
+										>
 									{/each}
 								</div>
 							</div>
 						{/if}
 					</div>
 					{#if description}
-						<p class="mt-2 text-sm font-light leading-relaxed tracking-wide text-text/70">{description}</p>
+						<p class="mt-2 text-sm leading-relaxed font-light tracking-wide text-text/70">
+							{description}
+						</p>
 					{/if}
 				</div>
 			</div>
@@ -181,9 +186,7 @@
 	<div
 		class="fixed top-1/2 right-4 z-40 -translate-y-1/2 opacity-100 transition-opacity duration-300"
 	>
-		<div
-			class="flex flex-col items-center gap-1 rounded-lg border border-border bg-fg/90 p-2"
-		>
+		<div class="flex flex-col items-center gap-1 rounded-lg border border-border bg-fg/90 p-2">
 			<div class="relative h-64 w-min">
 				<div class="absolute left-1/2 h-full w-px -translate-x-1/2 bg-text/10"></div>
 

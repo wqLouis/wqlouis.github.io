@@ -3,13 +3,13 @@ version: alpha
 name: Muji Personal Site
 description: Personal portfolio and blog with a Muji-inspired aesthetic — warm minimalism, natural materials, purposeful emptiness.
 colors:
-  primary: "#2C2C2C"
-  secondary: "#D4CDBF"
-  tertiary: "#8B7E6B"
-  neutral: "#F7F5F0"
-  surface: "#EFEBE4"
-  on-surface: "#2C2C2C"
-  error: "#8B4513"
+  primary: '#7f0019'
+  secondary: '#cccccc'
+  tertiary: '#999999'
+  neutral: '#faf7eb'
+  surface: '#f5f3eb'
+  on-surface: '#666666'
+  error: '#7f0019'
 typography:
   h1:
     fontFamily: Inter
@@ -67,50 +67,50 @@ spacing:
   section: 96px
 components:
   nav-pill:
-    backgroundColor: "{colors.surface}"
-    borderColor: "{colors.secondary}"
-    rounded: "{rounded.lg}"
+    backgroundColor: '{colors.surface}'
+    borderColor: '{colors.secondary}'
+    rounded: '{rounded.lg}'
     padding: 8px
   nav-item:
-    textColor: "{colors.primary}"
-    rounded: "{rounded.md}"
+    textColor: '{colors.primary}'
+    rounded: '{rounded.md}'
     padding: 8px
   nav-item-hover:
-    borderColor: "{colors.primary}"
+    borderColor: '{colors.primary}'
   card:
-    backgroundColor: "{colors.surface}"
-    borderColor: "{colors.secondary}"
-    rounded: "{rounded.lg}"
+    backgroundColor: '{colors.surface}'
+    borderColor: '{colors.secondary}'
+    rounded: '{rounded.lg}'
     padding: 16px
   card-hover:
-    borderColor: "{colors.primary}"
+    borderColor: '{colors.primary}'
   button-outline:
     backgroundColor: transparent
-    borderColor: "{colors.secondary}"
-    textColor: "{colors.primary}"
-    rounded: "{rounded.sm}"
+    borderColor: '{colors.secondary}'
+    textColor: '{colors.primary}'
+    rounded: '{rounded.sm}'
     padding: 8px 16px
     fontSize: 12px
     letterSpacing: 0.05em
   button-outline-hover:
-    borderColor: "{colors.primary}"
+    borderColor: '{colors.primary}'
   code-block:
-    backgroundColor: "{colors.surface}"
-    borderColor: "{colors.secondary}"
-    rounded: "{rounded.md}"
+    backgroundColor: '{colors.surface}'
+    borderColor: '{colors.secondary}'
+    rounded: '{rounded.md}'
     padding: 16px
   tag:
     backgroundColor: transparent
-    borderColor: "{colors.secondary}"
-    textColor: "{colors.tertiary}"
-    rounded: "{rounded.full}"
+    borderColor: '{colors.secondary}'
+    textColor: '{colors.tertiary}'
+    rounded: '{rounded.full}'
     padding: 2px 10px
     fontSize: 11px
     letterSpacing: 0.03em
   tooltip:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.neutral}"
-    rounded: "{rounded.md}"
+    backgroundColor: '{colors.primary}'
+    textColor: '{colors.neutral}'
+    rounded: '{rounded.md}'
     padding: 6px 12px
     fontSize: 12px
 ---
@@ -133,6 +133,7 @@ The palette is rooted in warm, earthy neutrals and a single muted accent for int
 - **Error (#8B4513):** Warm rust/brown for errors and destructive actions. No harsh reds.
 
 Dark mode inverts the warmth:
+
 - Background becomes **#2A2826** (warm charcoal).
 - Text becomes **#E0DCD4** (warm off-white like natural linen).
 - Surfaces shift to **#33312E**.
@@ -161,6 +162,7 @@ A fluid-centered layout with generous whitespace. Content is constrained to a co
 ## Elevation & Depth
 
 No shadows. No z-axis depth. Hierarchy is communicated through:
+
 - **Tonal layering** — surface color vs. background color
 - **Borders** — thin (1px), warm beige lines
 - **Typography weight** — lighter weight for less important content

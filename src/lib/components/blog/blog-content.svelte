@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount, afterUpdate } from 'svelte';
-	import { copyToClipboard, showCopySuccess, showCopyError } from '$lib/utils/clipboard';
+	import { copyToClipboard, showCopySuccess, showCopyError } from '$lib/utils/clipboard-utils';
 	import './blog.css';
 
 	// Track if we're in browser (hydration complete)

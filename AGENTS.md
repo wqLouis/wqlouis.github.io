@@ -23,21 +23,21 @@
 
 ## Key Dependencies
 
-| Package | Purpose |
-|---------|---------|
-| `@iconify/json` + `@iconify/tailwind4` | Iconify icon set (usage: `icon-[collection--name]` in Tailwind) |
-| `mdsvex` | Markdown/MDX preprocessor for Svelte (blog posts as `.md`/`.svx` files) |
+| Package                                | Purpose                                                                 |
+| -------------------------------------- | ----------------------------------------------------------------------- |
+| `@iconify/json` + `@iconify/tailwind4` | Iconify icon set (usage: `icon-[collection--name]` in Tailwind)         |
+| `mdsvex`                               | Markdown/MDX preprocessor for Svelte (blog posts as `.md`/`.svx` files) |
 
 ## Scripts (`bun run <script>`)
 
-| Script | Command |
-|--------|---------|
-| `dev` | `vite dev` — dev server |
-| `build` | `vite build` — production build |
-| `preview` | `vite preview` — preview production build |
-| `check` | `svelte-kit sync && svelte-check --tsconfig ./tsconfig.json` |
-| `format` | `prettier --write .` |
-| `lint` | `prettier --check . && eslint .` |
+| Script    | Command                                                      |
+| --------- | ------------------------------------------------------------ |
+| `dev`     | `vite dev` — dev server                                      |
+| `build`   | `vite build` — production build                              |
+| `preview` | `vite preview` — preview production build                    |
+| `check`   | `svelte-kit sync && svelte-check --tsconfig ./tsconfig.json` |
+| `format`  | `prettier --write .`                                         |
+| `lint`    | `prettier --check . && eslint .`                             |
 
 ## Project Conventions
 

@@ -1,12 +1,5 @@
-export interface ProjectPage {
-	slug: string;
-	title: string;
-	description: string;
-	tags: string[];
-}
-
 export const load = () => {
-	const projects: ProjectPage[] = [
+	const projects = [
 		{
 			slug: 'linux-wallpaper-engine',
 			title: 'linux wallpaper engine',
