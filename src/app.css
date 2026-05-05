@@ -21,18 +21,18 @@ body {
 
 @layer base {
 	:root {
-		--background: #faf7eb;
-		--foreground: #f5f3eb;
-		--border: #cccccc;
-		--text: #666666;
+		--background: #f8f6f0;
+		--foreground: #f0ede5;
+		--border: #d4cdbf;
+		--text: #5c5347;
 		--accent: #7f0019;
 	}
 
 	.dark {
-		--background: #2a2826;
+		--background: #3a3836;
 		--foreground: #33312e;
-		--border: #666666;
-		--text: #cccccc;
+		--border: #4a4844;
+		--text: #e0dcd4;
 		--accent: #7f0019;
 	}
 }
