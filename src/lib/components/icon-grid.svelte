@@ -9,7 +9,7 @@
 		<img
 			src={icon.src}
 			alt={icon.alt || ''}
-			class="size-9 shrink-0 object-contain {className} {icon.className || ''} {iconClass}"
+			class="size-12 shrink-0 object-contain {className} {icon.className || ''} {iconClass}"
 		/>
 	{/each}
 </div>

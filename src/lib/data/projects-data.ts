@@ -12,6 +12,11 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
+		link: 'https://github.com/wqLouis/linux-wallpaperengine-gui',
+		cardTitle: 'wallpaper engine gui',
+		tags: ['Rust', 'Iced', 'Linux']
+	},
+	{
 		link: 'https://github.com/wqLouis/linux-wallpaperengine',
 		cardTitle: 'linux wallpaper engine',
 		image: Yawe,

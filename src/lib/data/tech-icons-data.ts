@@ -1,15 +1,18 @@
 // Game development icons
 import unity from '$lib/assets/gamedev/unity-logo.svg';
 import godot from '$lib/assets/gamedev/godot-logo.svg';
+import wgpu from '$lib/assets/backend/wgpu-logo.png';
 
 // Frontend icons
 import svelte from '$lib/assets/frontend/favicon.svg';
 import tailwind from '$lib/assets/frontend/tailwindcss-mark.d52e9897.svg';
 import flet from '$lib/assets/frontend/logo.svg';
 import qt from '$lib/assets/frontend/qt-logo.svg';
+import iced from '$lib/assets/frontend/iced-logo.svg';
 
 // Backend icons
 import sqlite from '$lib/assets/backend/SQLite.svg';
+import supabase from '$lib/assets/backend/supabase-logo-icon.svg';
 
 // DevOps icons
 import ubuntu from '$lib/assets/devops/ubuntu-cof.svg';
@@ -27,6 +30,7 @@ import js from '$lib/assets/langs/javascript.svg';
 import ts from '$lib/assets/langs/typescript.svg';
 
 export const gameDevIcons = [
+	{ src: wgpu, className: '' },
 	{ src: unity, className: 'icon-unity' },
 	{ src: godot, className: '' }
 ];
@@ -35,10 +39,14 @@ export const frontendIcons = [
 	{ src: svelte, className: '' },
 	{ src: tailwind, className: '' },
 	{ src: flet, className: '' },
-	{ src: qt, className: '' }
+	{ src: qt, className: '' },
+	{ src: iced, className: '' }
 ];
 
-export const backendIcons = [{ src: sqlite, className: '' }];
+export const backendIcons = [
+	{ src: supabase, className: '' },
+	{ src: sqlite, className: '' }
+];
 
 export const devopsIcons = [
 	{ src: ubuntu, className: '' },

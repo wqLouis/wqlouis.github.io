@@ -184,6 +184,26 @@
 		</div>
 	</section>
 
+	<section class="mx-auto mt-8 flex h-max w-max min-w-[70vw] flex-col" id="commercial">
+		<div class="mr-auto ml-8 text-2xl font-light tracking-wider">
+			{m.main_section_commercial()}
+		</div>
+		<div class="mx-16 mt-8 flex">
+			<div class="h-full w-8">
+				<div class="mx-auto my-1 h-4 w-px bg-border"></div>
+				<div class="mx-auto size-2 rounded-full border border-border"></div>
+				<div class="mx-auto my-1 h-4 w-px bg-border"></div>
+			</div>
+			<div class="my-auto text-sm font-light tracking-wide">
+				<div class="flex flex-col">
+					<div class="text-base">{m.main_commercial_eduai_title()}</div>
+					<div class="text-xs text-text/60">{m.main_commercial_eduai_description()}</div>
+					<div class="mt-1 text-xs text-text/40 italic">{m.main_commercial_eduai_note()}</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<section id="projects" class="mx-auto mt-8 flex h-max w-max min-w-[70vw] flex-col">
 		<div class="mb-8 ml-8 text-2xl font-light tracking-wider">{m.main_section_projects()}</div>
 		<div class="mx-auto mb-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
