@@ -15,7 +15,7 @@
 	"main_tech_frontend": "前端",
 	"main_tech_backend": "後端",
 	"main_tech_devops": "運維",
-	"main_tech_game_dev": "遊戲開發",
+	"main_tech_game_dev": "圖形編程",
 	"main_see_more": "查看更多",
 	"main_see_less": "收回",
 	"main_section_education": "教育背景",
@@ -119,5 +119,9 @@
 	"blogs_one_article": "1 篇文章",
 	"blogs_articles_count": "{count} 篇文章",
 	"blogs_read_article": "閱讀文章",
-	"blogs_footer_built_with": "以 SvelteKit 構建"
+	"blogs_footer_built_with": "以 SvelteKit 構建",
+	"main_section_commercial": "商業項目",
+	"main_commercial_eduai_title": "CoolWalk Technology EDUAI 平台",
+	"main_commercial_eduai_description": "AI Agent 工程師 & 後端 + DevOps 工程師",
+	"main_commercial_eduai_note": "(更多詳情即將公佈)"
 }

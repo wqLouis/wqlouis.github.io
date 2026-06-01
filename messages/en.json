@@ -15,7 +15,7 @@
 	"main_tech_frontend": "Frontend",
 	"main_tech_backend": "Backend",
 	"main_tech_devops": "Dev Ops",
-	"main_tech_game_dev": "Game Dev",
+	"main_tech_game_dev": "Graphics",
 	"main_see_more": "See More",
 	"main_see_less": "See Less",
 	"main_section_education": "Education",
@@ -119,5 +119,9 @@
 	"blogs_one_article": "1 article",
 	"blogs_articles_count": "{count} articles",
 	"blogs_read_article": "Read article",
-	"blogs_footer_built_with": "Built with SvelteKit"
+	"blogs_footer_built_with": "Built with SvelteKit",
+	"main_section_commercial": "Commercial Projects",
+	"main_commercial_eduai_title": "EDUAI Platform for CoolWalk Technology",
+	"main_commercial_eduai_description": "AI Agent Engineer & Backend + DevOps Engineer",
+	"main_commercial_eduai_note": "(More details coming soon)"
 }
