@@ -188,17 +188,31 @@
 		<div class="mr-auto ml-8 text-2xl font-light tracking-wider">
 			{m.main_section_commercial()}
 		</div>
-		<div class="mx-16 mt-8 flex">
-			<div class="h-full w-8">
-				<div class="mx-auto my-1 h-4 w-px bg-border"></div>
-				<div class="mx-auto size-2 rounded-full border border-border"></div>
-				<div class="mx-auto my-1 h-4 w-px bg-border"></div>
+		<div class="relative mx-16 mt-8 flex flex-col gap-6">
+			<div class="absolute inset-y-0 left-4 w-px -translate-x-1/2 bg-border"></div>
+			<div class="flex">
+				<div class="relative h-full w-8 shrink-0">
+					<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-bg p-1">
+						<div class="size-2 rounded-full border border-border bg-bg"></div>
+					</div>
+				</div>
+				<div class="my-auto text-sm font-light tracking-wide">
+					<div class="text-base">{m.main_commercial_rightpick_title()}</div>
+					<div class="text-xs text-text/60">{m.main_commercial_rightpick_description()}</div>
+				</div>
 			</div>
-			<div class="my-auto text-sm font-light tracking-wide">
-				<div class="flex flex-col">
-					<div class="text-base">{m.main_commercial_eduai_title()}</div>
-					<div class="text-xs text-text/60">{m.main_commercial_eduai_description()}</div>
-					<div class="mt-1 text-xs text-text/40 italic">{m.main_commercial_eduai_note()}</div>
+			<div class="flex">
+				<div class="relative h-full w-8 shrink-0">
+					<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-bg p-1">
+						<div class="size-2 rounded-full border border-border bg-bg"></div>
+					</div>
+				</div>
+				<div class="my-auto text-sm font-light tracking-wide">
+					<div class="flex flex-col">
+						<div class="text-base">{m.main_commercial_eduai_title()}</div>
+						<div class="text-xs text-text/60">{m.main_commercial_eduai_description()}</div>
+						<div class="mt-1 text-xs text-text/40 italic">{m.main_commercial_eduai_note()}</div>
+					</div>
 				</div>
 			</div>
 		</div>

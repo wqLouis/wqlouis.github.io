@@ -123,7 +123,10 @@
 				</div>
 			</Tooltip>
 		</button>
-		<Dropdown popOffset={{ x: 0, y: 240 }} triggerClass="size-8 hover:bg-accent/10 active:bg-accent/20">
+		<Dropdown
+			popOffset={{ x: 0, y: 240 }}
+			triggerClass="size-8 hover:bg-accent/10 active:bg-accent/20"
+		>
 			<span class="text-xs font-light tracking-wider">{localeLabels[$locale]}</span>
 			{#snippet menu()}
 				{#each locales as loc (loc)}

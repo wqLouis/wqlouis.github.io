@@ -20,7 +20,7 @@
 	"main_see_less": "收回",
 	"main_section_education": "教育背景",
 	"main_education_cityu": "香港城市大學 (2025~)",
-	"main_education_degree": "電子工程本科生",
+	"main_education_degree": "計算機與數據工程 (CDE) 本科生，2026~",
 	"main_section_projects": "項目",
 	"main_section_findme": "搵我",
 	"main_github_label": "github/wqLouis",
@@ -123,5 +123,7 @@
 	"main_section_commercial": "商業項目",
 	"main_commercial_eduai_title": "CoolWalk Technology EDUAI 平台",
 	"main_commercial_eduai_description": "AI Agent 工程師 & 後端 + DevOps 工程師",
-	"main_commercial_eduai_note": "(更多詳情即將公佈)"
+	"main_commercial_eduai_note": "(更多詳情即將公佈)",
+	"main_commercial_rightpick_title": "RightPick Technology 香港",
+	"main_commercial_rightpick_description": "編程實習生 — 全棧 + DevOps"
 }

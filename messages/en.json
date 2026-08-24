@@ -20,7 +20,7 @@
 	"main_see_less": "See Less",
 	"main_section_education": "Education",
 	"main_education_cityu": "CityUHK (2025~)",
-	"main_education_degree": "Bachelor's student in Electrical Engineering",
+	"main_education_degree": "Bachelor's student in Computer and Data Engineering (CDE), 2026~",
 	"main_section_projects": "Projects",
 	"main_section_findme": "Find me",
 	"main_github_label": "github/wqLouis",
@@ -123,5 +123,7 @@
 	"main_section_commercial": "Commercial Projects",
 	"main_commercial_eduai_title": "EDUAI Platform for CoolWalk Technology",
 	"main_commercial_eduai_description": "AI Agent Engineer & Backend + DevOps Engineer",
-	"main_commercial_eduai_note": "(More details coming soon)"
+	"main_commercial_eduai_note": "(More details coming soon)",
+	"main_commercial_rightpick_title": "RightPick Technology Hong Kong",
+	"main_commercial_rightpick_description": "Programming Intern — Full Stack + DevOps"
 }
