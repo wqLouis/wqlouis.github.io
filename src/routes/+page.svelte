@@ -191,8 +191,8 @@
 		<div class="relative mx-16 mt-8 flex flex-col gap-6">
 			<div class="absolute inset-y-0 left-4 w-px -translate-x-1/2 bg-border"></div>
 			<div class="flex">
-				<div class="relative h-full w-8 shrink-0">
-					<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-bg p-1">
+				<div class="flex w-8 shrink-0 items-center justify-center">
+					<div class="bg-bg p-1">
 						<div class="size-2 rounded-full border border-border bg-bg"></div>
 					</div>
 				</div>
@@ -202,8 +202,8 @@
 				</div>
 			</div>
 			<div class="flex">
-				<div class="relative h-full w-8 shrink-0">
-					<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-bg p-1">
+				<div class="flex w-8 shrink-0 items-center justify-center">
+					<div class="bg-bg p-1">
 						<div class="size-2 rounded-full border border-border bg-bg"></div>
 					</div>
 				</div>
