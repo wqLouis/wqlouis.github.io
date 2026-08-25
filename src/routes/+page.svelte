@@ -164,21 +164,35 @@
 
 	<section class="mx-auto mt-8 flex h-max w-max min-w-[70vw] flex-col" id="edu">
 		<div class="mr-auto ml-8 text-2xl font-light tracking-wider">{m.main_section_education()}</div>
-		<div class="mx-16 mt-8 flex">
-			<div class="h-full w-8">
-				<div class="mx-auto my-1 h-4 w-px bg-border"></div>
-				<div class="mx-auto size-2 rounded-full border border-border"></div>
-				<div class="mx-auto my-1 h-4 w-px bg-border"></div>
-			</div>
-			<div class="my-auto flex text-sm font-light tracking-wide">
-				<div
-					class="hidden size-16 items-center justify-center rounded-full border border-border sm:flex"
-				>
-					<img src={Cityu} alt="" class="m-auto h-6" />
+		<div class="relative mx-16 mt-8 flex flex-col gap-6">
+			<div class="absolute inset-y-0 left-4 w-px -translate-x-1/2 bg-border"></div>
+			<div class="flex">
+				<div class="flex w-8 shrink-0 items-center justify-center">
+					<div class="relative bg-bg p-1">
+						<div class="size-2 rounded-full border border-border bg-bg"></div>
+					</div>
 				</div>
-				<div class="mx-2 my-auto">
-					<div class="">{m.main_education_cityu()}</div>
-					<div class="text-xs text-text/60">{m.main_education_degree()}</div>
+				<div class="my-auto flex text-sm font-light tracking-wide">
+					<div
+						class="hidden size-16 items-center justify-center rounded-full border border-border sm:flex"
+					>
+						<img src={Cityu} alt="" class="m-auto h-6" />
+					</div>
+					<div class="mx-2 my-auto">
+						<div class="text-base">{m.main_education_ee_title()}</div>
+						<div class="text-xs text-text/60">{m.main_education_ee_desc()}</div>
+					</div>
+				</div>
+			</div>
+			<div class="flex">
+				<div class="flex w-8 shrink-0 items-center justify-center">
+					<div class="relative bg-bg p-1">
+						<div class="size-2 rounded-full border border-border bg-bg"></div>
+					</div>
+				</div>
+				<div class="my-auto text-sm font-light tracking-wide">
+					<div class="text-base">{m.main_education_cde_title()}</div>
+					<div class="text-xs text-text/60">{m.main_education_cde_desc()}</div>
 				</div>
 			</div>
 		</div>
@@ -192,7 +206,7 @@
 			<div class="absolute inset-y-0 left-4 w-px -translate-x-1/2 bg-border"></div>
 			<div class="flex">
 				<div class="flex w-8 shrink-0 items-center justify-center">
-					<div class="bg-bg p-1">
+					<div class="relative bg-bg p-1">
 						<div class="size-2 rounded-full border border-border bg-bg"></div>
 					</div>
 				</div>
@@ -203,7 +217,7 @@
 			</div>
 			<div class="flex">
 				<div class="flex w-8 shrink-0 items-center justify-center">
-					<div class="bg-bg p-1">
+					<div class="relative bg-bg p-1">
 						<div class="size-2 rounded-full border border-border bg-bg"></div>
 					</div>
 				</div>
