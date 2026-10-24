@@ -241,6 +241,7 @@
 					cardTitle={project.cardTitle}
 					image={project.image}
 					tags={project.tags}
+					fit={project.fit}
 				/>
 			{/each}
 		</div>

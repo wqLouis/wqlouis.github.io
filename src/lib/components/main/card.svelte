@@ -3,6 +3,7 @@
 	export let image: string = '';
 	export let cardTitle: string = '';
 	export let tags: string[] = [];
+	export let fit: 'cover' | 'contain' = 'cover';
 </script>
 
 <a
@@ -14,7 +15,9 @@
 		{#if image}
 			<img
 				src={image}
-				class="h-full w-full object-cover transition-all duration-500 group-hover:scale-105"
+				class="h-full w-full transition-all duration-500 group-hover:scale-105 {fit === 'contain'
+					? 'object-contain p-4'
+					: 'object-cover'}"
 				alt=""
 			/>
 		{:else}

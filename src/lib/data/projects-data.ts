@@ -2,12 +2,15 @@ import PersonalWebsite from '$lib/assets/others/PersonalWebsite.png';
 import TreeRs from '$lib/assets/others/treers.png';
 import Depkg from '$lib/assets/others/depkg.png';
 import Yawe from '$lib/assets/others/yawe.png';
+import KrkrRs from '$lib/assets/gamedev/krkr-rs.svg';
 
 export interface Project {
 	link: string;
 	cardTitle: string;
 	image?: string;
 	tags: string[];
+	/** how the preview image fills the card — 'contain' keeps square icons uncropped */
+	fit?: 'cover' | 'contain';
 }
 
 export const projects: Project[] = [
@@ -54,5 +57,12 @@ export const projects: Project[] = [
 		cardTitle: 'tree-rs',
 		image: TreeRs,
 		tags: ['Rust']
+	},
+	{
+		link: 'https://github.com/wqLouis/krkr-rs',
+		cardTitle: 'krkr-rs',
+		image: KrkrRs,
+		fit: 'contain',
+		tags: ['Rust', 'Vulkan', 'KiriKiri2']
 	}
 ];

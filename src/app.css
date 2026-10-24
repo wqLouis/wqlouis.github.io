@@ -39,6 +39,11 @@ body {
 		--text: #33312c;
 		/* Cinnabar seal red (印章) */
 		--accent: #b23a2f;
+
+		/* highlights sampled from the krkr-rs launcher icon */
+		--accent-clay: #b34a20;
+		--accent-sand: #eea24b;
+		--accent-pine: #123e42;
 	}
 
 	.dark {
@@ -53,6 +58,11 @@ body {
 		--text: #cdd6f4;
 		/* mauve */
 		--accent: #cba6f7;
+
+		/* krkr-rs launcher icon accents (lightened for the dark ground) */
+		--accent-clay: #e8956a;
+		--accent-sand: #eea24b;
+		--accent-pine: #1d565b;
 	}
 }
 
@@ -119,6 +129,55 @@ body::after {
 
 .dark body::after {
 	display: none;
+}
+
+/* ---------------------------------------------------------------
+ * Scroll reveal (used with the `reveal` action in src/lib/utils)
+ * ------------------------------------------------------------- */
+.reveal {
+	opacity: 0;
+	transform: translateY(20px);
+	transition:
+		opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+		transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+	transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.reveal-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.reveal {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+}
+
+/* accent chips — colours sampled from the krkr-rs launcher icon */
+.chip-clay {
+	background-color: var(--accent-clay);
+	color: #ffffff;
+}
+
+.chip-sand {
+	background-color: var(--accent-sand);
+	color: var(--accent-pine);
+}
+
+.chip-pine {
+	background-color: var(--accent-pine);
+	color: #ffffff;
+}
+
+.dark .chip-clay {
+	color: var(--background);
+}
+
+.dark .chip-sand {
+	color: var(--background);
 }
 
 /* Desaturate brand icons for the ink aesthetic */
