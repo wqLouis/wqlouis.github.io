@@ -156,6 +156,42 @@ body::after {
 	}
 }
 
+/* ---------------------------------------------------------------
+ * Hero reveal — shared by the home page and the krkr-rs hero.
+ * The text is invisible until it flies out of the icon.
+ * ------------------------------------------------------------- */
+.hero-fly {
+	--hero-shift: -40px;
+	animation: hero-fly 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+	animation-delay: var(--d, 0ms);
+}
+
+.hero-fly-right {
+	--hero-shift: 40px;
+}
+
+@keyframes hero-fly {
+	from {
+		opacity: 0;
+		filter: blur(10px);
+		transform: translateX(var(--hero-shift));
+	}
+	to {
+		opacity: 1;
+		filter: blur(0);
+		transform: translateX(0);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.hero-fly {
+		animation: none;
+		opacity: 1;
+		filter: none;
+		transform: none;
+	}
+}
+
 /* accent chips — colours sampled from the krkr-rs launcher icon */
 .chip-clay {
 	background-color: var(--accent-clay);

@@ -96,7 +96,7 @@
 
 			<div class="translate-y-[10%]">
 				<h1
-					class="hero-text text-6xl leading-none font-medium tracking-[-0.04em] text-text md:text-8xl"
+					class="hero-fly text-6xl leading-none font-medium tracking-[-0.04em] text-text md:text-8xl"
 					style="--d: 880ms"
 				>
 					krkr<span class="text-[var(--accent-clay)]">-</span>rs
@@ -104,7 +104,7 @@
 			</div>
 		</div>
 
-		<div class="hero-text flex flex-wrap items-center justify-center gap-4" style="--d: 1000ms">
+		<div class="hero-fly flex flex-wrap items-center justify-center gap-4" style="--d: 1000ms">
 			<a
 				href="#build"
 				class="flex items-center gap-2 rounded-md border border-transparent bg-accent px-7 py-3 text-xs font-light tracking-wider text-white transition-all hover:opacity-90 active:opacity-80"
@@ -140,27 +140,9 @@
 
 <style>
 	/* the text is invisible until it flies out of the icon */
-	.hero-text {
-		animation: hero-fly 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
-		animation-delay: var(--d, 0ms);
-	}
-
 	.hero-return {
 		animation: hero-fly 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
 		animation-delay: var(--d, 0ms);
-	}
-
-	@keyframes hero-fly {
-		from {
-			opacity: 0;
-			filter: blur(10px);
-			transform: translateX(-40px);
-		}
-		to {
-			opacity: 1;
-			filter: blur(0);
-			transform: translateX(0);
-		}
 	}
 
 	.krkr-icon {
@@ -172,7 +154,6 @@
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.hero-text,
 		.hero-return {
 			animation: none;
 			opacity: 1;

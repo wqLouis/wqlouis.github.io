@@ -12,17 +12,92 @@
 	import ProjectCard from '$lib/components/main/card.svelte';
 	import { projects } from '$lib/data/projects-data';
 	import * as m from '$paraglide/messages.js';
+	import { prefersReducedMotion } from 'svelte/motion';
+
+	let stage = $state<HTMLDivElement | undefined>();
+	let avatarAnchor = $state<HTMLDivElement | undefined>();
+	let avatarEl = $state<HTMLDivElement | undefined>();
+
+	// the avatar starts in the middle and then travels to its place
+	let avatarLeft = $state('50%');
+	let avatarTop = $state('50%');
+	let avatarScale = $state(0.82);
+	let avatarOpacity = $state(0);
+
+	function centre() {
+		if (!stage || !avatarAnchor) return;
+		const s = stage.getBoundingClientRect();
+		const a = avatarAnchor.getBoundingClientRect();
+		avatarTop = `${a.top + a.height / 2 - s.top}px`;
+	}
+
+	function land() {
+		if (!stage || !avatarAnchor) return;
+		const s = stage.getBoundingClientRect();
+		const a = avatarAnchor.getBoundingClientRect();
+		avatarLeft = `${a.left + a.width / 2 - s.left}px`;
+		avatarTop = `${a.top + a.height / 2 - s.top}px`;
+		avatarScale = 1;
+	}
+
+	$effect(() => {
+		if (prefersReducedMotion.current) {
+			avatarOpacity = 1;
+			land();
+			return;
+		}
+
+		const timers: ReturnType<typeof setTimeout>[] = [];
+
+		// 1 — the avatar shows up in the middle
+		timers.push(
+			setTimeout(() => {
+				centre();
+				avatarOpacity = 1;
+			}, 80)
+		);
+
+		// 2 — it travels to its place and the title flies out of it
+		timers.push(setTimeout(() => land(), 620));
+
+		const observer = new ResizeObserver(() => {
+			if (avatarScale === 1) land();
+		});
+		if (avatarAnchor) observer.observe(avatarAnchor);
+
+		return () => {
+			timers.forEach(clearTimeout);
+			observer.disconnect();
+		};
+	});
 </script>
 
 <main class="flex h-auto w-full flex-col overflow-clip bg-bg text-text">
 	<section class="mx-auto flex h-screen w-full flex-col" id="home">
-		<div class="mx-auto mt-[42vh] mb-auto flex cursor-default">
+		<div bind:this={stage} class="relative mx-auto mt-[42vh] mb-auto flex cursor-default">
 			<div class="mx-4 my-auto">
-				<span class="text-3xl font-light tracking-wider">{m.main_hero_greeting()}</span>
+				<span
+					class="hero-fly hero-fly-right inline-block text-3xl font-light tracking-wider"
+					style="--d: 780ms">{m.main_hero_greeting()}</span
+				>
 				<br />
-				<span class="text-sm font-light tracking-wide text-border">{m.main_hero_tagline()}</span>
+				<span
+					class="hero-fly hero-fly-right inline-block text-sm font-light tracking-wide text-border"
+					style="--d: 900ms">{m.main_hero_tagline()}</span
+				>
 			</div>
-			<div class="size-22 overflow-clip rounded-full border border-border">
+			<!-- the place the avatar travels to -->
+			<div
+				bind:this={avatarAnchor}
+				class="size-22 shrink-0 overflow-clip rounded-full border border-border"
+			></div>
+
+			<!-- the travelling avatar -->
+			<div
+				bind:this={avatarEl}
+				class="pointer-events-none absolute z-10 size-22 overflow-clip rounded-full border border-border"
+				style="left: {avatarLeft}; top: {avatarTop}; transform: translate(-50%, -50%) scale({avatarScale}); opacity: {avatarOpacity};"
+			>
 				<img
 					src="https://avatars.githubusercontent.com/u/114333810?v=4"
 					alt=""
@@ -168,35 +243,35 @@
 			<!-- the root of the timeline -->
 			<div class="flex w-8 shrink-0 items-center justify-center">
 				<div
-					class="flex size-12 shrink-0 items-center justify-center rounded-full border border-border bg-bg"
+					class="flex size-16 shrink-0 items-center justify-center rounded-full border border-border bg-bg"
 				>
-					<img src={Cityu} alt="" class="m-auto h-5" />
+					<img src={Cityu} alt="" class="m-auto h-7" />
 				</div>
 			</div>
 
-			<div class="relative flex flex-col gap-6">
-				<div class="absolute inset-y-0 left-4 w-px -translate-x-1/2 bg-border"></div>
-				<div class="flex">
-					<div class="flex w-8 shrink-0 items-center justify-center">
-						<div class="relative bg-bg p-1">
-							<div class="size-2 rounded-full border border-border bg-bg"></div>
-						</div>
-					</div>
-					<div class="mx-2 my-auto text-sm font-light tracking-wide">
-						<div class="text-base">{m.main_education_ee_title()}</div>
-						<div class="text-xs text-text/60">{m.main_education_ee_desc()}</div>
+			<!-- the rule starts at the root and runs through the entries -->
+			<div class="absolute top-16 bottom-0 left-4 w-px -translate-x-1/2 bg-border"></div>
+
+			<div class="flex">
+				<div class="flex w-8 shrink-0 items-center justify-center">
+					<div class="relative bg-bg p-1">
+						<div class="size-2 rounded-full border border-border bg-bg"></div>
 					</div>
 				</div>
-				<div class="flex">
-					<div class="flex w-8 shrink-0 items-center justify-center">
-						<div class="relative bg-bg p-1">
-							<div class="size-2 rounded-full border border-border bg-bg"></div>
-						</div>
+				<div class="my-auto text-sm font-light tracking-wide">
+					<div class="text-base">{m.main_education_ee_title()}</div>
+					<div class="text-xs text-text/60">{m.main_education_ee_desc()}</div>
+				</div>
+			</div>
+			<div class="flex">
+				<div class="flex w-8 shrink-0 items-center justify-center">
+					<div class="relative bg-bg p-1">
+						<div class="size-2 rounded-full border border-border bg-bg"></div>
 					</div>
-					<div class="my-auto text-sm font-light tracking-wide">
-						<div class="text-base">{m.main_education_cde_title()}</div>
-						<div class="text-xs text-text/60">{m.main_education_cde_desc()}</div>
-					</div>
+				</div>
+				<div class="my-auto text-sm font-light tracking-wide">
+					<div class="text-base">{m.main_education_cde_title()}</div>
+					<div class="text-xs text-text/60">{m.main_education_cde_desc()}</div>
 				</div>
 			</div>
 		</div>
