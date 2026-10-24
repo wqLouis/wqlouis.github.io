@@ -126,7 +126,7 @@
 		<!-- the travelling icon -->
 		<div
 			bind:this={iconWrap}
-			class="krkr-icon pointer-events-none absolute z-10"
+			class="hero-icon pointer-events-none absolute z-10"
 			style="left: {iconLeft}; top: {iconTop}; transform: translate(-50%, -50%) scale({iconScale}); opacity: {iconOpacity};"
 		>
 			<img
@@ -145,24 +145,12 @@
 		animation-delay: var(--d, 0ms);
 	}
 
-	.krkr-icon {
-		transition:
-			left 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-			top 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-			transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-			opacity 0.6s ease;
-	}
-
 	@media (prefers-reduced-motion: reduce) {
 		.hero-return {
 			animation: none;
 			opacity: 1;
 			filter: none;
 			transform: none;
-		}
-
-		.krkr-icon {
-			transition: none;
 		}
 	}
 </style>

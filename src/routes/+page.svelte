@@ -86,16 +86,13 @@
 					style="--d: 900ms">{m.main_hero_tagline()}</span
 				>
 			</div>
-			<!-- the place the avatar travels to -->
-			<div
-				bind:this={avatarAnchor}
-				class="size-22 shrink-0 overflow-clip rounded-full border border-border"
-			></div>
+			<!-- the place the avatar travels to — a plain spacer, no outline -->
+			<div bind:this={avatarAnchor} class="size-22 shrink-0"></div>
 
 			<!-- the travelling avatar -->
 			<div
 				bind:this={avatarEl}
-				class="pointer-events-none absolute z-10 size-22 overflow-clip rounded-full border border-border"
+				class="hero-icon pointer-events-none absolute z-10 size-22 overflow-clip rounded-full border border-border"
 				style="left: {avatarLeft}; top: {avatarTop}; transform: translate(-50%, -50%) scale({avatarScale}); opacity: {avatarOpacity};"
 			>
 				<img
