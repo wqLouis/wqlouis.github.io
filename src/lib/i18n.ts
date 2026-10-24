@@ -1,7 +1,7 @@
 import * as m from '$paraglide/messages.js';
 
 export const t = (key: string): string => {
-	// @ts-ignore - paraglide generates exports with special characters
+	// @ts-expect-error - paraglide generates exports with special characters
 	const fn = (m as Record<string, () => string>)[key];
 	return fn ? fn() : key;
 };

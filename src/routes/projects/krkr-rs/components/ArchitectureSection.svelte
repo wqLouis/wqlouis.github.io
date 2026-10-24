@@ -115,14 +115,16 @@
 		return () => observer.disconnect();
 	});
 
-	function measure() {
+	function measure(panelOpen = false) {
 		if (!stage || !slot || !svg) return;
 		const stageRect = stage.getBoundingClientRect();
 		const slotRect = slot.getBoundingClientRect();
 		const svgRect = svg.getBoundingClientRect();
 
 		geometry = {
-			panelRight: slotRect.right - stageRect.left,
+			// while the panel is closed the slot has no width — the connector
+			// is not drawn then, so its edge does not matter
+			panelRight: panelOpen ? slotRect.right - stageRect.left : slotRect.left - stageRect.left,
 			panelY: slotRect.top + slotRect.height / 2 - stageRect.top,
 			svgLeft: svgRect.left - stageRect.left,
 			svgTop: svgRect.top - stageRect.top,
@@ -131,9 +133,9 @@
 	}
 
 	$effect(() => {
-		open;
-		linkIndex;
-		measure();
+		/* the panel state is read here so the effect re-runs whenever the
+		   panel opens or the inspected card changes */
+		measure(open || linkIndex !== null);
 
 		const onResize = () => measure();
 		window.addEventListener('resize', onResize);

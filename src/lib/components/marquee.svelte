@@ -22,6 +22,7 @@
 		if (!content) return;
 
 		const clone = content.cloneNode(true) as HTMLElement;
+		// eslint-disable-next-line svelte/no-dom-manipulating -- the marquee is a deliberate DOM level animation
 		track.appendChild(clone);
 
 		requestAnimationFrame(() => {

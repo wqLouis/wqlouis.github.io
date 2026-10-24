@@ -1,5 +1,4 @@
 <script lang="ts">
-	import CodeBlock from '$lib/components/code-block.svelte';
 	import * as m from '$paraglide/messages.js';
 
 	const videoUrl =

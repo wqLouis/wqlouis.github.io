@@ -1,70 +1,56 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
-	import Project from './project.svelte';
 	import * as m from '$paraglide/messages.js';
+	import EmptyState from '$lib/components/list/EmptyState.svelte';
+	import EntryRow from '$lib/components/list/EntryRow.svelte';
+	import PageFooter from '$lib/components/list/PageFooter.svelte';
+	import PageHeader from '$lib/components/list/PageHeader.svelte';
+	import PageShell from '$lib/components/list/PageShell.svelte';
+
+	const projects = $derived(page.data.projects);
+	const count = $derived(projects.length);
 </script>
 
-<section class="min-h-screen w-screen bg-bg" id="project-list">
-	<div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-		<div class="mb-12">
-			<div class="flex items-center gap-4">
-				<button
-					title={m.projects_back_to_home()}
-					class="flex size-10 cursor-pointer items-center justify-center rounded-md border border-border transition-all hover:border-text active:border-2 active:border-text"
-					onclick={() => {
-						goto(resolve('/'));
-					}}
-				>
-					<span class="icon-[heroicons--arrow-left-20-solid] size-5 text-text/70"></span>
-				</button>
-				<div>
-					<h1 class="text-2xl font-light tracking-wider text-text">{m.projects_page_title()}</h1>
-					<p class="mt-2 text-sm font-light tracking-wide text-text/60">
-						{m.projects_page_subtitle()}
-					</p>
-				</div>
-			</div>
+<svelte:head>
+	<title>{m.projects_page_title()}</title>
+	<meta name="description" content={m.projects_page_subtitle()} />
+</svelte:head>
 
-			<div class="mt-8 border-b border-border/50 pb-4">
-				<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-					<p class="text-xs font-light tracking-wide text-text/50">
-						{#if page.data.projects.length === 0}
-							{m.projects_no_projects()}
-						{:else if page.data.projects.length === 1}
-							{m.projects_one_project()}
-						{:else}
-							{m.projects_projects_count({ count: page.data.projects.length })}
-						{/if}
-					</p>
-					<div class="flex gap-3"></div>
-				</div>
-			</div>
-		</div>
+<PageShell>
+	<PageHeader
+		title={m.projects_page_title()}
+		backHref={resolve('/')}
+		backLabel={m.projects_back_to_home()}
+	/>
 
-		<div class="space-y-6">
-			{#if page.data.projects.length === 0}
-				<div class="rounded-lg border border-border bg-fg/50 p-12 text-center">
-					<h3 class="text-sm font-light tracking-wide text-text/50">{m.projects_no_projects()}</h3>
-					<p class="mt-2 text-xs font-light tracking-wide text-text/40">
-						{m.projects_no_projects_hint()}
-					</p>
-				</div>
-			{:else}
-				{#each page.data.projects as project (project.slug)}
-					<Project
-						title={project.title}
-						description={project.description}
-						route={`/projects/${project.slug}`}
-						tags={project.tags}
-					/>
-				{/each}
-			{/if}
-		</div>
+	{#if count === 0}
+		<EmptyState
+			iconClass="icon-[heroicons--cube-transparent-20-solid] size-5"
+			kicker={m.projects_no_projects()}
+			description={m.projects_no_projects_hint()}
+		/>
+	{:else}
+		<div class="relative mt-12 border-t border-text/25 md:mt-16">
+			<div class="absolute -top-px left-0 h-px w-16 bg-[var(--accent-clay)]"></div>
 
-		<div class="mt-16 border-t border-border/30 pt-8 text-center">
-			<p class="text-xs font-light tracking-wide text-text/50">{m.projects_footer_built_with()}</p>
+			{#each projects as project, i (project.slug)}
+				<EntryRow
+					index={String(i + 1).padStart(2, '0')}
+					title={project.title}
+					description={project.description}
+					href={`/projects/${project.slug}`}
+					tags={project.tags}
+					actionLabel={m.common_project_card_view()}
+					revealDelay={i * 70}
+				/>
+			{/each}
 		</div>
-	</div>
-</section>
+	{/if}
+
+	{#snippet footer()}
+		<PageFooter notice={m.main_github_label()} noticeHref="https://github.com/wqLouis">
+			{m.projects_footer_built_with()}
+		</PageFooter>
+	{/snippet}
+</PageShell>

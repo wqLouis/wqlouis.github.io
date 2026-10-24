@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
 	import BlogContent from '$lib/components/blog/blog-content.svelte';
+	import ReturnButton from '$lib/components/ReturnButton.svelte';
 	import { formatBlogDate } from '$lib/utils/date-utils';
 
 	export let title = 'Untitled Blog Post';
@@ -136,15 +136,7 @@
 	<header class="sticky top-0 z-30 border-b border-border bg-bg">
 		<div class="mx-auto max-w-4xl px-4 py-4 sm:px-6 lg:px-8">
 			<div class="flex items-center gap-4">
-				<button
-					title="Return to blog list"
-					class="flex size-10 cursor-pointer items-center justify-center rounded-md border border-border transition-all hover:border-text active:border-2 active:border-text"
-					onclick={() => {
-						goto(resolve('/blogs'));
-					}}
-				>
-					<span class="icon-[heroicons--arrow-left-20-solid] size-5 text-text/70"></span>
-				</button>
+				<ReturnButton href={resolve('/blogs')} label="Return to blog list" />
 
 				<div class="flex-1">
 					<h1 class="text-2xl font-light tracking-wider text-text">{title}</h1>

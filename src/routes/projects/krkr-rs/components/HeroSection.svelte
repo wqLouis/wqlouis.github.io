@@ -1,9 +1,29 @@
 <script lang="ts">
 	import * as m from '$paraglide/messages.js';
 	import { prefersReducedMotion } from 'svelte/motion';
+	import { onMount } from 'svelte';
+	import { resolve } from '$app/paths';
+	import ReturnButton from '$lib/components/ReturnButton.svelte';
 	import icon from '$lib/assets/gamedev/krkr-rs.svg';
 
 	const githubUrl = 'https://github.com/wqLouis/krkr-rs';
+
+	/* the latest release, served straight from GitHub (always the newest tag) */
+	const releasePageUrl = 'https://github.com/wqLouis/krkr-rs/releases/latest';
+	const linuxReleaseUrl =
+		'https://github.com/wqLouis/krkr-rs/releases/latest/download/krkr-rs-linux-x86_64.tar.gz';
+	const androidReleaseUrl =
+		'https://github.com/wqLouis/krkr-rs/releases/latest/download/app-release.apk';
+
+	/* pick the asset that matches the visitor platform; everyone else lands on
+	   the release page where both downloads are listed */
+	let downloadUrl = $state(releasePageUrl);
+
+	onMount(() => {
+		const ua = navigator.userAgent;
+		if (/Android/i.test(ua)) downloadUrl = androidReleaseUrl;
+		else if (/Linux|X11/i.test(ua)) downloadUrl = linuxReleaseUrl;
+	});
 
 	let stage = $state<HTMLDivElement | undefined>();
 	let anchor = $state<HTMLDivElement | undefined>();
@@ -65,6 +85,7 @@
 	});
 </script>
 
+<!-- eslint-disable svelte/no-navigation-without-resolve -->
 <section class="relative flex min-h-screen w-full items-center overflow-hidden px-6 py-24 md:px-10">
 	<!-- swiss grid -->
 	<div
@@ -74,14 +95,9 @@
 			repeating-linear-gradient(to right, var(--border) 0 1px, transparent 1px 8.3333%);"
 	></div>
 
-	<a
-		href="/projects"
-		title={m.krkr_nav_projects()}
-		class="hero-return absolute top-7 left-6 z-20 flex size-9 items-center justify-center rounded-full bg-text text-bg transition-opacity hover:opacity-80 md:left-10"
-		style="--d: 1000ms"
-	>
-		<span class="icon-[heroicons--arrow-left-20-solid] size-4"></span>
-	</a>
+	<span class="hero-return absolute top-7 left-6 z-20 md:left-10" style="--d: 1000ms">
+		<ReturnButton href={resolve('/projects')} label={m.krkr_nav_projects()} />
+	</span>
 
 	<div
 		bind:this={stage}
@@ -105,12 +121,16 @@
 		</div>
 
 		<div class="hero-fly flex flex-wrap items-center justify-center gap-4" style="--d: 1000ms">
+			<!-- primary: the accent of the icon becomes the background of the
+			     button, so the accent reads the same in light and dark mode -->
 			<a
-				href="#build"
-				class="flex items-center gap-2 rounded-md border border-transparent bg-accent px-7 py-3 text-xs font-light tracking-wider text-white transition-all hover:opacity-90 active:opacity-80"
+				href={downloadUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="flex items-center gap-2 rounded-md border border-transparent bg-[var(--accent-clay)] px-7 py-3 text-xs font-light tracking-wider text-bg transition-all hover:opacity-90 active:opacity-80"
 			>
-				<span>{m.krkr_hero_cta_build()}</span>
-				<span class="icon-[heroicons--arrow-right-20-solid] size-4"></span>
+				<span>{m.krkr_hero_cta_download()}</span>
+				<span class="icon-[heroicons--arrow-down-tray-20-solid] size-4"></span>
 			</a>
 			<a
 				href={githubUrl}

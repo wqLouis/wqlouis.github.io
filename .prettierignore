@@ -7,3 +7,9 @@ bun.lockb
 
 # Miscellaneous
 /static/
+
+# Generated paraglide output
+src/paraglide/
+
+# Tool-managed inlang files
+project.inlang/

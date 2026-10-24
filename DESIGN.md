@@ -220,3 +220,26 @@ No element uses a radius larger than 12px unless it's a pill shape.
 - Don't use more than one typeface — Inter is sufficient
 - Don't use capitalized text unless it's a label — lowercase feels more natural and restrained
 - Don't mix corner radii — cards use lg (12px), buttons use sm (4px)
+
+## List Pages
+
+The project and blog indexes share one visual language with the project detail pages (see `src/routes/projects/krkr-rs`). They are composed from four shared components in `src/lib/components/list/` — a shell, a header, a hairline row and a footer — so a list page can never drift from its siblings.
+
+- **Shell** (`PageShell.svelte`) — the page wrapper: `min-h-screen w-full bg-bg text-text`, a `mx-auto w-full max-w-6xl px-6 py-20 md:px-10 md:py-28` content column, and the krkr-rs typeface override (`Helvetica Neue, Helvetica, Arial, Inter, system-ui, sans-serif`) together with its `#d76b3f` / `#f8f6f0` selection colours.
+- **Header** (`PageHeader.svelte`) — the round back button (`size-9 rounded-full bg-text text-bg`, `hover:opacity-80`) and the title alone (`text-2xl md:text-3xl font-light tracking-wider`), closed by the hairline divider (`h-px w-full bg-border/60`). No kicker, no subtitle, no count: the list explains itself, the page only names itself.
+- **Row** (`EntryRow.svelte`) — one row component for both lists, a hairline table row and never a card: `group grid grid-cols-12 items-center gap-y-2 border-b border-border/50 py-6 transition-colors hover:bg-fg/50 md:gap-y-0 md:py-8`. The clay index (`text-[11px] tracking-[0.18em] tabular-nums`) leads, the title carries the clay hover (`group-hover:text-[var(--accent-clay)]`), the description is clamped to two lines (`line-clamp-2 text-xs leading-relaxed text-text/60`) and the tags are pills (`rounded-full border border-border/60 px-2.5 py-0.5 text-[10px] tracking-widest text-text/40`). The date is micro meta on the right.
+- **Footer** (`PageFooter.svelte`) — `border-t border-border/40 pt-8 pb-16 md:pt-12 md:pb-0` with a `flex flex-col gap-4 md:flex-row md:items-center md:justify-between` inner row: the "built with" line on the left (`text-xs font-light tracking-wide text-text/50`) and a short notice on the right (`text-[11px] leading-relaxed text-text/40`). It sits inside the centred column, so title, list and footer read as one block.
+
+- **Return button** (`src/lib/components/ReturnButton.svelte`) — one component for every "back" affordance on the site (list pages, the krkr-rs hero, the blog post header). It is a 36px inverted circle (`rounded-full bg-text text-bg`) that on hover extends to the right into a pill: the border takes the text colour (`hover:border-text`), the background falls back to the page default (`hover:bg-bg`) and the word "return" slides out (`opacity-0 group-hover:opacity-100`). The width animates through `max-w-9 → hover:max-w-28`, so nothing jumps.
+- **Placeholder** (`EmptyState.svelte`) — an empty list is never a bare sentence. It is a krkr-rs card (`rounded-lg border border-border bg-fg`) over the same swiss grid the hero uses, with an icon badge, a clay kicker, one line of copy and a clay hairline.
+
+**Rules**
+
+- The page is one vertically centred block: the shell wraps title, list and footer in a `my-auto` column inside a `min-h-screen` flex page, so the title always sits on the optical centre of the screen — never pinned to the top, never pushed down by the footer. Auto margins (not `justify-center`) are used so a long list can never clip its own head.
+- A list is a hairline table — `mt-12 border-t border-text/25 md:mt-16` with `border-b border-border/50` rows — never a stack of bordered cards.
+- Accent clay is reserved for the row index and hover text; the accent segment that opens the table is a single 1px line (`bg-[var(--accent-clay)]`).
+- Hover feedback stays border and colour only — no `transition-all duration-300`, no scale, no shadow.
+- A list page never leaves the `max-w-6xl` column: no `w-screen`, no `md:w-[70vw]` escape hatches.
+- A list page carries exactly one piece of text in its header — the title. No eyebrow, no tagline, no count; the rows speak for themselves.
+- Below 640px the row stacks (title / date / description / pills) inside the 12-column grid and every tap target stays at least 40px tall.
+- The floating bottom navigation sits 48px above the viewport edge — the footer keeps an extra bottom padding on small screens so the navigation never covers the notice.

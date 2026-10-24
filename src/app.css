@@ -4,6 +4,12 @@
 /* Class-based dark mode (html.dark), toggled by the theme store */
 @custom-variant dark (&:where(.dark, .dark *));
 
+html,
+body {
+	/* the canvas is the paper — a transition must never reveal white */
+	background-color: var(--background);
+}
+
 body {
 	font-family:
 		'Inter',

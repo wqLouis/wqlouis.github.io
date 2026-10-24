@@ -4,7 +4,7 @@
 	import { projects } from '$lib/data/projects-data';
 	import TechGraph from '$lib/components/tech-graph.svelte';
 	import * as m from '$paraglide/messages.js';
-	import { prefersReducedMotion } from 'svelte/motion';
+	import { Spring, prefersReducedMotion } from 'svelte/motion';
 
 	let stage = $state<HTMLDivElement | undefined>();
 	let avatarAnchor = $state<HTMLDivElement | undefined>();
@@ -31,6 +31,23 @@
 		avatarTop = `${a.top + a.height / 2 - s.top}px`;
 		avatarScale = 1;
 	}
+
+	// scroll progress — driven by svelte/motion
+	const progress = new Spring(0, { stiffness: 0.12, damping: 0.75 });
+
+	$effect(() => {
+		const update = () => {
+			const max = document.documentElement.scrollHeight - window.innerHeight;
+			progress.set(max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0);
+		};
+		update();
+		window.addEventListener('scroll', update, { passive: true });
+		window.addEventListener('resize', update, { passive: true });
+		return () => {
+			window.removeEventListener('scroll', update);
+			window.removeEventListener('resize', update);
+		};
+	});
 
 	$effect(() => {
 		if (prefersReducedMotion.current) {
@@ -63,6 +80,11 @@
 		};
 	});
 </script>
+
+<div
+	class="pointer-events-none fixed top-0 left-0 z-50 h-[3px] rounded-r-full bg-[var(--accent-clay)]"
+	style="width: {progress.current * 100}%"
+></div>
 
 <main class="flex h-auto w-full flex-col overflow-clip bg-bg text-text">
 	<section class="mx-auto flex h-screen w-full flex-col" id="home">
@@ -105,15 +127,14 @@
 		</button>
 	</section>
 
-	<section class="mx-auto flex h-auto min-h-max w-[70vw] min-w-max" id="tech-stacks">
-		<div class="flex w-full max-w-[70vw] flex-col">
-			<div class="flex w-max gap-8">
-				<div class="my-8 mr-auto ml-8 text-2xl font-light tracking-wider">
-					{m.main_section_tech_stacks()}
-				</div>
-			</div>
-			<TechGraph />
+	<section
+		class="mx-auto flex h-auto min-h-max w-full max-w-[1240px] flex-col px-4 sm:px-6"
+		id="tech-stacks"
+	>
+		<div class="my-8 mr-auto ml-2 text-2xl font-light tracking-wider sm:ml-4">
+			{m.main_section_tech_stacks()}
 		</div>
+		<TechGraph />
 	</section>
 
 	<section class="mx-auto mt-8 flex h-max w-max min-w-[70vw] flex-col" id="edu">

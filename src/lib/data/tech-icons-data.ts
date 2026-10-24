@@ -29,38 +29,49 @@ import python from '$lib/assets/langs/python.svg';
 import js from '$lib/assets/langs/javascript.svg';
 import ts from '$lib/assets/langs/typescript.svg';
 
-export const gameDevIcons = [
-	{ src: wgpu, className: '' },
-	{ src: unity, className: 'icon-unity' },
-	{ src: godot, className: '' }
+/** every icon carries a human readable name — the graph itself only shows
+ *  pictures, so this is what screen readers get instead */
+export interface TechIcon {
+	/** the picture */
+	src: string;
+	/** extra classes for the picture */
+	className: string;
+	/** the name of the technology, in plain text */
+	label: string;
+}
+
+export const gameDevIcons: TechIcon[] = [
+	{ src: wgpu, className: '', label: 'wgpu' },
+	{ src: unity, className: 'icon-unity', label: 'Unity' },
+	{ src: godot, className: '', label: 'Godot' }
 ];
 
-export const frontendIcons = [
-	{ src: svelte, className: '' },
-	{ src: tailwind, className: '' },
-	{ src: flet, className: '' },
-	{ src: qt, className: '' },
-	{ src: iced, className: '' }
+export const frontendIcons: TechIcon[] = [
+	{ src: svelte, className: '', label: 'Svelte' },
+	{ src: tailwind, className: '', label: 'Tailwind CSS' },
+	{ src: flet, className: '', label: 'Flet' },
+	{ src: qt, className: '', label: 'Qt' },
+	{ src: iced, className: '', label: 'Iced' }
 ];
 
-export const backendIcons = [
-	{ src: supabase, className: '' },
-	{ src: sqlite, className: '' }
+export const backendIcons: TechIcon[] = [
+	{ src: supabase, className: '', label: 'Supabase' },
+	{ src: sqlite, className: '', label: 'SQLite' }
 ];
 
-export const devopsIcons = [
-	{ src: ubuntu, className: '' },
-	{ src: podman, className: '' },
-	{ src: git, className: '' },
-	{ src: github, className: 'icon-github' }
+export const devopsIcons: TechIcon[] = [
+	{ src: ubuntu, className: '', label: 'Ubuntu' },
+	{ src: podman, className: '', label: 'Podman' },
+	{ src: git, className: '', label: 'Git' },
+	{ src: github, className: 'icon-github', label: 'GitHub' }
 ];
 
-export const languageIcons = [
-	{ src: c, className: '' },
-	{ src: cpp, className: '' },
-	{ src: csharp, className: '' },
-	{ src: rust, className: 'icon-rust' },
-	{ src: python, className: '' },
-	{ src: js, className: '' },
-	{ src: ts, className: '' }
+export const languageIcons: TechIcon[] = [
+	{ src: c, className: '', label: 'C' },
+	{ src: cpp, className: '', label: 'C++' },
+	{ src: csharp, className: '', label: 'C#' },
+	{ src: rust, className: 'icon-rust', label: 'Rust' },
+	{ src: python, className: '', label: 'Python' },
+	{ src: js, className: '', label: 'JavaScript' },
+	{ src: ts, className: '', label: 'TypeScript' }
 ];

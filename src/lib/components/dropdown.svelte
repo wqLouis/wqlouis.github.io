@@ -87,7 +87,7 @@
 
 	<div
 		bind:this={dropdown}
-		class="pointer-events-none absolute z-10 flex min-w-max flex-col rounded-md border border-border bg-fg text-text opacity-0 shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition-all blur-xs scale-95"
+		class="pointer-events-none absolute z-10 flex min-w-max scale-95 flex-col rounded-md border border-border bg-fg text-text opacity-0 shadow-[0_2px_8px_rgba(0,0,0,0.08)] blur-xs transition-all"
 	>
 		{@render menu()}
 	</div>
