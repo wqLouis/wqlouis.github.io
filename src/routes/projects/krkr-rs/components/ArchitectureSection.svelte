@@ -399,20 +399,6 @@
 												}
 											}}
 										>
-											{#if active}
-												<rect
-													x="-4"
-													y="-4"
-													width={NODE_W + 8}
-													height={NODE_H + 8}
-													rx="17"
-													fill="none"
-													stroke="var(--accent-clay)"
-													stroke-width="1"
-													opacity="0.45"
-													class="krkr-halo"
-												/>
-											{/if}
 											<rect
 												width={NODE_W}
 												height={NODE_H}
@@ -655,27 +641,6 @@
 		}
 	}
 
-	.krkr-halo {
-		animation: krkr-halo 1.8s ease-out infinite;
-		transform-box: fill-box;
-		transform-origin: center;
-	}
-
-	@keyframes krkr-halo {
-		0% {
-			transform: scale(1);
-			opacity: 0.45;
-		}
-		70% {
-			transform: scale(1.06);
-			opacity: 0;
-		}
-		100% {
-			transform: scale(1.06);
-			opacity: 0;
-		}
-	}
-
 	@media (max-width: 1023px) {
 		/* no room for a side panel — it becomes a sheet over the view */
 		.krkr-stage.is-open .krkr-slot {
@@ -707,8 +672,7 @@
 		}
 
 		.krkr-link-in,
-		.krkr-link-out,
-		.krkr-halo {
+		.krkr-link-out {
 			animation: none;
 		}
 

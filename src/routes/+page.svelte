@@ -1,16 +1,8 @@
 <script lang="ts">
-	import IconGrid from '$lib/components/icon-grid.svelte';
-	import {
-		languageIcons,
-		frontendIcons,
-		backendIcons,
-		devopsIcons,
-		gameDevIcons
-	} from '$lib/data/tech-icons-data';
 	import Cityu from '$lib/assets/others/cityu-logo.svg';
-	import Marquee from '$lib/components/marquee.svelte';
 	import ProjectCard from '$lib/components/main/card.svelte';
 	import { projects } from '$lib/data/projects-data';
+	import TechGraph from '$lib/components/tech-graph.svelte';
 	import * as m from '$paraglide/messages.js';
 	import { prefersReducedMotion } from 'svelte/motion';
 
@@ -114,123 +106,13 @@
 	</section>
 
 	<section class="mx-auto flex h-auto min-h-max w-[70vw] min-w-max" id="tech-stacks">
-		<div class="flex max-w-[70vw] flex-col">
+		<div class="flex w-full max-w-[70vw] flex-col">
 			<div class="flex w-max gap-8">
 				<div class="my-8 mr-auto ml-8 text-2xl font-light tracking-wider">
 					{m.main_section_tech_stacks()}
 				</div>
-				<button
-					class="mx-auto my-auto flex h-8 w-26 cursor-pointer items-center rounded-sm border border-border transition-all hover:border-text active:border-2 active:border-text"
-					onclick={(event) => {
-						const btn = event.currentTarget;
-						const table = document.getElementById('tech-stacks-table');
-						const toggle = (classArr: string[]) => {
-							classArr.forEach((i) => {
-								table?.classList.toggle(i);
-							});
-
-							const children = Array.from(btn.children);
-							const icon = children.filter((x) => x instanceof HTMLSpanElement)[0];
-							const text = children.filter((x) => x instanceof HTMLDivElement)[0] as HTMLElement;
-							text.innerText =
-								text.innerText == m.main_see_more() ? m.main_see_less() : m.main_see_more();
-							icon.classList.toggle('rotate-180');
-						};
-						toggle(['h-0', 'h-300', 'opacity-0', 'sm:h-200']);
-						const animationHandler = () => {
-							table?.removeEventListener('transitionend', animationHandler);
-						};
-						table?.addEventListener('transitionend', animationHandler, { once: true });
-					}}
-					title="Toggle table"
-				>
-					<div class="my-auto mr-auto ml-2 text-xs font-light tracking-wider text-text/50">
-						{m.main_see_more()}
-					</div>
-					<span
-						class="my-auto mr-2 ml-auto icon-[heroicons--chevron-down] size-4 bg-text/50 transition-all"
-					></span>
-				</button>
 			</div>
-			<Marquee time="70s"
-				><IconGrid icons={languageIcons} /><IconGrid icons={frontendIcons} /><IconGrid
-					icons={backendIcons}
-				/><IconGrid icons={devopsIcons} /><IconGrid icons={gameDevIcons} />
-			</Marquee>
-			<div class="h-0 overflow-clip opacity-0 transition-all duration-1000" id="tech-stacks-table">
-				<div class="mx-auto grid w-full grid-cols-1 sm:grid-cols-2 lg:w-4/5">
-					<div class="flex flex-col">
-						<div class="mx-auto mt-8 mb-4 text-xl font-light tracking-wider">
-							{m.main_tech_languages()}
-						</div>
-						<div class="mx-auto grid w-auto grid-cols-3 place-items-center gap-6">
-							{#each languageIcons as icon (icon.src)}
-								<img
-									src={icon.src}
-									alt=""
-									class="size-12 object-contain grayscale-0 {icon.className || ''}"
-								/>
-							{/each}
-						</div>
-					</div>
-					<div class="flex flex-col">
-						<div class="mx-auto mt-8 mb-4 text-xl font-light tracking-wider">
-							{m.main_tech_frontend()}
-						</div>
-						<div class="mx-auto grid w-auto grid-cols-2 place-items-center gap-6">
-							{#each frontendIcons as icon (icon.src)}
-								<img
-									src={icon.src}
-									alt=""
-									class="size-12 object-contain grayscale-0 {icon.className || ''}"
-								/>
-							{/each}
-						</div>
-					</div>
-					<div class="flex flex-col">
-						<div class="mx-auto mt-8 mb-4 text-xl font-light tracking-wider">
-							{m.main_tech_backend()}
-						</div>
-						<div class="mx-auto grid w-auto grid-cols-1 place-items-center gap-6">
-							{#each backendIcons as icon (icon.src)}
-								<img
-									src={icon.src}
-									alt=""
-									class="size-12 object-contain grayscale-0 {icon.className || ''}"
-								/>
-							{/each}
-						</div>
-					</div>
-					<div class="flex flex-col">
-						<div class="mx-auto mt-8 mb-4 text-xl font-light tracking-wider">
-							{m.main_tech_devops()}
-						</div>
-						<div class="mx-auto grid w-auto grid-cols-2 place-items-center gap-6">
-							{#each devopsIcons as icon (icon.src)}
-								<img
-									src={icon.src}
-									alt=""
-									class="size-12 object-contain grayscale-0 {icon.className || ''}"
-								/>
-							{/each}
-						</div>
-					</div>
-				</div>
-				<div class="flex flex-col">
-					<div class="mx-auto mt-8 mb-4 text-xl font-light tracking-wider">
-						{m.main_tech_game_dev()}
-					</div>
-					<div class="mx-auto grid w-auto grid-cols-1 place-items-center gap-6">
-						{#each gameDevIcons as icon (icon.src)}
-							<img
-								src={icon.src}
-								alt=""
-								class="size-12 object-contain grayscale-0 {icon.className || ''}"
-							/>
-						{/each}
-					</div>
-				</div>
-			</div>
+			<TechGraph />
 		</div>
 	</section>
 
