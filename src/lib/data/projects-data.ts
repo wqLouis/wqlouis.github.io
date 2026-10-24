@@ -1,5 +1,4 @@
 import PersonalWebsite from '$lib/assets/others/PersonalWebsite.png';
-import TreeRs from '$lib/assets/others/treers.png';
 import Depkg from '$lib/assets/others/depkg.png';
 import Yawe from '$lib/assets/others/yawe.png';
 import KrkrRs from '$lib/assets/gamedev/krkr-rs.svg';
@@ -51,12 +50,6 @@ export const projects: Project[] = [
 		link: 'https://github.com/wqLouis/paper_check',
 		cardTitle: 'paper check',
 		tags: ['Python', 'Flet']
-	},
-	{
-		link: 'https://github.com/wqLouis/tree-rs',
-		cardTitle: 'tree-rs',
-		image: TreeRs,
-		tags: ['Rust']
 	},
 	{
 		link: 'https://github.com/wqLouis/krkr-rs',
