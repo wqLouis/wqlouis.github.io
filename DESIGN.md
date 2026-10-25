@@ -244,12 +244,12 @@ The project and blog indexes share one visual language with the project detail p
 - Below 640px the row stacks (title / date / description / pills) inside the 12-column grid and every tap target stays at least 40px tall.
 - The floating bottom navigation sits 48px above the viewport edge — the footer keeps an extra bottom padding on small screens so the navigation never covers the notice.
 
-## Project Reel
+## Project Roulette
 
-The projects section of the front page is a reel, not a grid (`src/lib/components/main/project-carousel.svelte`).
+The projects section of the front page is a wheel, not a grid (`src/lib/components/main/project-roulette.svelte`).
 
-- The cards sit on one horizontal track (`scroll-snap-type: x mandatory`, `snap-center` on every card) and the reel is padded by half a card on both sides (`padding-inline: calc((100% - var(--card-w)) / 2)`), so the first and the last card can both reach the middle.
-- The card in the middle is the active one: it stands at full opacity and full scale, the others step back to `opacity: 0.45` and `scale(0.95)`. The active card is found on every scroll frame by measuring which card sits closest to the centre of the reel.
-- The reel has no buttons and no index: it is driven by the hand. Dragging with the cursor moves the reel and it settles on the card that ends up in the middle (the snapping steps aside while the pointer holds it). Scrolling down over the reel walks through the cards one by one, and the wheel is handed back to the page at either end. A trackpad swipe and the arrow keys work as well.
-- Only the card in the middle is in focus: the others sit at `opacity: 0.55` behind a `blur(6px)`, so the reel reads as a row of out-of-focus cards with one sharp in the centre. The blur, the opacity and the scale all move together over 0.4s.
+- The cards are the pockets of a flat wheel: they stand on a circle (`rotate(i × 45°) translateY(-radius)`, counter-rotated so every card stays upright) and the ring turns with `rotate(angle)`. The pocket under the clay pointer at the top is the active one.
+- The view has no frame: the circle is a single hairline, nothing is drawn around the wheel, and the cards themselves lose their border so they float free on the page.
+- Only the pocket in front is in focus: every other pocket carries a `blur` that grows with its distance from the front and fades out with its opacity, so the wheel reads as a ring of out-of-focus cards with one sharp in the middle.
+- The wheel is driven by the hand: drag it with the cursor and it turns with the pointer, release it and it coasts to a stop on a pocket. Scrolling down over the wheel turns it to the next pocket. There are no buttons and no index.
 - The card itself (`src/lib/components/main/card.svelte`) is a flat frame on the swiss grid: a `h-44` preview, the index in the corner, the name, the stack as pills and the arrow in the top-right. A project without a preview shows its monogram instead of an empty photo box, so no card looks unfinished.
