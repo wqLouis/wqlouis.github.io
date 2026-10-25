@@ -231,7 +231,7 @@ The project and blog indexes share one visual language with the project detail p
 - **Footer** (`PageFooter.svelte`) — `border-t border-border/40 pt-8 pb-16 md:pt-12 md:pb-0` with a `flex flex-col gap-4 md:flex-row md:items-center md:justify-between` inner row: the "built with" line on the left (`text-xs font-light tracking-wide text-text/50`) and a short notice on the right (`text-[11px] leading-relaxed text-text/40`). It sits inside the centred column, so title, list and footer read as one block.
 
 - **Return button** (`src/lib/components/ReturnButton.svelte`) — one component for every "back" affordance on the site (list pages, the krkr-rs hero, the blog post header). It is a 36px inverted circle (`rounded-full bg-text text-bg`) that on hover extends to the right into a pill: the border takes the text colour (`hover:border-text`), the background falls back to the page default (`hover:bg-bg`) and the word "return" slides out (`opacity-0 group-hover:opacity-100`). The width animates through `max-w-9 → hover:max-w-28`, so nothing jumps.
-- **Placeholder** (`EmptyState.svelte`) — an empty list is never a bare sentence. It is a krkr-rs card (`rounded-lg border border-border bg-fg`) over the same swiss grid the hero uses, with an icon badge, a clay kicker, one line of copy and a clay hairline.
+- **Placeholder** (`EmptyState.svelte`) — an empty list says nothing at all: it is a band of diagonal clay stripes (`repeating-linear-gradient(45deg, transparent 0 14px, var(--accent-clay) 14px 15px)`) that fades out at both edges and sits on a `my-12` band. The stripes wipe in from the left when the page opens. No box, no icon, no words.
 
 **Rules**
 
