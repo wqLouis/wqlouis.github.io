@@ -1,12 +1,20 @@
 <script lang="ts">
 	import * as m from '$paraglide/messages.js';
+	import { reveal } from '$lib/utils/reveal';
+
+	/** the status markers ship as "[done]" / "[wip]" / "[todo]" — the brackets are dropped */
+	const labels = {
+		done: m.linuxwallpaperengine_roadmap_done().replace(/[[\]]/g, ''),
+		wip: m.linuxwallpaperengine_roadmap_wip().replace(/[[\]]/g, ''),
+		todo: m.linuxwallpaperengine_roadmap_todo().replace(/[[\]]/g, '')
+	};
 
 	const roadmap = [
-		{ done: true, status: 'done', text: m.linuxwallpaperengine_roadmap_items_0() },
-		{ done: false, status: 'wip', text: m.linuxwallpaperengine_roadmap_items_1() },
-		{ done: true, status: 'done', text: m.linuxwallpaperengine_roadmap_items_2() },
-		{ done: false, status: 'todo', text: m.linuxwallpaperengine_roadmap_items_3() },
-		{ done: false, status: 'todo', text: m.linuxwallpaperengine_roadmap_items_4() }
+		{ done: true, status: 'done' as const, text: m.linuxwallpaperengine_roadmap_items_0() },
+		{ done: false, status: 'wip' as const, text: m.linuxwallpaperengine_roadmap_items_1() },
+		{ done: true, status: 'done' as const, text: m.linuxwallpaperengine_roadmap_items_2() },
+		{ done: false, status: 'todo' as const, text: m.linuxwallpaperengine_roadmap_items_3() },
+		{ done: false, status: 'todo' as const, text: m.linuxwallpaperengine_roadmap_items_4() }
 	];
 	const knownIssues = [
 		m.linuxwallpaperengine_known_issues_items_0(),
@@ -21,87 +29,123 @@
 	];
 </script>
 
-<section id="development" class="flex flex-col px-8 py-24">
-	<div class="mx-auto w-full max-w-2xl">
-		<h2 class="mb-16 text-center text-xl font-light tracking-wider text-text/70">
-			{m.linuxwallpaperengine_development_title()}
-		</h2>
-
-		<div class="space-y-16">
+<section id="development" class="px-6 py-20 md:px-10 md:py-28">
+	<div class="mx-auto w-full max-w-6xl">
+		<div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between" use:reveal>
 			<div>
-				<h3 class="mb-6 text-sm font-light tracking-wider text-text/60">
-					{m.linuxwallpaperengine_roadmap_title()}
-				</h3>
-				<div class="h-px w-full bg-border/20"></div>
-				<ul class="mt-6 space-y-3">
-					{#each roadmap as item (item.text)}
-						<li class="flex items-center text-xs font-light tracking-wide text-text/60">
-							{#if item.status === 'done'}
-								<span class="mr-3 text-text/40">{m.linuxwallpaperengine_roadmap_done()}</span>
-							{:else if item.status === 'wip'}
-								<span class="mr-3 text-text/40">{m.linuxwallpaperengine_roadmap_wip()}</span>
-							{:else}
-								<span class="mr-3 text-text/30">{m.linuxwallpaperengine_roadmap_todo()}</span>
-							{/if}
-							<span class={item.done ? 'text-text/70' : 'text-text/50'}>{item.text}</span>
-						</li>
-					{/each}
-				</ul>
+				<span class="text-[11px] font-light tracking-[0.28em] text-[var(--accent-clay)] uppercase">
+					{m.linuxwallpaperengine_hero_title()}
+				</span>
+				<h2 class="mt-3 text-2xl font-light tracking-wider text-text md:text-3xl">
+					{m.linuxwallpaperengine_development_title()}
+				</h2>
 			</div>
-
-			<div>
-				<h3 class="mb-6 text-sm font-light tracking-wider text-text/60">
-					{m.linuxwallpaperengine_known_issues_title()}
-				</h3>
-				<div class="h-px w-full bg-border/20"></div>
-				<ul class="mt-6 space-y-3">
-					{#each knownIssues as issue (issue)}
-						<li class="flex items-center text-xs font-light tracking-wide text-text/60">
-							<span class="mr-3 text-text/30">[!]</span>
-							<span>{issue}</span>
-						</li>
-					{/each}
-				</ul>
-			</div>
-
-			<div>
-				<h3 class="mb-6 text-sm font-light tracking-wider text-text/60">
-					{m.linuxwallpaperengine_disclaimer_title()}
-				</h3>
-				<div class="h-px w-full bg-border/20"></div>
-				<ul class="mt-6 space-y-3">
-					{#each disclaimer as item (item)}
-						<li class="flex items-center text-xs font-light tracking-wide text-text/60">
-							<span class="mr-3 text-text/30">[i]</span>
-							<span>{item}</span>
-						</li>
-					{/each}
-				</ul>
-			</div>
+			<div class="h-px flex-1 bg-border/60 md:mb-3"></div>
 		</div>
 
-		<div class="mt-16 flex flex-col items-center gap-6">
-			<div class="h-px w-full bg-border/20"></div>
-			<div class="flex flex-wrap justify-center gap-4">
+		<!-- ── roadmap ──────────────────────────────────────────────── -->
+		<div class="mt-12 md:mt-16" use:reveal={{ delay: 100 }}>
+			<h3 class="text-base font-light tracking-wider text-text">
+				{m.linuxwallpaperengine_roadmap_title()}
+			</h3>
+			<div class="mt-4 h-px w-full bg-border/60"></div>
+
+			{#each roadmap as item, i (item.text)}
+				<div
+					use:reveal={{ delay: i * 70 }}
+					class="group grid grid-cols-12 items-center gap-y-2 border-b border-border/50 py-6 transition-colors hover:bg-fg/50 md:gap-y-0 md:py-8"
+				>
+					<div class="col-span-3 md:col-span-2">
+						<span
+							class="text-[11px] font-light tracking-[0.18em] uppercase {item.status === 'wip'
+								? 'text-[var(--accent-clay)]'
+								: 'text-text/30'}"
+						>
+							{labels[item.status]}
+						</span>
+					</div>
+
+					<div class="col-span-9 md:col-span-10 md:pl-6">
+						<p class="text-xs leading-relaxed font-light tracking-wide text-text/60">
+							{item.text}
+						</p>
+					</div>
+				</div>
+			{/each}
+		</div>
+
+		<!-- ── known issues ─────────────────────────────────────────── -->
+		<div class="mt-12 md:mt-16" use:reveal={{ delay: 160 }}>
+			<h3 class="text-base font-light tracking-wider text-text">
+				{m.linuxwallpaperengine_known_issues_title()}
+			</h3>
+			<div class="mt-4 h-px w-full bg-border/60"></div>
+
+			{#each knownIssues as issue, i (issue)}
+				<div
+					use:reveal={{ delay: i * 70 }}
+					class="group grid grid-cols-12 items-center gap-y-2 border-b border-border/50 py-6 transition-colors hover:bg-fg/50 md:gap-y-0 md:py-8"
+				>
+					<div class="col-span-3 md:col-span-2">
+						<span
+							class="text-[11px] font-light tracking-[0.18em] text-[var(--accent-clay)] uppercase"
+							>[!]</span
+						>
+					</div>
+
+					<div class="col-span-9 md:col-span-10 md:pl-6">
+						<p class="text-xs leading-relaxed font-light tracking-wide text-text/60">{issue}</p>
+					</div>
+				</div>
+			{/each}
+		</div>
+
+		<!-- ── disclaimer ───────────────────────────────────────────── -->
+		<div class="mt-12 md:mt-16" use:reveal={{ delay: 220 }}>
+			<h3 class="text-base font-light tracking-wider text-text">
+				{m.linuxwallpaperengine_disclaimer_title()}
+			</h3>
+			<div class="mt-4 h-px w-full bg-border/60"></div>
+
+			{#each disclaimer as item, i (item)}
+				<div
+					use:reveal={{ delay: i * 70 }}
+					class="group grid grid-cols-12 items-center gap-y-2 border-b border-border/50 py-6 transition-colors hover:bg-fg/50 md:gap-y-0 md:py-8"
+				>
+					<div class="col-span-3 md:col-span-2">
+						<span class="text-[11px] font-light tracking-[0.18em] text-text/30 uppercase">[i]</span>
+					</div>
+
+					<div class="col-span-9 md:col-span-10 md:pl-6">
+						<p class="text-xs leading-relaxed font-light tracking-wide text-text/60">{item}</p>
+					</div>
+				</div>
+			{/each}
+		</div>
+
+		<!-- ── the stack and the source ────────────────────────────── -->
+		<div class="mt-12 flex flex-col items-center gap-6 md:mt-16" use:reveal={{ delay: 280 }}>
+			<div class="h-px w-full bg-border/60"></div>
+			<div class="flex flex-wrap justify-center gap-3">
 				<a
 					href="https://www.rust-lang.org/"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="rounded-full border border-border/30 px-4 py-1.5 text-[11px] font-light tracking-wider text-text/50 transition-all hover:border-text hover:text-text"
+					class="rounded-full border border-border/60 px-2.5 py-0.5 text-[10px] font-light tracking-widest text-text/40 transition-all hover:border-text hover:text-text"
 					>Rust</a
 				>
 				<a
 					href="https://github.com/gfx-rs/wgpu"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="rounded-full border border-border/30 px-4 py-1.5 text-[11px] font-light tracking-wider text-text/50 transition-all hover:border-text hover:text-text"
+					class="rounded-full border border-border/60 px-2.5 py-0.5 text-[10px] font-light tracking-widest text-text/40 transition-all hover:border-text hover:text-text"
 					>Wgpu</a
 				>
 				<a
 					href="https://www.vulkan.org/"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="rounded-full border border-border/30 px-4 py-1.5 text-[11px] font-light tracking-wider text-text/50 transition-all hover:border-text hover:text-text"
+					class="rounded-full border border-border/60 px-2.5 py-0.5 text-[10px] font-light tracking-widest text-text/40 transition-all hover:border-text hover:text-text"
 					>Vulkan</a
 				>
 			</div>
@@ -109,9 +153,11 @@
 				href="https://github.com/wqLouis/linux-wallpaperengine"
 				target="_blank"
 				rel="noopener noreferrer"
-				class="text-xs font-light tracking-wide text-text/50 transition-all hover:text-text"
-				>{m.linuxwallpaperengine_view_on_github()}</a
+				class="inline-flex items-center gap-2 text-[11px] font-light tracking-[0.18em] text-text/70 uppercase transition-colors hover:text-[var(--accent-clay)]"
 			>
+				{m.linuxwallpaperengine_view_on_github()}
+				<span class="icon-[heroicons--arrow-top-right-on-square-20-solid] size-3.5"></span>
+			</a>
 		</div>
 	</div>
 </section>

@@ -1,76 +1,176 @@
 <script lang="ts">
-	import CodeBlock from '$lib/components/code-block.svelte';
 	import { t } from '$lib/i18n';
+	import { reveal } from '$lib/utils/reveal';
 
-	const quickStart = [
-		t('neotv_features_installDeps'),
-		'bun install',
-		'',
-		t('neotv_features_runDev'),
-		'bun run dev',
-		'',
-		t('neotv_features_buildWeb'),
-		'bun run build',
-		'',
-		t('neotv_features_buildAndroid'),
-		'./scripts/build-android.sh'
+	/** "Title: Description" → a title and a description */
+	function splitEntry(value: string) {
+		const index = value.indexOf(':');
+		if (index === -1) return { title: value, desc: '' };
+		return {
+			title: value.slice(0, index).trim(),
+			desc: value.slice(index + 1).trim()
+		};
+	}
+
+	const features = [
+		t('neotv_features_items_0'),
+		t('neotv_features_items_1'),
+		t('neotv_features_items_2'),
+		t('neotv_features_items_3'),
+		t('neotv_features_items_4'),
+		t('neotv_features_items_5')
+	].map(splitEntry);
+
+	const tech = [
+		t('neotv_features_tech_0'),
+		t('neotv_features_tech_1'),
+		t('neotv_features_tech_2'),
+		t('neotv_features_tech_3')
+	].map(splitEntry);
+
+	const steps = [
+		{ label: t('neotv_features_installDeps').replace(/^#\s*/, ''), code: 'bun install' },
+		{ label: t('neotv_features_runDev').replace(/^#\s*/, ''), code: 'bun run dev' },
+		{ label: t('neotv_features_buildWeb').replace(/^#\s*/, ''), code: 'bun run build' },
+		{
+			label: t('neotv_features_buildAndroid').replace(/^#\s*/, ''),
+			code: './scripts/build-android.sh'
+		}
 	];
 </script>
 
-<section id="features" class="flex flex-col px-8 py-24">
-	<div class="mx-auto w-full max-w-2xl">
-		<div class="space-y-12">
+<!-- ── features ─────────────────────────────────────────────────────── -->
+<section id="features" class="px-6 py-20 md:px-10 md:py-28">
+	<div class="mx-auto w-full max-w-6xl">
+		<div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between" use:reveal>
 			<div>
-				<h3 class="mb-6 text-sm font-light tracking-wider text-text/60">
+				<span class="text-[11px] font-light tracking-[0.28em] text-[var(--accent-clay)] uppercase">
+					{t('neotv_hero_badges_1')}
+				</span>
+				<h2 class="mt-3 text-2xl font-light tracking-wider text-text md:text-3xl">
 					{t('neotv_features_title')}
-				</h3>
-				<div class="h-px w-full bg-border/20"></div>
-				<ul class="mt-6 space-y-4">
-					{#each ['neotv_features_items_0', 'neotv_features_items_1', 'neotv_features_items_2', 'neotv_features_items_3', 'neotv_features_items_4', 'neotv_features_items_5'] as key (key)}
-						<li class="flex items-center text-xs font-light tracking-wide text-text/60">
-							<span class="mr-3 size-1 rounded-full bg-text/30"></span>
-							<span>{t(key)}</span>
-						</li>
-					{/each}
-				</ul>
+				</h2>
 			</div>
+			<div class="h-px flex-1 bg-border/60 md:mb-3"></div>
+		</div>
 
+		<div class="mt-12 border-t border-text/25 md:mt-16">
+			{#each features as feature, i (feature.title)}
+				<div
+					use:reveal={{ delay: i * 70 }}
+					class="group grid grid-cols-12 items-center gap-y-2 border-b border-border/50 py-6 transition-colors hover:bg-fg/50 md:gap-y-0 md:py-8"
+				>
+					<div class="col-span-2 md:col-span-1">
+						<span
+							class="text-[11px] font-light tracking-[0.18em] text-[var(--accent-clay)] tabular-nums"
+						>
+							{String(i + 1).padStart(2, '0')}
+						</span>
+					</div>
+
+					<div class="col-span-10 md:col-span-4 md:pr-8 md:pl-6">
+						<h3
+							class="text-base font-light tracking-wider text-text transition-colors group-hover:text-[var(--accent-clay)]"
+						>
+							{feature.title}
+						</h3>
+					</div>
+
+					<div class="col-span-12 md:col-span-7 md:pl-6">
+						<p class="text-xs leading-relaxed font-light tracking-wide text-text/60">
+							{feature.desc}
+						</p>
+					</div>
+				</div>
+			{/each}
+		</div>
+	</div>
+</section>
+
+<!-- ── tech stack ───────────────────────────────────────────────────── -->
+<section id="stack" class="px-6 py-20 md:px-10 md:py-28">
+	<div class="mx-auto w-full max-w-6xl">
+		<div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between" use:reveal>
 			<div>
-				<h3 class="mb-6 text-sm font-light tracking-wider text-text/60">
+				<span class="text-[11px] font-light tracking-[0.28em] text-[var(--accent-clay)] uppercase">
+					{t('neotv_hero_badges_0')}
+				</span>
+				<h2 class="mt-3 text-2xl font-light tracking-wider text-text md:text-3xl">
 					{t('neotv_features_techStack')}
-				</h3>
-				<div class="h-px w-full bg-border/20"></div>
-				<ul class="mt-6 space-y-4">
-					{#each ['neotv_features_tech_0', 'neotv_features_tech_1', 'neotv_features_tech_2', 'neotv_features_tech_3'] as key (key)}
-						<li class="flex items-center text-xs font-light tracking-wide text-text/60">
-							<span class="mr-3 size-1 rounded-full bg-text/30"></span>
-							<span>{t(key)}</span>
-						</li>
-					{/each}
-				</ul>
+				</h2>
 			</div>
+			<div class="h-px flex-1 bg-border/60 md:mb-3"></div>
+		</div>
 
+		<div class="mt-12 border-t border-text/25 md:mt-16">
+			{#each tech as item, i (item.title)}
+				<div
+					use:reveal={{ delay: i * 70 }}
+					class="group grid grid-cols-12 items-center gap-y-2 border-b border-border/50 py-6 transition-colors hover:bg-fg/50 md:gap-y-0 md:py-8"
+				>
+					<div class="col-span-2 md:col-span-1">
+						<span
+							class="text-[11px] font-light tracking-[0.18em] text-[var(--accent-clay)] tabular-nums"
+						>
+							{String(i + 1).padStart(2, '0')}
+						</span>
+					</div>
+
+					<div class="col-span-10 md:col-span-4 md:pr-8 md:pl-6">
+						<h3
+							class="text-base font-light tracking-wider text-text transition-colors group-hover:text-[var(--accent-clay)]"
+						>
+							{item.title}
+						</h3>
+					</div>
+
+					<div class="col-span-12 md:col-span-7 md:pl-6">
+						<p class="text-xs leading-relaxed font-light tracking-wide text-text/60">{item.desc}</p>
+					</div>
+				</div>
+			{/each}
+		</div>
+	</div>
+</section>
+
+<!-- ── quick start ──────────────────────────────────────────────────── -->
+<section id="quickstart" class="px-6 py-20 md:px-10 md:py-28">
+	<div class="mx-auto w-full max-w-6xl">
+		<div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between" use:reveal>
 			<div>
-				<h3 class="mb-6 text-sm font-light tracking-wider text-text/60">
+				<span class="text-[11px] font-light tracking-[0.28em] text-[var(--accent-clay)] uppercase">
+					{t('neotv_features_title')}
+				</span>
+				<h2 class="mt-3 text-2xl font-light tracking-wider text-text md:text-3xl">
 					{t('neotv_features_quickStart')}
-				</h3>
-				<div class="h-px w-full bg-border/20"></div>
-				<p class="mt-6 text-xs font-light tracking-wide text-text/60">
+				</h2>
+			</div>
+			<div class="h-px flex-1 bg-border/60 md:mb-3"></div>
+		</div>
+
+		<div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-12">
+			<div class="md:col-span-4" use:reveal>
+				<p class="text-xs leading-relaxed font-light tracking-wide text-text/60">
 					{t('neotv_features_requirements')}
 				</p>
-				<div class="mt-6">
-					<CodeBlock lang="bash" lines={quickStart} />
-				</div>
 			</div>
 
-			<div>
-				<h3 class="mb-6 text-sm font-light tracking-wider text-text/60">
-					{t('neotv_features_disclaimer')}
-				</h3>
-				<div class="h-px w-full bg-border/20"></div>
-				<p class="mt-6 text-xs font-light tracking-wide text-text/60">
-					{t('neotv_features_disclaimerText')}
-				</p>
+			<div class="flex flex-col gap-4 md:col-span-8">
+				{#each steps as step, i (step.code)}
+					<div
+						use:reveal={{ delay: i * 100 }}
+						class="overflow-hidden rounded-lg border border-border bg-fg"
+					>
+						<div class="flex items-center justify-between border-b border-border/40 px-5 py-3">
+							<span class="text-[10px] font-light tracking-[0.22em] text-text/40 uppercase">
+								{step.label}
+							</span>
+							<span class="size-1.5 rounded-full bg-[var(--accent-sand)]"></span>
+						</div>
+						<pre
+							class="overflow-x-auto bg-[var(--accent-pine)] px-5 py-4 font-mono text-xs leading-relaxed text-[#f7f2e8]">{step.code}</pre>
+					</div>
+				{/each}
 			</div>
 		</div>
 	</div>

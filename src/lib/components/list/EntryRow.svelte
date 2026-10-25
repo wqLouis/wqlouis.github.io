@@ -24,7 +24,7 @@
 		date?: string;
 		/** optional index — rendered in clay, like the krkr-rs feature rows */
 		index?: string;
-		/** optional call to action on the right */
+		/** optional call to action on the right — the arrow is always there */
 		actionLabel?: string;
 		/** scroll reveal delay in milliseconds */
 		revealDelay?: number;
@@ -99,13 +99,12 @@
 			</div>
 		{/if}
 
-		{#if actionLabel}
-			<span
-				class="inline-flex items-center gap-1 text-[11px] font-light tracking-[0.18em] text-text/70 uppercase transition-colors group-hover:text-[var(--accent-clay)]"
-			>
-				{actionLabel}
-				<span class="icon-[heroicons--arrow-right-20-solid] size-3"></span>
-			</span>
-		{/if}
+		<!-- the affordance is the arrow; the label is optional -->
+		<span
+			class="inline-flex items-center gap-1 text-[11px] font-light tracking-[0.18em] text-text/70 uppercase transition-colors group-hover:text-[var(--accent-clay)]"
+		>
+			{#if actionLabel}{actionLabel}{/if}
+			<span class="icon-[heroicons--arrow-right-20-solid] size-3"></span>
+		</span>
 	</div>
 </a>

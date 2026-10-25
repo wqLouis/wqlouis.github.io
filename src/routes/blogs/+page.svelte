@@ -25,11 +25,7 @@
 	/>
 
 	{#if count === 0}
-		<EmptyState
-			iconClass="icon-[heroicons--document-text-20-solid] size-5"
-			kicker={m.blogs_no_articles()}
-			description={m.blogs_no_articles_hint()}
-		/>
+		<EmptyState text={m.common_under_construction()} />
 	{:else}
 		<div class="relative mt-12 border-t border-text/25 md:mt-16">
 			<div class="absolute -top-px left-0 h-px w-16 bg-[var(--accent-clay)]"></div>
@@ -42,7 +38,6 @@
 					href={`/blogs/${blog.slug}`}
 					tags={blog.tags}
 					date={blog.date}
-					actionLabel={m.blogs_read_article()}
 					revealDelay={i * 70}
 				/>
 			{/each}
@@ -50,8 +45,6 @@
 	{/if}
 
 	{#snippet footer()}
-		<PageFooter notice={m.main_github_label()} noticeHref="https://github.com/wqLouis">
-			{m.blogs_footer_built_with()}
-		</PageFooter>
+		<PageFooter>{m.blogs_footer_built_with()}</PageFooter>
 	{/snippet}
 </PageShell>
