@@ -25,7 +25,7 @@
 	/>
 
 	{#if count === 0}
-		<EmptyState text={m.common_under_construction()} />
+		<EmptyState />
 	{:else}
 		<div class="relative mt-12 border-t border-text/25 md:mt-16">
 			<div class="absolute -top-px left-0 h-px w-16 bg-[var(--accent-clay)]"></div>

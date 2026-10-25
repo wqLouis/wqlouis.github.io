@@ -21,7 +21,7 @@
 			{@render children()}
 
 			{#if footer}
-				<div class="mt-16 md:mt-24">
+				<div>
 					{@render footer()}
 				</div>
 			{/if}
