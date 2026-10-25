@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Cityu from '$lib/assets/others/cityu-logo.svg';
-	import ProjectCard from '$lib/components/main/card.svelte';
-	import { projects } from '$lib/data/projects-data';
+	import ProjectCarousel from '$lib/components/main/project-carousel.svelte';
 	import TechGraph from '$lib/components/tech-graph.svelte';
 	import * as m from '$paraglide/messages.js';
 	import { Spring, prefersReducedMotion } from 'svelte/motion';
@@ -213,17 +212,7 @@
 
 	<section id="projects" class="mx-auto mt-8 flex h-max w-max min-w-[70vw] flex-col">
 		<div class="mb-8 ml-8 text-2xl font-light tracking-wider">{m.main_section_projects()}</div>
-		<div class="mx-auto mb-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-			{#each projects as project (project.cardTitle)}
-				<ProjectCard
-					link={project.link}
-					cardTitle={project.cardTitle}
-					image={project.image}
-					tags={project.tags}
-					fit={project.fit}
-				/>
-			{/each}
-		</div>
+		<ProjectCarousel />
 	</section>
 
 	<section id="findme" class="mx-auto mt-8 flex w-max min-w-[70vw] flex-col">
