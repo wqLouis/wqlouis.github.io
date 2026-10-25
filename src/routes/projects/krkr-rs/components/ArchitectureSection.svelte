@@ -115,7 +115,7 @@
 		return () => observer.disconnect();
 	});
 
-	function measure(panelOpen = false) {
+	function measure(panelOpen = true) {
 		if (!stage || !slot || !svg) return;
 		const stageRect = stage.getBoundingClientRect();
 		const slotRect = slot.getBoundingClientRect();
