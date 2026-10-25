@@ -231,7 +231,7 @@ The project and blog indexes share one visual language with the project detail p
 - **Footer** (`PageFooter.svelte`) — `border-t border-border/40 pt-8 pb-16 md:pt-12 md:pb-0` with a `flex flex-col gap-4 md:flex-row md:items-center md:justify-between` inner row: the "built with" line on the left (`text-xs font-light tracking-wide text-text/50`) and a short notice on the right (`text-[11px] leading-relaxed text-text/40`). It sits inside the centred column, so title, list and footer read as one block.
 
 - **Return button** (`src/lib/components/ReturnButton.svelte`) — one component for every "back" affordance on the site (list pages, the krkr-rs hero, the blog post header). It is a 36px inverted circle (`rounded-full bg-text text-bg`) that on hover extends to the right into a pill: the border takes the text colour (`hover:border-text`), the background falls back to the page default (`hover:bg-bg`) and the word "return" slides out (`opacity-0 group-hover:opacity-100`). The width animates through `max-w-9 → hover:max-w-28`, so nothing jumps.
-- **Placeholder** (`EmptyState.svelte`) — an empty list says nothing at all: it is a band of diagonal clay stripes (`repeating-linear-gradient(45deg, transparent 0 14px, var(--accent-clay) 14px 15px)`) that fades out at both edges and sits on a `my-12` band. The stripes wipe in from the left when the page opens. No box, no icon, no words.
+- **Placeholder** (`EmptyState.svelte`) — an empty list is never a bare sentence. It is a krkr-rs card (`rounded-lg border border-border bg-fg`) over the same swiss grid the hero uses, with an icon badge, a clay kicker, one line of copy and a clay hairline.
 
 **Rules**
 
@@ -243,11 +243,3 @@ The project and blog indexes share one visual language with the project detail p
 - A list page carries exactly one piece of text in its header — the title. No eyebrow, no tagline, no count; the rows speak for themselves.
 - Below 640px the row stacks (title / date / description / pills) inside the 12-column grid and every tap target stays at least 40px tall.
 - The floating bottom navigation sits 48px above the viewport edge — the footer keeps an extra bottom padding on small screens so the navigation never covers the notice.
-
-## Main Page
-
-The front page speaks the same language as the rest of the site: a `max-w-6xl` column, hairline rules, clay accents, and no decoration that does not carry meaning.
-
-- **Sections** — every block opens with the same header (`src/lib/components/main/section-header.svelte`): a clay index (`01`, `02`, …) in `tabular-nums`, the section title (`text-2xl md:text-3xl font-light tracking-wider`) and a hairline (`border-b border-border/60 pb-5`).
-- **Stack roulette** (`src/lib/components/tech-roulette.svelte`) — the tech stack is a reel, not a diagram. Every technology rides an endless horizontal track; a clay payline sits in the middle of the reel, and the tile under it grows (`scale(1.08)`) and turns clay. A spin lasts 2.6s, runs three to four laps, eases out quintic and wobbles slightly as it settles. The reel gives itself one spin when the page opens and spins again whenever the visitor clicks the reel or the spin button. The tile positions are written straight to the DOM — the reel moves far too often for the reactive graph. The landed technology is announced under the reel in an `aria-live` region: its stack in clay, its name in the title type. `prefers-reduced-motion` skips the spin and simply lands on a tile.
-- **Project cards** (`src/lib/components/main/card.svelte`) — a flat frame on the swiss grid: a `h-40` preview, the index in the corner, the name, the stack in small caps and the arrow in the top-right. A project without a preview shows its monogram instead of an empty box, so every card looks deliberate. Hover moves the border, the title, the tag colour and the arrow — no lift, no shadow.

@@ -1,9 +1,8 @@
 <script lang="ts">
 	import Cityu from '$lib/assets/others/cityu-logo.svg';
 	import ProjectCard from '$lib/components/main/card.svelte';
-	import SectionHeader from '$lib/components/main/section-header.svelte';
 	import { projects } from '$lib/data/projects-data';
-	import TechRoulette from '$lib/components/tech-roulette.svelte';
+	import TechGraph from '$lib/components/tech-graph.svelte';
 	import * as m from '$paraglide/messages.js';
 	import { Spring, prefersReducedMotion } from 'svelte/motion';
 
@@ -128,151 +127,119 @@
 		</button>
 	</section>
 
-	<!-- 01 — the stack roulette -->
 	<section
-		class="mx-auto flex w-full max-w-6xl flex-col px-6 pt-20 pb-24 md:px-10 md:pt-28 md:pb-32"
+		class="mx-auto flex h-auto min-h-max w-full max-w-[1240px] flex-col px-4 sm:px-6"
 		id="tech-stacks"
 	>
-		<SectionHeader index="01" title={m.main_section_tech_stacks()} />
-		<div class="mt-12 md:mt-16">
-			<TechRoulette />
+		<div class="my-8 mr-auto ml-2 text-2xl font-light tracking-wider sm:ml-4">
+			{m.main_section_tech_stacks()}
 		</div>
+		<TechGraph />
 	</section>
 
-	<!-- 02 — education -->
-	<section class="mx-auto flex w-full max-w-6xl flex-col px-6 pb-24 md:px-10 md:pb-32" id="edu">
-		<SectionHeader index="02" title={m.main_section_education()} />
-
-		<div class="relative mt-12 flex flex-col gap-8 md:mt-16 md:pl-16">
+	<section class="mx-auto mt-8 flex h-max w-max min-w-[70vw] flex-col" id="edu">
+		<div class="mr-auto ml-8 text-2xl font-light tracking-wider">{m.main_section_education()}</div>
+		<div class="relative mx-16 mt-8 flex flex-col gap-6">
 			<!-- the root of the timeline -->
-			<div class="flex items-center gap-5">
+			<div class="flex w-8 shrink-0 items-center justify-center">
 				<div
-					class="flex size-14 shrink-0 items-center justify-center rounded-full border border-border bg-bg"
+					class="flex size-16 shrink-0 items-center justify-center rounded-full border border-border bg-bg"
 				>
-					<img src={Cityu} alt="" class="m-auto h-6" />
+					<img src={Cityu} alt="" class="m-auto h-7" />
 				</div>
 			</div>
 
 			<!-- the rule starts at the root and runs through the entries -->
-			<div class="absolute top-14 bottom-0 left-7 w-px bg-border md:left-7"></div>
+			<div class="absolute top-16 bottom-0 left-4 w-px -translate-x-1/2 bg-border"></div>
 
-			<div class="relative flex gap-5">
-				<div class="flex w-7 shrink-0 items-center justify-center">
+			<div class="flex">
+				<div class="flex w-8 shrink-0 items-center justify-center">
 					<div class="relative bg-bg p-1">
 						<div class="size-2 rounded-full border border-border bg-bg"></div>
 					</div>
 				</div>
-				<div class="flex flex-col gap-1 pb-2">
-					<div class="text-base font-light tracking-wider text-text">
-						{m.main_education_ee_title()}
-					</div>
-					<div class="text-xs leading-relaxed font-light tracking-wide text-text/60">
-						{m.main_education_ee_desc()}
-					</div>
+				<div class="my-auto text-sm font-light tracking-wide">
+					<div class="text-base">{m.main_education_ee_title()}</div>
+					<div class="text-xs text-text/60">{m.main_education_ee_desc()}</div>
 				</div>
 			</div>
-
-			<div class="relative flex gap-5">
-				<div class="flex w-7 shrink-0 items-center justify-center">
+			<div class="flex">
+				<div class="flex w-8 shrink-0 items-center justify-center">
 					<div class="relative bg-bg p-1">
 						<div class="size-2 rounded-full border border-border bg-bg"></div>
 					</div>
 				</div>
-				<div class="flex flex-col gap-1 pb-2">
-					<div class="text-base font-light tracking-wider text-text">
-						{m.main_education_cde_title()}
+				<div class="my-auto text-sm font-light tracking-wide">
+					<div class="text-base">{m.main_education_cde_title()}</div>
+					<div class="text-xs text-text/60">{m.main_education_cde_desc()}</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="mx-auto mt-8 flex h-max w-max min-w-[70vw] flex-col" id="commercial">
+		<div class="mr-auto ml-8 text-2xl font-light tracking-wider">
+			{m.main_section_commercial()}
+		</div>
+		<div class="relative mx-16 mt-8 flex flex-col gap-6">
+			<div class="absolute inset-y-0 left-4 w-px -translate-x-1/2 bg-border"></div>
+			<div class="flex">
+				<div class="flex w-8 shrink-0 items-center justify-center">
+					<div class="relative bg-bg p-1">
+						<div class="size-2 rounded-full border border-border bg-bg"></div>
 					</div>
-					<div class="text-xs leading-relaxed font-light tracking-wide text-text/60">
-						{m.main_education_cde_desc()}
+				</div>
+				<div class="my-auto text-sm font-light tracking-wide">
+					<div class="text-base">{m.main_commercial_rightpick_title()}</div>
+					<div class="text-xs text-text/60">{m.main_commercial_rightpick_description()}</div>
+				</div>
+			</div>
+			<div class="flex">
+				<div class="flex w-8 shrink-0 items-center justify-center">
+					<div class="relative bg-bg p-1">
+						<div class="size-2 rounded-full border border-border bg-bg"></div>
+					</div>
+				</div>
+				<div class="my-auto text-sm font-light tracking-wide">
+					<div class="flex flex-col">
+						<div class="text-base">{m.main_commercial_eduai_title()}</div>
+						<div class="text-xs text-text/60">{m.main_commercial_eduai_description()}</div>
+						<div class="mt-1 text-xs text-text/40 italic">{m.main_commercial_eduai_note()}</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- 03 — commercial work -->
-	<section
-		class="mx-auto flex w-full max-w-6xl flex-col px-6 pb-24 md:px-10 md:pb-32"
-		id="commercial"
-	>
-		<SectionHeader index="03" title={m.main_section_commercial()} />
-
-		<div class="relative mt-12 flex flex-col gap-8 md:mt-16 md:pl-16">
-			<div class="absolute inset-y-0 left-7 w-px bg-border"></div>
-
-			<div class="relative flex gap-5">
-				<div class="flex w-7 shrink-0 items-center justify-center">
-					<div class="relative bg-bg p-1">
-						<div class="size-2 rounded-full border border-border bg-bg"></div>
-					</div>
-				</div>
-				<div class="flex flex-col gap-1 pb-2">
-					<div class="text-base font-light tracking-wider text-text">
-						{m.main_commercial_rightpick_title()}
-					</div>
-					<div class="text-xs leading-relaxed font-light tracking-wide text-text/60">
-						{m.main_commercial_rightpick_description()}
-					</div>
-				</div>
-			</div>
-
-			<div class="relative flex gap-5">
-				<div class="flex w-7 shrink-0 items-center justify-center">
-					<div class="relative bg-bg p-1">
-						<div class="size-2 rounded-full border border-border bg-bg"></div>
-					</div>
-				</div>
-				<div class="flex flex-col gap-1 pb-2">
-					<div class="text-base font-light tracking-wider text-text">
-						{m.main_commercial_eduai_title()}
-					</div>
-					<div class="text-xs leading-relaxed font-light tracking-wide text-text/60">
-						{m.main_commercial_eduai_description()}
-					</div>
-					<div class="text-xs leading-relaxed font-light tracking-wide text-text/40 italic">
-						{m.main_commercial_eduai_note()}
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- 04 — projects -->
-	<section
-		class="mx-auto flex w-full max-w-6xl flex-col px-6 pb-24 md:px-10 md:pb-32"
-		id="projects"
-	>
-		<SectionHeader index="04" title={m.main_section_projects()} />
-
-		<div class="mt-12 grid grid-cols-1 gap-6 md:mt-16 md:grid-cols-2 lg:grid-cols-3">
-			{#each projects as project, i (project.cardTitle)}
+	<section id="projects" class="mx-auto mt-8 flex h-max w-max min-w-[70vw] flex-col">
+		<div class="mb-8 ml-8 text-2xl font-light tracking-wider">{m.main_section_projects()}</div>
+		<div class="mx-auto mb-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+			{#each projects as project (project.cardTitle)}
 				<ProjectCard
 					link={project.link}
 					cardTitle={project.cardTitle}
 					image={project.image}
 					tags={project.tags}
 					fit={project.fit}
-					index={String(i + 1).padStart(2, '0')}
 				/>
 			{/each}
 		</div>
 	</section>
 
-	<!-- contact -->
-	<section id="findme" class="mx-auto flex w-full max-w-6xl flex-col px-6 py-20 md:px-10">
-		<div class="flex flex-col items-center gap-4">
+	<section id="findme" class="mx-auto mt-8 flex w-max min-w-[70vw] flex-col">
+		<div class="mx-auto mb-16 text-center">
 			<a
-				class="inline-flex items-center gap-2 border-b border-transparent text-sm font-light tracking-wide text-text/60 transition-all hover:border-text"
+				class="my-2 inline-flex items-center gap-2 border-b border-transparent text-sm font-light tracking-wide text-text/60 transition-all hover:border-text"
 				title="github"
 				href="https://github.com/wqLouis"
 				target="_blank"
-				rel="noreferrer"
 			>
 				<span class="icon-[octicon--mark-github-24] size-5"></span>
 				{m.main_github_label()}
 			</a>
+			<br />
 			<a
-				class="inline-flex items-center gap-2 border-b border-transparent text-sm font-light tracking-wide text-text/60 transition-all hover:border-text"
+				class="my-2 inline-flex items-center gap-2 border-b border-transparent text-sm font-light tracking-wide text-text/60 transition-all hover:border-text"
 				title="mail"
 				href="mailto:wql-louis@outlook.com"
 			>
