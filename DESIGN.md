@@ -199,7 +199,7 @@ No element uses a radius larger than 12px unless it's a pill shape.
 
 ## Components
 
-- **Navigation:** A single bottom-center pill containing icon links. No labels visible by default; aria-labels provide accessibility. Tooltips appear on hover. Border-only states communicate interaction.
+- **Navigation:** One navigation with two faces, chosen by the shape of the screen. Landscape gets a single bottom-center pill containing icon links. Portrait gets one round button in the bottom-right corner that opens a wheel. No labels visible by default; aria-labels provide accessibility. Tooltips appear on hover. Border-only states communicate interaction. See **Mobile** below.
 - **Buttons (outline):** Minimal outline style. On hover, the border shifts from secondary (beige) to primary (charcoal), providing clear but quiet feedback. On click, the border briefly flashes to a thicker/higher-contrast state before returning.
 - **Cards:** Flat containers with a cream surface and warm beige border. No shadow, no tilt, no lift on hover. Border shifts to charcoal on hover for interactive cards. Image fills top portion. Title and description below.
 - **Tags:** Minimal pill with muted earth-tone text and beige border. No background fill.
@@ -254,3 +254,41 @@ The projects section of the front page is one plain grid (`src/lib/components/ma
 - Hover stays quiet: the border darkens, the title turns clay and the arrow moves a hair to the corner. Nothing scales, nothing lifts, nothing casts a shadow.
 - The preview image may be `cover` (a screenshot fills the frame) or `contain` (a square logo keeps its whole shape on the grid).
 - There is no reveal animation here: the section is the page's index and it has to be there the moment it is scrolled into view.
+
+## Mobile
+
+The site has one navigation with two faces. The face is chosen by the shape of the screen, not by its width.
+
+- **Portrait (taller than wide)** gets the wheel: one round button in the bottom-right corner — 52px, 20px from the edge, plus whatever the safe area asks for. Rest on it for 380ms and the wheel opens; keep holding, slide onto the face you want and let go to take it. A short tap instead opens the sheet: the plain list of every action.
+- **Landscape (wider than tall)** gets the bar: the same pill as before, centred 48px above the bottom edge, with a tooltip on every icon.
+- The switch is made with the `portrait:` and `landscape:` variants and not with JavaScript. Both faces are in the document and the media query hides the one that does not belong, so the static HTML is already right and the page never flashes.
+- **The navigation never drifts.** It does not ride the scroll, it does not hide on the way down and come back on the way up. It is a fixed thing in the corner and it stays there.
+
+### The wheel
+
+- The wheel is a **fan, not a full circle**. The button sits in the corner of the screen and everything below and to the right of it is off the screen, so the five faces stand on a 90° arc that runs from the left (9 o'clock) to the top (12 o'clock), 120px from the button.
+- The faces are home, blogs, projects, theme and language. The repository and the mail address live in the sheet: the wheel is the short list, the sheet is the whole list.
+- A face is chosen by **angle, not by distance** — whichever wedge the finger points at is the one that lights up, and its label appears under it.
+- **The language face opens a second ring that stands on the language face itself.** The three locales (EN, 简, 繁) are arranged on a short arc around the language button, so the face that opened them is the centre of the ring. The first ring fades to a quarter while the second one is open.
+- Letting go over a face takes it. Letting go on the button, in the gap between two faces, or on the language face without stepping into its ring does nothing.
+- A short tick of vibration marks every change of face, a slightly longer one marks the choice. A phone may not have a motor and nothing breaks if it does not.
+
+### The sheet
+
+- A tap on the wheel button opens the sheet: a bottom panel with every action on it, 44px tall rows, the language row folding out into the three locales.
+- The sheet is also the path a keyboard or a screen reader takes. The wheel is a gesture, and a gesture is not an interface.
+
+### Rules
+
+- The wheel is a phone affordance. It only exists in portrait and it is never shown where there is room for the bar.
+- Every face is at least 40px across and no two of them overlap.
+- Nothing in the wheel or the sheet is scaled or lifted; the one soft shadow the bar has always had is all the depth there is.
+- The safe area is respected: the button keeps 20px from the edge plus the system inset.
+
+### Still to do
+
+The mobile standard is written one surface at a time.
+
+- **Navigation** — done.
+- **Home page** — next. The education and commercial timelines overflow the viewport (`w-max min-w-[70vw]`), the tech graph and the project grid need a phone layout of their own, and the section titles have to line up on a narrow column.
+- **List pages and project pages** — after that. Every list page and every detail page has to be read on a phone before it counts as done.

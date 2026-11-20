@@ -1,0 +1,328 @@
+<script lang="ts">
+	import { locale, type Locale } from '$lib/stores/locale-store';
+	import { theme } from '$lib/stores/theme-store';
+	import * as m from '$paraglide/messages.js';
+	import { activate, localeWheel, navActions, type NavAction } from './nav-items';
+
+	/** how long the finger has to rest before the wheel opens (ms) */
+	const HOLD_MS = 380;
+	/** the diameter of the button (px) */
+	const FAB = 52;
+	/** the gap between the button and the screen edge (px) */
+	const INSET = 20;
+	/** the radius of the first ring (px) */
+	const ROOT_R = 120;
+	/** the first ring runs from the left to the top (degrees, 0 = right, 90 = down) */
+	const ROOT_FROM = 180;
+	const ROOT_TO = 270;
+	/** the radius of the second ring — it is centred on the language button (px) */
+	const SUB_R = 58;
+	/** the second ring is a short arc above the language button */
+	const SUB_FROM = 210;
+	const SUB_TO = 290;
+	/** the band the second ring answers in (px) */
+	const SUB_BAND = [40, 78];
+
+	let { onopen }: { onopen: () => void } = $props();
+
+	// @ts-expect-error - paraglide generates exports with special characters
+	const t = (key: string) => (m as Record<string, () => string>)[key]?.() ?? key;
+
+	const actions = $derived(navActions(t, $theme, $locale));
+
+	/** the five faces of the wheel, in the order they are laid out */
+	const WHEEL: NavAction['id'][] = ['home', 'blogs', 'projects', 'theme', 'lang'];
+
+	/** spreads n angles from `from` to `to` (both in degrees) */
+	function fan(from: number, to: number, count: number) {
+		const step = (to - from) / (count - 1);
+		return Array.from({ length: count }, (_, i) => from + i * step);
+	}
+
+	const rootAngles = fan(ROOT_FROM, ROOT_TO, WHEEL.length);
+	const subAngles = fan(SUB_FROM, SUB_TO, localeWheel.length);
+
+	/* the geometry of the screen */
+	let vw = $state(0);
+	let vh = $state(0);
+	let safeBottom = $state(0);
+	let safeRight = $state(0);
+
+	/** the centre of the button, in viewport coordinates */
+	const cx = $derived(vw - INSET - safeRight - FAB / 2);
+	const cy = $derived(vh - INSET - safeBottom - FAB / 2);
+
+	let fab: HTMLButtonElement | undefined;
+	let safeProbe: HTMLDivElement | undefined;
+
+	function measure() {
+		vw = window.innerWidth;
+		vh = window.innerHeight;
+		safeBottom = safeProbe?.clientHeight ?? 0;
+		safeRight = safeProbe?.clientWidth ?? 0;
+	}
+
+	$effect(() => {
+		measure();
+		window.addEventListener('resize', measure);
+		window.addEventListener('orientationchange', measure);
+		return () => {
+			window.removeEventListener('resize', measure);
+			window.removeEventListener('orientationchange', measure);
+		};
+	});
+
+	/* the state of the gesture */
+	let pressing = $state(false);
+	let open = $state(false);
+	let layer = $state<'root' | 'sub'>('root');
+	let highlighted = $state<NavAction['id'] | null>(null);
+	let subHighlighted = $state<Locale | null>(null);
+
+	let startX = 0;
+	let startY = 0;
+	let holdTimer: ReturnType<typeof setTimeout> | undefined;
+
+	/** the label hangs under its face — but it must never leave the screen */
+	function labelStyle(x: number) {
+		return x > vw - 72
+			? 'left: 0; transform: translateX(-100%);'
+			: 'left: 50%; transform: translateX(-50%);';
+	}
+
+	function buzz(ms: number) {
+		// a short tick — the phone may not have a motor, and that is fine
+		navigator.vibrate?.(ms);
+	}
+
+	/** the items of the first ring */
+	const rootItems = $derived(
+		WHEEL.map((id, i) => {
+			const action = actions.find((a) => a.id === id);
+			const angle = rootAngles[i];
+			return {
+				id,
+				action,
+				angle,
+				x: cx + ROOT_R * Math.cos((angle * Math.PI) / 180),
+				y: cy + ROOT_R * Math.sin((angle * Math.PI) / 180)
+			};
+		})
+	);
+
+	/** the language button is the centre of the second ring */
+	const langButton = $derived(rootItems.find((item) => item.id === 'lang')!);
+
+	/** the items of the second ring — they stand on the language button */
+	const subItems = $derived(
+		localeWheel.map((entry, i) => {
+			const angle = subAngles[i];
+			return {
+				...entry,
+				angle,
+				x: langButton.x + SUB_R * Math.cos((angle * Math.PI) / 180),
+				y: langButton.y + SUB_R * Math.sin((angle * Math.PI) / 180)
+			};
+		})
+	);
+
+	/** the nearest wedge of a fan, or null when the pointer is out of reach */
+	function pick(angles: number[], theta: number, radius: number, reach: number) {
+		if (radius > reach) return null;
+		let best: number | null = null;
+		let bestDelta = Infinity;
+		angles.forEach((angle, i) => {
+			const delta = Math.abs(((theta - angle + 540) % 360) - 180);
+			if (delta < bestDelta) {
+				bestDelta = delta;
+				best = i;
+			}
+		});
+		// the gap between two wedges is not a wedge
+		const step = angles[1] - angles[0];
+		return best !== null && bestDelta <= step / 2 ? best : null;
+	}
+
+	function track(x: number, y: number) {
+		/* the second ring first: it stands on the language button */
+		const sx = x - langButton.x;
+		const sy = y - langButton.y;
+		const sRadius = Math.hypot(sx, sy);
+		if (sRadius >= SUB_BAND[0] && sRadius <= SUB_BAND[1]) {
+			const sTheta = ((Math.atan2(sy, sx) * 180) / Math.PI + 360) % 360;
+			const index = pick(subAngles, sTheta, sRadius, SUB_BAND[1]);
+			if (index !== null) {
+				const next = subItems[index].id;
+				if (next !== subHighlighted) buzz(8);
+				subHighlighted = next;
+				layer = 'sub';
+				highlighted = 'lang';
+				return;
+			}
+		}
+
+		/* otherwise the first ring */
+		const dx = x - cx;
+		const dy = y - cy;
+		const radius = Math.hypot(dx, dy);
+		const theta = ((Math.atan2(dy, dx) * 180) / Math.PI + 360) % 360;
+
+		layer = 'root';
+		subHighlighted = null;
+		const index = pick(rootAngles, theta, radius, ROOT_R + 40);
+		const next = index === null ? null : (WHEEL[index] as NavAction['id']);
+		if (next !== highlighted) buzz(8);
+		highlighted = next;
+	}
+
+	function onPointerDown(event: PointerEvent) {
+		if (event.pointerType === 'mouse' && event.button !== 0) return;
+		pressing = true;
+		startX = event.clientX;
+		startY = event.clientY;
+		fab?.setPointerCapture(event.pointerId);
+		clearTimeout(holdTimer);
+		holdTimer = setTimeout(() => {
+			open = true;
+			buzz(12);
+		}, HOLD_MS);
+	}
+
+	function onPointerMove(event: PointerEvent) {
+		if (!pressing) return;
+		if (!open) {
+			// a hold that turns into a scroll is not a hold
+			if (Math.hypot(event.clientX - startX, event.clientY - startY) > 12) {
+				clearTimeout(holdTimer);
+			}
+			return;
+		}
+		track(event.clientX, event.clientY);
+	}
+
+	function onPointerUp(event: PointerEvent) {
+		if (!pressing) return;
+		pressing = false;
+		clearTimeout(holdTimer);
+		if (fab?.hasPointerCapture(event.pointerId)) fab.releasePointerCapture(event.pointerId);
+
+		if (!open) {
+			// a short tap opens the sheet — the plain, reachable way in
+			onopen();
+			return;
+		}
+
+		open = false;
+		layer = 'root';
+
+		if (subHighlighted) {
+			locale.set(subHighlighted);
+			buzz(14);
+			subHighlighted = null;
+			highlighted = null;
+			return;
+		}
+
+		const action = actions.find((a) => a.id === highlighted);
+		highlighted = null;
+		// releasing on the language wedge without stepping into its ring does nothing
+		if (!action || action.id === 'lang') return;
+		activate(action);
+		buzz(14);
+	}
+
+	function onPointerCancel() {
+		pressing = false;
+		clearTimeout(holdTimer);
+		open = false;
+		layer = 'root';
+		highlighted = null;
+		subHighlighted = null;
+	}
+</script>
+
+<!-- a probe that reports the safe area insets to the script -->
+<div
+	bind:this={safeProbe}
+	class="pointer-events-none fixed bottom-0 left-0 h-0 w-0"
+	style="padding-bottom: env(safe-area-inset-bottom, 0px); padding-right: env(safe-area-inset-right, 0px);"
+></div>
+
+<!--
+	The portrait face of the navigation: one round button in the corner.
+	Rest on it and the wheel opens — keep holding, slide onto the face you
+	want and let go to take it.
+
+	Landscape screens get the bar instead (see NavBar), so this wheel is
+	only laid out when the viewport is taller than it is wide.
+-->
+<div class="pointer-events-none fixed inset-0 z-95 hidden portrait:block">
+	{#if open}
+		<!-- the wheel: a fan in the upper left, the corner is off screen -->
+		<div class="absolute inset-0 bg-bg/70 backdrop-blur-[2px]"></div>
+
+		{#each rootItems as item (item.id)}
+			{@const on = highlighted === item.id}
+			<div
+				class="absolute flex flex-col items-center transition-opacity duration-150 {layer ===
+					'sub' && item.id !== 'lang'
+					? 'opacity-25'
+					: 'opacity-100'}"
+				style="left: {item.x}px; top: {item.y}px; transform: translate(-50%, -50%);"
+			>
+				<div
+					class="flex size-11 items-center justify-center rounded-full border bg-fg shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-colors duration-150 {on
+						? 'border-text/45 text-text'
+						: 'border-border text-text/60'}"
+				>
+					<span class="{item.action?.icon} size-5"></span>
+				</div>
+				{#if on && layer === 'root'}
+					<span
+						class="absolute top-full mt-1.5 rounded-sm border border-border/60 bg-fg px-1.5 py-0.5 text-[10px] font-light tracking-wider whitespace-nowrap text-text/70"
+						style={labelStyle(item.x)}
+					>
+						{item.action?.label}
+					</span>
+				{/if}
+			</div>
+		{/each}
+
+		<!--
+			The second ring: it stands on the language button, so the three
+			languages are read as a ring around the button that opened them.
+		-->
+		{#if layer === 'sub'}
+			{#each subItems as item (item.id)}
+				{@const on = subHighlighted === item.id}
+				<div
+					class="absolute flex flex-col items-center"
+					style="left: {item.x}px; top: {item.y}px; transform: translate(-50%, -50%);"
+				>
+					<div
+						class="flex size-9 items-center justify-center rounded-full border bg-fg text-xs font-light tracking-wider shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-colors duration-150 {on
+							? 'border-text/45 text-text'
+							: 'border-border text-text/60'}"
+					>
+						{item.label}
+					</div>
+				</div>
+			{/each}
+		{/if}
+	{/if}
+</div>
+
+<button
+	bind:this={fab}
+	type="button"
+	aria-label={t('common_nav_menu')}
+	title={t('common_nav_menu')}
+	class="pointer-events-auto fixed z-100 hidden touch-none items-center justify-center rounded-full border border-border bg-fg text-text/70 shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-colors duration-150 select-none active:bg-accent/10 portrait:flex"
+	style="width: {FAB}px; height: {FAB}px; right: calc({INSET}px + env(safe-area-inset-right, 0px)); bottom: calc({INSET}px + env(safe-area-inset-bottom, 0px));"
+	onpointerdown={onPointerDown}
+	onpointermove={onPointerMove}
+	onpointerup={onPointerUp}
+	onpointercancel={onPointerCancel}
+>
+	<span class="icon-[heroicons--squares-2x2] size-5"></span>
+</button>
