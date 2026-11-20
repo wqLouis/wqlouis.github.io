@@ -244,12 +244,13 @@ The project and blog indexes share one visual language with the project detail p
 - Below 640px the row stacks (title / date / description / pills) inside the 12-column grid and every tap target stays at least 40px tall.
 - The floating bottom navigation sits 48px above the viewport edge — the footer keeps an extra bottom padding on small screens so the navigation never covers the notice.
 
-## Project Roulette
+## Projects Grid
 
-The projects section of the front page is a wheel, not a grid (`src/lib/components/main/project-roulette.svelte`).
+The projects section of the front page is one plain grid (`src/lib/components/main/project-grid.svelte`) — one column on a phone, two on a tablet, three on a desktop, with a `gap-8` between the cards.
 
-- The cards are the pockets of a flat wheel: they stand on a circle (`rotate(i × 45°) translateY(-radius)`, counter-rotated so every card stays upright) and the ring turns with `rotate(angle)`. The pocket under the clay pointer at the top is the active one.
-- The view has no frame: the circle is a single hairline, nothing is drawn around the wheel, and the cards themselves lose their border so they float free on the page.
-- Only the pocket in front is in focus: every other pocket carries a `blur` that grows with its distance from the front and fades out with its opacity, so the wheel reads as a ring of out-of-focus cards with one sharp in the middle.
-- The wheel is driven by the hand: drag it with the cursor and it turns with the pointer, release it and it coasts to a stop on a pocket. Scrolling down over the wheel turns it to the next pocket. There are no buttons and no index.
-- The card itself (`src/lib/components/main/card.svelte`) is a flat frame on the swiss grid: a `h-44` preview, the index in the corner, the name, the stack as pills and the arrow in the top-right. A project without a preview shows its monogram instead of an empty photo box, so no card looks unfinished.
+- The section never grows wider than the page: it sits in the same `w-[70vw]` column as the education and commercial sections, so its title lines up with the sections above it and the page never scrolls sideways.
+- The card (`src/lib/components/main/card.svelte`) is a flat frame on the swiss grid: a `h-44` preview, the index in the corner, the name, a clamped two-line description, the stack as pills and the arrow in the top-right.
+- A project without a preview shows its monogram on the swiss grid instead of an empty photo box, so no card looks unfinished. The grid is the same for every card, with or without a picture.
+- Hover stays quiet: the border darkens, the title turns clay and the arrow moves a hair to the corner. Nothing scales, nothing lifts, nothing casts a shadow.
+- The preview image may be `cover` (a screenshot fills the frame) or `contain` (a square logo keeps its whole shape on the grid).
+- There is no reveal animation here: the section is the page's index and it has to be there the moment it is scrolled into view.

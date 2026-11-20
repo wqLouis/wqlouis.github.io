@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Cityu from '$lib/assets/others/cityu-logo.svg';
-	import ProjectRoulette from '$lib/components/main/project-roulette.svelte';
+	import ProjectGrid from '$lib/components/main/project-grid.svelte';
 	import TechGraph from '$lib/components/tech-graph.svelte';
 	import * as m from '$paraglide/messages.js';
 	import { Spring, prefersReducedMotion } from 'svelte/motion';
@@ -210,9 +210,9 @@
 		</div>
 	</section>
 
-	<section id="projects" class="mx-auto mt-8 flex h-max w-max min-w-[70vw] flex-col">
+	<section id="projects" class="mx-auto mt-8 flex w-[70vw] flex-col">
 		<div class="mb-8 ml-8 text-2xl font-light tracking-wider">{m.main_section_projects()}</div>
-		<ProjectRoulette />
+		<ProjectGrid />
 	</section>
 
 	<section id="findme" class="mx-auto mt-8 flex w-max min-w-[70vw] flex-col">

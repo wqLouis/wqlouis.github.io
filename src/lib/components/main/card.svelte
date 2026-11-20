@@ -3,10 +3,10 @@
 		link = 'https://wqlouis.github.io/',
 		image = '',
 		cardTitle = '',
+		description = '',
 		tags = [] as string[],
 		fit = 'cover' as 'cover' | 'contain',
-		index = '',
-		active = false
+		index = ''
 	}: {
 		/** where the card points to */
 		link?: string;
@@ -14,14 +14,14 @@
 		image?: string;
 		/** the project name */
 		cardTitle?: string;
+		/** one or two lines about the project */
+		description?: string;
 		/** the stack the project is built with */
 		tags?: string[];
 		/** how the preview fills the frame — 'contain' keeps square icons uncropped */
 		fit?: 'cover' | 'contain';
 		/** the position of the card, rendered in the corner */
 		index?: string;
-		/** whether this card is the one in the middle of the reel */
-		active?: boolean;
 	} = $props();
 
 	/** the fallback mark for the projects that have no preview */
@@ -33,9 +33,7 @@
 	href={link}
 	target="_blank"
 	rel="noreferrer"
-	class="group flex h-full flex-col overflow-hidden rounded-lg border bg-bg transition-colors duration-300 {active
-		? 'border-text/45'
-		: 'border-border/60 hover:border-text/45'}"
+	class="group flex h-full flex-col overflow-hidden rounded-lg border border-border/60 bg-bg transition-colors duration-300 hover:border-text/45"
 >
 	<!-- the preview: every card stands on the same swiss grid, so the ones
 	     without a picture look deliberate instead of empty -->
@@ -67,19 +65,17 @@
 					: 'object-cover'}"
 			/>
 		{:else}
-			<span class="relative text-5xl font-light tracking-tight text-text/15 select-none">
+			<span class="relative text-5xl font-light tracking-tight text-text/25 select-none">
 				{monogram}
 			</span>
 		{/if}
 	</div>
 
 	<!-- the body -->
-	<div class="flex flex-1 flex-col gap-4 p-5">
+	<div class="flex flex-1 flex-col gap-3 p-5">
 		<div class="flex items-start justify-between gap-3">
 			<h3
-				class="text-base font-light tracking-wider break-words transition-colors duration-300 {active
-					? 'text-[var(--accent-clay)]'
-					: 'text-text group-hover:text-[var(--accent-clay)]'}"
+				class="text-base font-light tracking-wider break-words transition-colors duration-300 group-hover:text-[var(--accent-clay)]"
 			>
 				{cardTitle}
 			</h3>
@@ -88,14 +84,20 @@
 			></span>
 		</div>
 
+		{#if description}
+			<p class="line-clamp-2 text-xs leading-relaxed font-light tracking-wide text-text/60">
+				{description}
+			</p>
+		{/if}
+
 		{#if tags.length > 0}
 			<div class="mt-auto flex flex-wrap gap-1.5">
 				{#each tags as tag (tag)}
 					<span
 						class="rounded-full border border-border/60 px-2.5 py-0.5 text-[10px] font-light tracking-widest text-text/40"
 					>
-						{tag}
-					</span>
+						{tag}</span
+					>
 				{/each}
 			</div>
 		{/if}
