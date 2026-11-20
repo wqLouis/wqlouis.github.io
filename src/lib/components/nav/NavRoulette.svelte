@@ -175,13 +175,6 @@
 		return isOpen ? `${index * 45}ms` : `${(total - 1 - index) * 25}ms`;
 	}
 
-	/** the label hangs under its face — but it must never leave the screen */
-	function labelStyle(x: number) {
-		return x > vw - 72
-			? 'left: 0; transform: translateX(-100%);'
-			: 'left: 50%; transform: translateX(-50%);';
-	}
-
 	function track(x: number, y: number) {
 		/* the second ring first: it stands on the language button */
 		const sx = x - langButton.x;
@@ -370,9 +363,9 @@
 			)}; transition-delay: {faceDelay(i, open, rootItems.length)};"
 		>
 			<!-- a face is the bar's button, on the bar's own surface -->
+			<!-- no label under the face: the face is the face -->
 			<button
 				type="button"
-				title={item.action?.label}
 				aria-label={item.action?.label}
 				class="flex size-11 items-center justify-center rounded-full border bg-fg text-text/70 shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-colors duration-150 {on
 					? 'border-text/45 text-text'
@@ -381,14 +374,6 @@
 			>
 				<span class="{item.action?.icon} size-5"></span>
 			</button>
-			{#if on && layer === 'root'}
-				<span
-					class="absolute top-full mt-1.5 rounded-sm border border-border/60 bg-fg px-1.5 py-0.5 text-[10px] font-light tracking-wider whitespace-nowrap text-text/70"
-					style={labelStyle(item.x)}
-				>
-					{item.action?.label}
-				</span>
-			{/if}
 		</div>
 	{/each}
 

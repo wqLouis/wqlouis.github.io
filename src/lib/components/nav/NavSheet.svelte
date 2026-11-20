@@ -3,8 +3,7 @@
 	import { theme } from '$lib/stores/theme-store';
 	import * as m from '$paraglide/messages.js';
 	import { activate, navActions } from './nav-items';
-	import { prefersReducedMotion } from 'svelte/motion';
-	import { fade, fly } from 'svelte/transition';
+	import { Spring, prefersReducedMotion } from 'svelte/motion';
 
 	let { open = false, onclose }: { open?: boolean; onclose: () => void } = $props();
 
@@ -16,8 +15,26 @@
 	/** the language row opens a short list of the three locales */
 	let languagesOpen = $state(false);
 
-	/** a phone that asks for no motion gets none */
-	const dur = $derived(prefersReducedMotion.current ? 0 : 320);
+	/**
+	 * The sheet comes up on a spring: it is pushed from the bottom edge
+	 * and it settles, the way a drawer settles and not the way a
+	 * transition ends.
+	 */
+	const reveal = new Spring(0, { stiffness: 0.19, damping: 0.85, precision: 0.001 });
+
+	/** the sheet stays in the document until the spring has come to rest */
+	let mounted = $state(false);
+
+	$effect(() => {
+		if (open) {
+			mounted = true;
+			void reveal.set(1, prefersReducedMotion.current ? { instant: true } : {});
+			return;
+		}
+		void reveal.set(0, prefersReducedMotion.current ? { instant: true } : {}).then(() => {
+			mounted = false;
+		});
+	});
 
 	$effect(() => {
 		if (!open) {
@@ -51,19 +68,19 @@
 	It opens from a tap on the wheel button and it is the path a keyboard
 	or a screen reader takes.
 -->
-{#if open}
+{#if mounted}
 	<div class="fixed inset-0 z-110 flex items-end" role="dialog" aria-modal="true">
 		<button
 			type="button"
 			class="absolute inset-0 cursor-default bg-bg/70 backdrop-blur-[2px]"
+			style="opacity: {reveal.current}"
 			aria-label={t('common_nav_close')}
 			onclick={onclose}
-			transition:fade={{ duration: dur / 2 }}
 		></button>
 
 		<div
 			class="relative m-3 flex w-full flex-col gap-1 rounded-lg border border-border bg-fg p-2 shadow-[0_2px_12px_rgba(0,0,0,0.08)]"
-			transition:fly={{ y: 60, duration: dur, opacity: 0 }}
+			style="transform: translateY({(1 - reveal.current) * 72}px); opacity: {reveal.current};"
 		>
 			{#each actions as action (action.id)}
 				<button

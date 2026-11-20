@@ -271,7 +271,8 @@ The site has one navigation with two faces. The face is chosen by the device, no
 - The wheel is a **fan, not a full circle**. The button sits in the corner of the screen and everything below and to the right of it is off the screen, so the five faces stand on a 90° arc that runs from the left (9 o'clock) to the top (12 o'clock), 120px from the button.
 - The faces are home, blogs, projects, theme and language. The repository and the mail address live in the sheet: the wheel is the short list, the sheet is the whole list.
 - A face is a **circle on the bar's own surface** — the cream paper, the beige border, the muted text and the one soft shadow the bar has always had. It is the bar's button, cut out of the bar.
-- A face is chosen by **angle, not by distance** — whichever wedge the finger points at is the one that lights up, and its label appears under it.
+- A face is chosen by **angle, not by distance** — whichever wedge the finger points at is the one that lights up.
+- **A face carries no label.** The icon is the face; a tooltip under it would be a second thing to read while the finger is still moving. The name stays where it belongs: on the sheet.
 - **The language face opens a second ring that stands on the language face itself.** The three locales (EN, 简, 繁) are arranged on a short arc around the language button, so the face that opened them is the centre of the ring. The first ring fades to a quarter while the second one is open.
 - Letting go over a face takes it. Letting go on the button or in the gap between two faces does nothing.
 - **Letting go on the language face opens the second ring and lets it wait.** The ring stays open with the three locales standing around the language face, and a tap on one of them takes it. The wheel can be walked by finger and by tap, and the ring is the same in both.
@@ -289,7 +290,9 @@ The site has one navigation with two faces. The face is chosen by the device, no
 
 - **The wheel fans out of the button.** The faces travel from the button to their place over 340ms on the site's curve, 45ms apart, and they fold back the other way round when the finger lifts. The scrim fades in under them.
 - **The second ring opens out of the language button** on the same curve, so the ring reads as something that grew from the button that opened it.
-- **The sheet slides up** from the bottom edge over 320ms while the scrim fades in under it.
+- **The sheet comes up on a spring** — it is pushed out of the bottom edge and it settles, the way a drawer settles and not the way a transition ends. The scrim fades in under it. The spring is the one from Svelte's motion module: stiffness 0.19, damping 0.85.
+- **A fan has no tooltip.** Nothing opens under a face while the finger is still on it.
+
 - Nothing else moves. The bar does not drift, the button does not pulse, and no face is scaled by the page.
 - **A phone that asks for no motion gets none**: the reduced-motion query takes the travel out of the wheel and the slide out of the sheet, and the faces are simply there.
 
