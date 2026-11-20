@@ -280,6 +280,14 @@ The site has one navigation with two faces. The face is chosen by the device, no
 - A tap on the wheel button opens the sheet: a bottom panel with every action on it, 44px tall rows, the language row folding out into the three locales.
 - The sheet is also the path a keyboard or a screen reader takes. The wheel is a gesture, and a gesture is not an interface.
 
+### The motion
+
+- **The wheel fans out of the button.** The faces travel from the button to their place over 340ms on the site's curve, 45ms apart, and they fold back the other way round when the finger lifts. The scrim fades in under them.
+- **The second ring opens out of the language button** on the same curve, so the ring reads as something that grew from the button that opened it.
+- **The sheet slides up** from the bottom edge over 320ms while the scrim fades in under it.
+- Nothing else moves. The bar does not drift, the button does not pulse, and no face is scaled by the page.
+- **A phone that asks for no motion gets none**: the reduced-motion query takes the travel out of the wheel and the slide out of the sheet, and the faces are simply there.
+
 ### The front page on a phone
 
 - Every section is one column with a 20px margin on each side, so nothing ever leaves the screen. From `md` up the sections go back to the `70vw` column they share on a desk.

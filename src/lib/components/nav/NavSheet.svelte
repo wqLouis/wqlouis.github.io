@@ -3,6 +3,8 @@
 	import { theme } from '$lib/stores/theme-store';
 	import * as m from '$paraglide/messages.js';
 	import { activate, navActions } from './nav-items';
+	import { prefersReducedMotion } from 'svelte/motion';
+	import { fade, fly } from 'svelte/transition';
 
 	let { open = false, onclose }: { open?: boolean; onclose: () => void } = $props();
 
@@ -13,6 +15,9 @@
 
 	/** the language row opens a short list of the three locales */
 	let languagesOpen = $state(false);
+
+	/** a phone that asks for no motion gets none */
+	const dur = $derived(prefersReducedMotion.current ? 0 : 320);
 
 	$effect(() => {
 		if (!open) {
@@ -53,10 +58,12 @@
 			class="absolute inset-0 cursor-default bg-bg/70 backdrop-blur-[2px]"
 			aria-label={t('common_nav_close')}
 			onclick={onclose}
+			transition:fade={{ duration: dur / 2 }}
 		></button>
 
 		<div
 			class="relative m-3 flex w-full flex-col gap-1 rounded-lg border border-border bg-fg p-2 shadow-[0_2px_12px_rgba(0,0,0,0.08)]"
+			transition:fly={{ y: 60, duration: dur, opacity: 0 }}
 		>
 			{#each actions as action (action.id)}
 				<button

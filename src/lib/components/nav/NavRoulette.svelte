@@ -83,13 +83,6 @@
 	let startY = 0;
 	let holdTimer: ReturnType<typeof setTimeout> | undefined;
 
-	/** the label hangs under its face — but it must never leave the screen */
-	function labelStyle(x: number) {
-		return x > vw - 72
-			? 'left: 0; transform: translateX(-100%);'
-			: 'left: 50%; transform: translateX(-50%);';
-	}
-
 	function buzz(ms: number) {
 		// a short tick — the phone may not have a motor, and that is fine
 		navigator.vibrate?.(ms);
@@ -141,6 +134,32 @@
 		// the gap between two wedges is not a wedge
 		const step = angles[1] - angles[0];
 		return best !== null && bestDelta <= step / 2 ? best : null;
+	}
+
+	/** the faces fan out of the button when the wheel opens */
+	function faceTransform(x: number, y: number, isOpen: boolean) {
+		if (isOpen) return 'transform: translate(-50%, -50%);';
+		return `transform: translate(-50%, -50%) translate(${cx - x}px, ${cy - y}px) scale(0.35);`;
+	}
+
+	/** the second ring opens out of the language button */
+	function subTransform(x: number, y: number, isOpen: boolean) {
+		if (isOpen) return 'transform: translate(-50%, -50%);';
+		return `transform: translate(-50%, -50%) translate(${langButton.x - x}px, ${
+			langButton.y - y
+		}px) scale(0.35);`;
+	}
+
+	/** the faces arrive one after the other, and leave the other way round */
+	function faceDelay(index: number, isOpen: boolean, total: number) {
+		return isOpen ? `${index * 45}ms` : `${(total - 1 - index) * 25}ms`;
+	}
+
+	/** the label hangs under its face — but it must never leave the screen */
+	function labelStyle(x: number) {
+		return x > vw - 72
+			? 'left: 0; transform: translateX(-100%);'
+			: 'left: 50%; transform: translateX(-50%);';
 	}
 
 	function track(x: number, y: number) {
@@ -258,60 +277,70 @@
 	is still a phone, and the bar does not fit in a phone held sideways.
 -->
 <div class="pointer-events-none fixed inset-0 z-95 hidden pointer-coarse:block">
-	{#if open}
-		<!-- the wheel: a fan in the upper left, the corner is off screen -->
-		<div class="absolute inset-0 bg-bg/70 backdrop-blur-[2px]"></div>
+	<!-- the scrim: it comes up with the wheel -->
+	<div
+		class="absolute inset-0 bg-bg/70 backdrop-blur-[2px] transition-opacity duration-300 {open
+			? 'opacity-100'
+			: 'opacity-0'}"
+	></div>
 
-		{#each rootItems as item (item.id)}
-			{@const on = highlighted === item.id}
+	<!-- the wheel: a fan in the upper left, the corner is off screen -->
+	{#each rootItems as item, i (item.id)}
+		{@const on = highlighted === item.id}
+		<div
+			class="face absolute flex flex-col items-center {open
+				? 'opacity-100'
+				: 'opacity-0'} {layer === 'sub' && item.id !== 'lang' ? 'opacity-25' : ''}"
+			style="left: {item.x}px; top: {item.y}px; {faceTransform(
+				item.x,
+				item.y,
+				open
+			)}; transition-delay: {faceDelay(i, open, rootItems.length)};"
+		>
+			<!-- a face is the bar's button, on the bar's own surface -->
 			<div
-				class="absolute flex flex-col items-center transition-opacity duration-150 {layer ===
-					'sub' && item.id !== 'lang'
-					? 'opacity-25'
-					: 'opacity-100'}"
-				style="left: {item.x}px; top: {item.y}px; transform: translate(-50%, -50%);"
+				class="flex size-11 items-center justify-center rounded-full border bg-fg text-text/70 shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-colors duration-150 {on
+					? 'border-text/45 text-text'
+					: 'border-border'}"
 			>
-				<!-- a face is the bar's button, on the bar's own surface -->
-				<div
-					class="flex size-11 items-center justify-center rounded-full border bg-fg text-text/70 shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-colors duration-150 {on
-						? 'border-text/45 text-text'
-						: 'border-border'}"
-				>
-					<span class="{item.action?.icon} size-5"></span>
-				</div>
-				{#if on && layer === 'root'}
-					<span
-						class="absolute top-full mt-1.5 rounded-sm border border-border/60 bg-fg px-1.5 py-0.5 text-[10px] font-light tracking-wider whitespace-nowrap text-text/70"
-						style={labelStyle(item.x)}
-					>
-						{item.action?.label}
-					</span>
-				{/if}
+				<span class="{item.action?.icon} size-5"></span>
 			</div>
-		{/each}
-
-		<!--
-			The second ring: it stands on the language button, so the three
-			languages are read as a ring around the button that opened them.
-		-->
-		{#if layer === 'sub'}
-			{#each subItems as item (item.id)}
-				{@const on = subHighlighted === item.id}
-				<div
-					class="absolute flex flex-col items-center"
-					style="left: {item.x}px; top: {item.y}px; transform: translate(-50%, -50%);"
+			{#if on && layer === 'root'}
+				<span
+					class="absolute top-full mt-1.5 rounded-sm border border-border/60 bg-fg px-1.5 py-0.5 text-[10px] font-light tracking-wider whitespace-nowrap text-text/70"
+					style={labelStyle(item.x)}
 				>
-					<div
-						class="flex size-9 items-center justify-center rounded-full border bg-fg text-xs font-light tracking-wider text-text/70 shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-colors duration-150 {on
-							? 'border-text/45 text-text'
-							: 'border-border'}"
-					>
-						{item.label}
-					</div>
-				</div>
-			{/each}
-		{/if}
-	{/if}
+					{item.action?.label}
+				</span>
+			{/if}
+		</div>
+	{/each}
+
+	<!--
+		The second ring: it stands on the language button, so the three
+		languages are read as a ring around the button that opened them.
+	-->
+	{#each subItems as item, i (item.id)}
+		{@const on = subHighlighted === item.id}
+		<div
+			class="face absolute flex flex-col items-center {layer === 'sub'
+				? 'opacity-100'
+				: 'opacity-0'}"
+			style="left: {item.x}px; top: {item.y}px; {subTransform(
+				item.x,
+				item.y,
+				layer === 'sub'
+			)}; transition-delay: {faceDelay(i, layer === 'sub', subItems.length)};"
+		>
+			<div
+				class="flex size-9 items-center justify-center rounded-full border bg-fg text-xs font-light tracking-wider text-text/70 shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-colors duration-150 {on
+					? 'border-text/45 text-text'
+					: 'border-border'}"
+			>
+				{item.label}
+			</div>
+		</div>
+	{/each}
 </div>
 
 <button
@@ -328,3 +357,18 @@
 >
 	<span class="icon-[heroicons--squares-2x2] size-5"></span>
 </button>
+
+<style>
+	/* the faces move on their own — they never scale the page */
+	.face {
+		transition:
+			transform 340ms cubic-bezier(0.22, 1, 0.36, 1),
+			opacity 240ms ease;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.face {
+			transition: none;
+		}
+	}
+</style>
