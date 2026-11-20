@@ -293,6 +293,7 @@ The site has one navigation with two faces. The face is chosen by the device, no
 - **The second ring opens out of the language button** on the same curve, so the ring reads as something that grew from the button that opened it.
 - **The sheet comes up on a spring** — it is pushed out of the bottom edge and it settles, the way a drawer settles and not the way a transition ends. The scrim fades in under it. The spring is the one from Svelte's motion module: stiffness 0.19, damping 0.85.
 - **A fan has no tooltip.** Nothing opens under a face while the finger is still on it.
+- **The theme fades.** Every colour on the page travels to its new value together — the ground, the ink, the borders, the drawn icons — over 250ms on the site's curve. A theme that changed in one step read as a cut; the text has to travel with the paper.
 
 - Nothing else moves. The bar does not drift, the button does not pulse, and no face is scaled by the page.
 - **A phone that asks for no motion gets none**: the reduced-motion query takes the travel out of the wheel and the slide out of the sheet, and the faces are simply there.
