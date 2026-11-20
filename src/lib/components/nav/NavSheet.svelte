@@ -25,6 +25,28 @@
 	/** the sheet stays in the document until the spring has come to rest */
 	let mounted = $state(false);
 
+	/**
+	 * The language row opens on a spring of its own: the three locales
+	 * are not cut out of the sheet, they are pushed out of it.
+	 */
+	const langReveal = new Spring(0, { stiffness: 0.2, damping: 0.85, precision: 0.001 });
+
+	/** the list of locales, measured so the spring knows how far to open */
+	let langList = $state<HTMLDivElement | undefined>(undefined);
+	let langHeight = $state(0);
+
+	$effect(() => {
+		if (!mounted || !langList) return;
+		langHeight = langList.offsetHeight;
+	});
+
+	$effect(() => {
+		void langReveal.set(
+			languagesOpen ? 1 : 0,
+			prefersReducedMotion.current ? { instant: true } : {}
+		);
+	});
+
 	$effect(() => {
 		if (open) {
 			mounted = true;
@@ -99,23 +121,33 @@
 					{/if}
 				</button>
 
-				{#if action.id === 'lang' && languagesOpen}
-					<div class="flex flex-col gap-1 px-3 pb-1">
-						{#each locales as loc (loc)}
-							<button
-								type="button"
-								class="flex min-h-10 cursor-pointer items-center gap-3 rounded-md px-2 py-1.5 text-left text-xs font-light tracking-wider text-text/60 transition-colors hover:bg-accent/10 active:bg-accent/20 {loc ===
-								$locale
-									? 'text-text'
-									: ''}"
-								onclick={() => selectLocale(loc)}
-							>
-								<span class="w-8">{localeLabels[loc]}</span>
-								<span class="flex-1">
-									{loc === 'en' ? 'English' : loc === 'zh_cn' ? '简体中文' : '繁體中文'}
-								</span>
-							</button>
-						{/each}
+				{#if action.id === 'lang'}
+					<!--
+						The three locales live in the sheet the whole time; the
+						spring decides how much of them the sheet shows.
+					-->
+					<div
+						class="overflow-hidden px-3"
+						style="height: {langReveal.current * langHeight}px; opacity: {langReveal.current};"
+						inert={!languagesOpen}
+					>
+						<div bind:this={langList} class="flex flex-col gap-1 pb-1">
+							{#each locales as loc (loc)}
+								<button
+									type="button"
+									class="flex min-h-10 cursor-pointer items-center gap-3 rounded-md px-2 py-1.5 text-left text-xs font-light tracking-wider text-text/60 transition-colors hover:bg-accent/10 active:bg-accent/20 {loc ===
+									$locale
+										? 'text-text'
+										: ''}"
+									onclick={() => selectLocale(loc)}
+								>
+									<span class="w-8">{localeLabels[loc]}</span>
+									<span class="flex-1">
+										{loc === 'en' ? 'English' : loc === 'zh_cn' ? '简体中文' : '繁體中文'}
+									</span>
+								</button>
+							{/each}
+						</div>
 					</div>
 				{/if}
 			{/each}

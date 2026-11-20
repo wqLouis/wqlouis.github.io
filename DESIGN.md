@@ -283,6 +283,7 @@ The site has one navigation with two faces. The face is chosen by the device, no
 ### The sheet
 
 - A tap on the wheel button opens the sheet: a bottom panel with every action on it, 44px tall rows, the language row folding out into the three locales.
+- **The language row opens on a spring of its own.** The three locales live in the sheet the whole time; the spring decides how much of them the sheet shows. The row grows from nothing to its measured height and folds back the same way.
 - The button gets out of the way while the sheet is open — it is not a thing that hides behind a panel and then answers a tap from the place it used to be.
 - The sheet is also the path a keyboard or a screen reader takes. The wheel is a gesture, and a gesture is not an interface.
 
