@@ -257,17 +257,19 @@ The projects section of the front page is one plain grid (`src/lib/components/ma
 
 ## Mobile
 
-The site has one navigation with two faces. The face is chosen by the shape of the screen, not by its width.
+The site has one navigation with two faces. The face is chosen by the device, not by the orientation.
 
-- **Portrait (taller than wide)** gets the wheel: one round button in the bottom-right corner — 52px, 20px from the edge, plus whatever the safe area asks for. Rest on it for 380ms and the wheel opens; keep holding, slide onto the face you want and let go to take it. A short tap instead opens the sheet: the plain list of every action.
-- **Landscape (wider than tall)** gets the bar: the same pill as before, centred 48px above the bottom edge, with a tooltip on every icon.
-- The switch is made with the `portrait:` and `landscape:` variants and not with JavaScript. Both faces are in the document and the media query hides the one that does not belong, so the static HTML is already right and the page never flashes.
+- **A touch device** gets the wheel: one round button in the bottom-right corner — 52px, 20px from the edge, plus whatever the safe area asks for. Rest on it for 380ms and the wheel opens; keep holding, slide onto the face you want and let go to take it. A short tap instead opens the sheet: the plain list of every action.
+- **A device with a mouse** gets the bar: the same pill as before, centred 48px above the bottom edge, with a tooltip on every icon.
+- A phone turned sideways is still a phone, and the bar does not fit in a phone held sideways — so the test is the pointer, not the shape of the screen.
+- The switch is made with the `pointer-coarse:` and `pointer-fine:` variants and not with JavaScript. Both faces are in the document and the media query hides the one that does not belong, so the static HTML is already right and the page never flashes.
 - **The navigation never drifts.** It does not ride the scroll, it does not hide on the way down and come back on the way up. It is a fixed thing in the corner and it stays there.
 
 ### The wheel
 
 - The wheel is a **fan, not a full circle**. The button sits in the corner of the screen and everything below and to the right of it is off the screen, so the five faces stand on a 90° arc that runs from the left (9 o'clock) to the top (12 o'clock), 120px from the button.
 - The faces are home, blogs, projects, theme and language. The repository and the mail address live in the sheet: the wheel is the short list, the sheet is the whole list.
+- A face is a **circle on the bar's own surface** — the cream paper, the beige border, the muted text and the one soft shadow the bar has always had. It is the bar's button, cut out of the bar.
 - A face is chosen by **angle, not by distance** — whichever wedge the finger points at is the one that lights up, and its label appears under it.
 - **The language face opens a second ring that stands on the language face itself.** The three locales (EN, 简, 繁) are arranged on a short arc around the language button, so the face that opened them is the centre of the ring. The first ring fades to a quarter while the second one is open.
 - Letting go over a face takes it. Letting go on the button, in the gap between two faces, or on the language face without stepping into its ring does nothing.
@@ -278,10 +280,18 @@ The site has one navigation with two faces. The face is chosen by the shape of t
 - A tap on the wheel button opens the sheet: a bottom panel with every action on it, 44px tall rows, the language row folding out into the three locales.
 - The sheet is also the path a keyboard or a screen reader takes. The wheel is a gesture, and a gesture is not an interface.
 
+### The front page on a phone
+
+- Every section is one column with a 20px margin on each side, so nothing ever leaves the screen. From `md` up the sections go back to the `70vw` column they share on a desk.
+- The section titles all stand on the same left edge, on a phone as well as on a desk.
+- The timelines keep their rule and their dots, but their text wraps instead of running off the side.
+- The hero measures itself: below `sm` the greeting drops to 24px and the avatar to 64px, so the two stand next to each other on one line instead of the avatar floating away from a wrapped greeting.
+- Nothing is scaled down or hidden to make a phone fit. The content is the same, it is only given a narrower column.
+
 ### Rules
 
-- The wheel is a phone affordance. It only exists in portrait and it is never shown where there is room for the bar.
-- Every face is at least 40px across and no two of them overlap.
+- The wheel is a phone affordance. It only exists on a touch device and it is never shown where there is room for the bar.
+- Every face is at least 40px across and no two of them overlap, from a 320px phone to a phone held sideways.
 - Nothing in the wheel or the sheet is scaled or lifted; the one soft shadow the bar has always had is all the depth there is.
 - The safe area is respected: the button keeps 20px from the edge plus the system inset.
 
@@ -290,5 +300,5 @@ The site has one navigation with two faces. The face is chosen by the shape of t
 The mobile standard is written one surface at a time.
 
 - **Navigation** — done.
-- **Home page** — next. The education and commercial timelines overflow the viewport (`w-max min-w-[70vw]`), the tech graph and the project grid need a phone layout of their own, and the section titles have to line up on a narrow column.
-- **List pages and project pages** — after that. Every list page and every detail page has to be read on a phone before it counts as done.
+- **Front page** — done.
+- **List pages and project pages** — next. Every list page and every detail page has to be read on a phone before it counts as done.

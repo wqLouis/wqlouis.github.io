@@ -88,9 +88,9 @@
 <main class="flex h-auto w-full flex-col overflow-clip bg-bg text-text">
 	<section class="mx-auto flex h-screen w-full flex-col" id="home">
 		<div bind:this={stage} class="relative mx-auto mt-[42vh] mb-auto flex cursor-default">
-			<div class="mx-4 my-auto">
+			<div class="mx-2 my-auto sm:mx-4">
 				<span
-					class="hero-fly hero-fly-right inline-block text-3xl font-light tracking-wider"
+					class="hero-fly hero-fly-right inline-block text-2xl font-light tracking-wider sm:text-3xl"
 					style="--d: 780ms">{m.main_hero_greeting()}</span
 				>
 				<br />
@@ -100,12 +100,12 @@
 				>
 			</div>
 			<!-- the place the avatar travels to — a plain spacer, no outline -->
-			<div bind:this={avatarAnchor} class="size-22 shrink-0"></div>
+			<div bind:this={avatarAnchor} class="size-16 shrink-0 sm:size-22"></div>
 
 			<!-- the travelling avatar -->
 			<div
 				bind:this={avatarEl}
-				class="hero-icon pointer-events-none absolute z-10 size-22 overflow-clip rounded-full border border-border"
+				class="hero-icon pointer-events-none absolute z-10 size-16 overflow-clip rounded-full border border-border sm:size-22"
 				style="left: {avatarLeft}; top: {avatarTop}; transform: translate(-50%, -50%) scale({avatarScale}); opacity: {avatarOpacity};"
 			>
 				<img
@@ -127,18 +127,20 @@
 	</section>
 
 	<section
-		class="mx-auto flex h-auto min-h-max w-full max-w-[1240px] flex-col px-4 sm:px-6"
+		class="mx-auto flex h-auto min-h-max w-full max-w-[1240px] flex-col px-5"
 		id="tech-stacks"
 	>
-		<div class="my-8 mr-auto ml-2 text-2xl font-light tracking-wider sm:ml-4">
+		<div class="my-8 mr-auto text-2xl font-light tracking-wider">
 			{m.main_section_tech_stacks()}
 		</div>
 		<TechGraph />
 	</section>
 
-	<section class="mx-auto mt-8 flex h-max w-max min-w-[70vw] flex-col" id="edu">
-		<div class="mr-auto ml-8 text-2xl font-light tracking-wider">{m.main_section_education()}</div>
-		<div class="relative mx-16 mt-8 flex flex-col gap-6">
+	<section class="mx-auto mt-8 flex w-full flex-col px-5 md:w-[70vw] md:px-0" id="edu">
+		<div class="mr-auto text-2xl font-light tracking-wider md:ml-8">
+			{m.main_section_education()}
+		</div>
+		<div class="relative mx-4 mt-8 flex flex-col gap-6 md:mx-16">
 			<!-- the root of the timeline -->
 			<div class="flex w-8 shrink-0 items-center justify-center">
 				<div
@@ -157,7 +159,7 @@
 						<div class="size-2 rounded-full border border-border bg-bg"></div>
 					</div>
 				</div>
-				<div class="my-auto text-sm font-light tracking-wide">
+				<div class="my-auto min-w-0 text-sm font-light tracking-wide">
 					<div class="text-base">{m.main_education_ee_title()}</div>
 					<div class="text-xs text-text/60">{m.main_education_ee_desc()}</div>
 				</div>
@@ -168,7 +170,7 @@
 						<div class="size-2 rounded-full border border-border bg-bg"></div>
 					</div>
 				</div>
-				<div class="my-auto text-sm font-light tracking-wide">
+				<div class="my-auto min-w-0 text-sm font-light tracking-wide">
 					<div class="text-base">{m.main_education_cde_title()}</div>
 					<div class="text-xs text-text/60">{m.main_education_cde_desc()}</div>
 				</div>
@@ -176,11 +178,11 @@
 		</div>
 	</section>
 
-	<section class="mx-auto mt-8 flex h-max w-max min-w-[70vw] flex-col" id="commercial">
-		<div class="mr-auto ml-8 text-2xl font-light tracking-wider">
+	<section class="mx-auto mt-8 flex w-full flex-col px-5 md:w-[70vw] md:px-0" id="commercial">
+		<div class="mr-auto text-2xl font-light tracking-wider md:ml-8">
 			{m.main_section_commercial()}
 		</div>
-		<div class="relative mx-16 mt-8 flex flex-col gap-6">
+		<div class="relative mx-4 mt-8 flex flex-col gap-6 md:mx-16">
 			<div class="absolute inset-y-0 left-4 w-px -translate-x-1/2 bg-border"></div>
 			<div class="flex">
 				<div class="flex w-8 shrink-0 items-center justify-center">
@@ -188,7 +190,7 @@
 						<div class="size-2 rounded-full border border-border bg-bg"></div>
 					</div>
 				</div>
-				<div class="my-auto text-sm font-light tracking-wide">
+				<div class="my-auto min-w-0 text-sm font-light tracking-wide">
 					<div class="text-base">{m.main_commercial_rightpick_title()}</div>
 					<div class="text-xs text-text/60">{m.main_commercial_rightpick_description()}</div>
 				</div>
@@ -199,8 +201,8 @@
 						<div class="size-2 rounded-full border border-border bg-bg"></div>
 					</div>
 				</div>
-				<div class="my-auto text-sm font-light tracking-wide">
-					<div class="flex flex-col">
+				<div class="my-auto min-w-0 text-sm font-light tracking-wide">
+					<div class="flex min-w-0 flex-col">
 						<div class="text-base">{m.main_commercial_eduai_title()}</div>
 						<div class="text-xs text-text/60">{m.main_commercial_eduai_description()}</div>
 						<div class="mt-1 text-xs text-text/40 italic">{m.main_commercial_eduai_note()}</div>
@@ -210,12 +212,14 @@
 		</div>
 	</section>
 
-	<section id="projects" class="mx-auto mt-8 flex w-[70vw] flex-col">
-		<div class="mb-8 ml-8 text-2xl font-light tracking-wider">{m.main_section_projects()}</div>
+	<section id="projects" class="mx-auto mt-8 flex w-full flex-col px-5 md:w-[70vw] md:px-0">
+		<div class="mr-auto mb-8 text-2xl font-light tracking-wider md:ml-8">
+			{m.main_section_projects()}
+		</div>
 		<ProjectGrid />
 	</section>
 
-	<section id="findme" class="mx-auto mt-8 flex w-max min-w-[70vw] flex-col">
+	<section id="findme" class="mx-auto mt-8 flex w-full flex-col px-5 md:w-[70vw] md:px-0">
 		<div class="mx-auto mb-16 text-center">
 			<a
 				class="my-2 inline-flex items-center gap-2 border-b border-transparent text-sm font-light tracking-wide text-text/60 transition-all hover:border-text"
@@ -238,7 +242,7 @@
 		</div>
 	</section>
 
-	<span class="mx-12 mb-4 text-center text-xs font-light tracking-wide text-text/50"
+	<span class="mx-5 mb-4 text-center text-xs font-light tracking-wide text-text/50"
 		>{m.main_footer_built_with()}</span
 	>
 </main>

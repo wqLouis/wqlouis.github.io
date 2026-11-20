@@ -19,13 +19,14 @@
 </script>
 
 <!--
-	The landscape face of the navigation: a single pill with every action.
+	The bar face of the navigation: a single pill with every action.
 	It is still — it never drifts with the scroll.
 
-	Portrait screens get the wheel instead (see NavRoulette), so this bar is
-	only laid out when the viewport is wider than it is tall.
+	A touch device gets the wheel instead (see NavRoulette). The face is
+	chosen by the device and not by the orientation: a phone turned sideways
+	is still a phone, and the bar does not fit in a phone held sideways.
 -->
-<div class="pointer-events-none fixed inset-x-0 bottom-12 z-100 hidden landscape:flex">
+<div class="pointer-events-none fixed inset-x-0 bottom-12 z-100 hidden pointer-fine:flex">
 	<div
 		class="layout pointer-events-auto m-auto flex min-w-max cursor-default gap-3 rounded-lg border border-border bg-fg p-2 text-sm text-text/70 shadow-[0_2px_12px_rgba(0,0,0,0.08)]"
 	>

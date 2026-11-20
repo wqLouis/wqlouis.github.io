@@ -249,14 +249,15 @@
 ></div>
 
 <!--
-	The portrait face of the navigation: one round button in the corner.
+	The wheel face of the navigation: one round button in the corner.
 	Rest on it and the wheel opens — keep holding, slide onto the face you
 	want and let go to take it.
 
-	Landscape screens get the bar instead (see NavBar), so this wheel is
-	only laid out when the viewport is taller than it is wide.
+	A device with a mouse gets the bar instead (see NavBar). The face is
+	chosen by the device and not by the orientation: a phone turned sideways
+	is still a phone, and the bar does not fit in a phone held sideways.
 -->
-<div class="pointer-events-none fixed inset-0 z-95 hidden portrait:block">
+<div class="pointer-events-none fixed inset-0 z-95 hidden pointer-coarse:block">
 	{#if open}
 		<!-- the wheel: a fan in the upper left, the corner is off screen -->
 		<div class="absolute inset-0 bg-bg/70 backdrop-blur-[2px]"></div>
@@ -270,10 +271,11 @@
 					: 'opacity-100'}"
 				style="left: {item.x}px; top: {item.y}px; transform: translate(-50%, -50%);"
 			>
+				<!-- a face is the bar's button, on the bar's own surface -->
 				<div
-					class="flex size-11 items-center justify-center rounded-full border bg-fg shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-colors duration-150 {on
+					class="flex size-11 items-center justify-center rounded-full border bg-fg text-text/70 shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-colors duration-150 {on
 						? 'border-text/45 text-text'
-						: 'border-border text-text/60'}"
+						: 'border-border'}"
 				>
 					<span class="{item.action?.icon} size-5"></span>
 				</div>
@@ -300,9 +302,9 @@
 					style="left: {item.x}px; top: {item.y}px; transform: translate(-50%, -50%);"
 				>
 					<div
-						class="flex size-9 items-center justify-center rounded-full border bg-fg text-xs font-light tracking-wider shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-colors duration-150 {on
+						class="flex size-9 items-center justify-center rounded-full border bg-fg text-xs font-light tracking-wider text-text/70 shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-colors duration-150 {on
 							? 'border-text/45 text-text'
-							: 'border-border text-text/60'}"
+							: 'border-border'}"
 					>
 						{item.label}
 					</div>
@@ -317,7 +319,7 @@
 	type="button"
 	aria-label={t('common_nav_menu')}
 	title={t('common_nav_menu')}
-	class="pointer-events-auto fixed z-100 hidden touch-none items-center justify-center rounded-full border border-border bg-fg text-text/70 shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-colors duration-150 select-none active:bg-accent/10 portrait:flex"
+	class="pointer-events-auto fixed z-100 hidden touch-none items-center justify-center rounded-full border border-border bg-fg text-text/70 shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-colors duration-150 select-none active:bg-accent/10 pointer-coarse:flex"
 	style="width: {FAB}px; height: {FAB}px; right: calc({INSET}px + env(safe-area-inset-right, 0px)); bottom: calc({INSET}px + env(safe-area-inset-bottom, 0px));"
 	onpointerdown={onPointerDown}
 	onpointermove={onPointerMove}
