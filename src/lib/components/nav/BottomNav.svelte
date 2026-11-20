@@ -15,5 +15,5 @@
 	wheel. Either way the navigation never drifts with the scroll.
 -->
 <NavBar />
-<NavRoulette onopen={() => (sheetOpen = true)} />
+<NavRoulette onopen={() => (sheetOpen = true)} sheetopen={sheetOpen} />
 <NavSheet open={sheetOpen} onclose={() => (sheetOpen = false)} />

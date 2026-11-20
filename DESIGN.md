@@ -243,6 +243,7 @@ The project and blog indexes share one visual language with the project detail p
 - A list page carries exactly one piece of text in its header — the title. No eyebrow, no tagline, no count; the rows speak for themselves.
 - Below 640px the row stacks (title / date / description / pills) inside the 12-column grid and every tap target stays at least 40px tall.
 - The floating bottom navigation sits 48px above the viewport edge — the footer keeps an extra bottom padding on small screens so the navigation never covers the notice.
+- A menu is never a child of its trigger. A button inside a button is not a button: the browser closes the outer one as soon as it reads the inner one, and the menu ends up somewhere else on the page. The menu is a sibling, positioned by the wrapper around the trigger.
 
 ## Projects Grid
 
@@ -259,7 +260,7 @@ The projects section of the front page is one plain grid (`src/lib/components/ma
 
 The site has one navigation with two faces. The face is chosen by the device, not by the orientation.
 
-- **A touch device** gets the wheel: one round button in the bottom-right corner — 52px, 20px from the edge, plus whatever the safe area asks for. Rest on it for 380ms and the wheel opens; keep holding, slide onto the face you want and let go to take it. A short tap instead opens the sheet: the plain list of every action.
+- **A touch device** gets the wheel: one round button in the bottom-right corner — 52px, 28px from the edge, plus whatever the safe area asks for. Rest on it for 380ms and the wheel opens; keep holding, slide onto the face you want and let go to take it. A short tap instead opens the sheet: the plain list of every action.
 - **A device with a mouse** gets the bar: the same pill as before, centred 48px above the bottom edge, with a tooltip on every icon.
 - A phone turned sideways is still a phone, and the bar does not fit in a phone held sideways — so the test is the pointer, not the shape of the screen.
 - The switch is made with the `pointer-coarse:` and `pointer-fine:` variants and not with JavaScript. Both faces are in the document and the media query hides the one that does not belong, so the static HTML is already right and the page never flashes.
@@ -272,12 +273,16 @@ The site has one navigation with two faces. The face is chosen by the device, no
 - A face is a **circle on the bar's own surface** — the cream paper, the beige border, the muted text and the one soft shadow the bar has always had. It is the bar's button, cut out of the bar.
 - A face is chosen by **angle, not by distance** — whichever wedge the finger points at is the one that lights up, and its label appears under it.
 - **The language face opens a second ring that stands on the language face itself.** The three locales (EN, 简, 繁) are arranged on a short arc around the language button, so the face that opened them is the centre of the ring. The first ring fades to a quarter while the second one is open.
-- Letting go over a face takes it. Letting go on the button, in the gap between two faces, or on the language face without stepping into its ring does nothing.
+- Letting go over a face takes it. Letting go on the button or in the gap between two faces does nothing.
+- **Letting go on the language face opens the second ring and lets it wait.** The ring stays open with the three locales standing around the language face, and a tap on one of them takes it. The wheel can be walked by finger and by tap, and the ring is the same in both.
+- **A tap opens one thing, never two.** The browser sends a click after every tap, and when the tap opens the sheet that click lands on a row of the new sheet and takes an action the finger never asked for — the mail address most of all. The click that follows a gesture is swallowed, and only that one: the same spot, within six pixels.
+- The wheel may only take its own five faces. Nothing else on the page can be reached through it.
 - A short tick of vibration marks every change of face, a slightly longer one marks the choice. A phone may not have a motor and nothing breaks if it does not.
 
 ### The sheet
 
 - A tap on the wheel button opens the sheet: a bottom panel with every action on it, 44px tall rows, the language row folding out into the three locales.
+- The button gets out of the way while the sheet is open — it is not a thing that hides behind a panel and then answers a tap from the place it used to be.
 - The sheet is also the path a keyboard or a screen reader takes. The wheel is a gesture, and a gesture is not an interface.
 
 ### The motion

@@ -106,6 +106,13 @@ export function activate(action: NavAction) {
 				goto(resolve(action.route));
 				return;
 			}
-			if (action.href) window.open(action.href, '_blank', 'noopener');
+			if (action.href) {
+				// a mail address opens the composer, not a tab behind it
+				if (action.href.startsWith('mailto:')) {
+					window.location.href = action.href;
+					return;
+				}
+				window.open(action.href, '_blank', 'noopener');
+			}
 	}
 }

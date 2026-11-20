@@ -9,7 +9,7 @@
 	/** the diameter of the button (px) */
 	const FAB = 52;
 	/** the gap between the button and the screen edge (px) */
-	const INSET = 20;
+	const INSET = 28;
 	/** the radius of the first ring (px) */
 	const ROOT_R = 120;
 	/** the first ring runs from the left to the top (degrees, 0 = right, 90 = down) */
@@ -23,7 +23,7 @@
 	/** the band the second ring answers in (px) */
 	const SUB_BAND = [40, 78];
 
-	let { onopen }: { onopen: () => void } = $props();
+	let { onopen, sheetopen = false }: { onopen: () => void; sheetopen?: boolean } = $props();
 
 	// @ts-expect-error - paraglide generates exports with special characters
 	const t = (key: string) => (m as Record<string, () => string>)[key]?.() ?? key;
@@ -75,6 +75,8 @@
 	/* the state of the gesture */
 	let pressing = $state(false);
 	let open = $state(false);
+	/** the wheel stays open and waits for a tap */
+	let sticky = $state(false);
 	let layer = $state<'root' | 'sub'>('root');
 	let highlighted = $state<NavAction['id'] | null>(null);
 	let subHighlighted = $state<Locale | null>(null);
@@ -86,6 +88,24 @@
 	function buzz(ms: number) {
 		// a short tick — the phone may not have a motor, and that is fine
 		navigator.vibrate?.(ms);
+	}
+
+	/**
+	 * The browser sends a click after every tap. When the tap opens the
+	 * sheet, that click lands on a row of the new sheet and takes an
+	 * action the finger never asked for. The click that follows the
+	 * gesture is swallowed here — only the one at the same spot.
+	 */
+	function swallowClick(x: number, y: number) {
+		const stop = (event: MouseEvent) => {
+			document.removeEventListener('click', stop, true);
+			if (Math.abs(event.clientX - x) < 6 && Math.abs(event.clientY - y) < 6) {
+				event.stopPropagation();
+				event.preventDefault();
+			}
+		};
+		document.addEventListener('click', stop, true);
+		setTimeout(() => document.removeEventListener('click', stop, true), 300);
 	}
 
 	/** the items of the first ring */
@@ -194,8 +214,48 @@
 		highlighted = next;
 	}
 
+	/** closes the wheel */
+	function close() {
+		open = false;
+		sticky = false;
+		layer = 'root';
+		highlighted = null;
+		subHighlighted = null;
+	}
+
+	/** takes one of the faces — by a tap, when the wheel stands open */
+	function pickFace(id: NavAction['id']) {
+		const action = actions.find((a) => a.id === id);
+		if (!action) return;
+		if (action.id === 'lang') {
+			// the second ring opens and waits for a tap
+			open = true;
+			sticky = true;
+			layer = 'sub';
+			return;
+		}
+		// only the wheel's own faces can be taken
+		if (!WHEEL.includes(action.id)) return;
+		activate(action);
+		buzz(14);
+		close();
+	}
+
+	/** takes one of the three languages */
+	function pickLocale(id: Locale) {
+		locale.set(id);
+		buzz(14);
+		close();
+	}
+
 	function onPointerDown(event: PointerEvent) {
 		if (event.pointerType === 'mouse' && event.button !== 0) return;
+		swallowClick(event.clientX, event.clientY);
+		if (sticky) {
+			// the wheel stands open — a press on the button puts it away
+			close();
+			return;
+		}
 		pressing = true;
 		startX = event.clientX;
 		startY = event.clientY;
@@ -231,21 +291,32 @@
 			return;
 		}
 
-		open = false;
-		layer = 'root';
-
 		if (subHighlighted) {
 			locale.set(subHighlighted);
 			buzz(14);
-			subHighlighted = null;
-			highlighted = null;
+			close();
 			return;
 		}
 
 		const action = actions.find((a) => a.id === highlighted);
 		highlighted = null;
-		// releasing on the language wedge without stepping into its ring does nothing
-		if (!action || action.id === 'lang') return;
+
+		if (!action) {
+			close();
+			return;
+		}
+
+		if (action.id === 'lang') {
+			// the second ring opens and waits for a tap
+			open = true;
+			sticky = true;
+			layer = 'sub';
+			return;
+		}
+
+		close();
+		// only the wheel's own faces can be taken
+		if (!WHEEL.includes(action.id)) return;
 		activate(action);
 		buzz(14);
 	}
@@ -253,10 +324,7 @@
 	function onPointerCancel() {
 		pressing = false;
 		clearTimeout(holdTimer);
-		open = false;
-		layer = 'root';
-		highlighted = null;
-		subHighlighted = null;
+		close();
 	}
 </script>
 
@@ -270,19 +338,23 @@
 <!--
 	The wheel face of the navigation: one round button in the corner.
 	Rest on it and the wheel opens — keep holding, slide onto the face you
-	want and let go to take it.
+	want and let go to take it. Let go on the language face and the second
+	ring opens and waits for a tap.
 
 	A device with a mouse gets the bar instead (see NavBar). The face is
 	chosen by the device and not by the orientation: a phone turned sideways
 	is still a phone, and the bar does not fit in a phone held sideways.
 -->
 <div class="pointer-events-none fixed inset-0 z-95 hidden pointer-coarse:block">
-	<!-- the scrim: it comes up with the wheel -->
-	<div
-		class="absolute inset-0 bg-bg/70 backdrop-blur-[2px] transition-opacity duration-300 {open
+	<!-- the scrim: it comes up with the wheel, and it takes a tap to close it -->
+	<button
+		type="button"
+		aria-label={t('common_nav_close')}
+		class="absolute inset-0 cursor-default bg-bg/70 backdrop-blur-[2px] transition-opacity duration-300 {open
 			? 'opacity-100'
-			: 'opacity-0'}"
-	></div>
+			: 'opacity-0'} {sticky ? 'pointer-events-auto' : ''}"
+		onclick={close}
+	></button>
 
 	<!-- the wheel: a fan in the upper left, the corner is off screen -->
 	{#each rootItems as item, i (item.id)}
@@ -290,7 +362,7 @@
 		<div
 			class="face absolute flex flex-col items-center {open
 				? 'opacity-100'
-				: 'opacity-0'} {layer === 'sub' && item.id !== 'lang' ? 'opacity-25' : ''}"
+				: 'opacity-0'} {layer === 'sub' && item.id !== 'lang' ? 'face-dim' : ''}"
 			style="left: {item.x}px; top: {item.y}px; {faceTransform(
 				item.x,
 				item.y,
@@ -298,13 +370,17 @@
 			)}; transition-delay: {faceDelay(i, open, rootItems.length)};"
 		>
 			<!-- a face is the bar's button, on the bar's own surface -->
-			<div
+			<button
+				type="button"
+				title={item.action?.label}
+				aria-label={item.action?.label}
 				class="flex size-11 items-center justify-center rounded-full border bg-fg text-text/70 shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-colors duration-150 {on
 					? 'border-text/45 text-text'
-					: 'border-border'}"
+					: 'border-border'} {sticky ? 'pointer-events-auto' : ''}"
+				onclick={() => pickFace(item.id)}
 			>
 				<span class="{item.action?.icon} size-5"></span>
-			</div>
+			</button>
 			{#if on && layer === 'root'}
 				<span
 					class="absolute top-full mt-1.5 rounded-sm border border-border/60 bg-fg px-1.5 py-0.5 text-[10px] font-light tracking-wider whitespace-nowrap text-text/70"
@@ -322,24 +398,27 @@
 	-->
 	{#each subItems as item, i (item.id)}
 		{@const on = subHighlighted === item.id}
-		<div
+		<button
+			type="button"
+			aria-label={item.label}
 			class="face absolute flex flex-col items-center {layer === 'sub'
 				? 'opacity-100'
-				: 'opacity-0'}"
+				: 'opacity-0'} {sticky ? 'pointer-events-auto' : ''}"
 			style="left: {item.x}px; top: {item.y}px; {subTransform(
 				item.x,
 				item.y,
 				layer === 'sub'
 			)}; transition-delay: {faceDelay(i, layer === 'sub', subItems.length)};"
+			onclick={() => pickLocale(item.id)}
 		>
-			<div
+			<span
 				class="flex size-9 items-center justify-center rounded-full border bg-fg text-xs font-light tracking-wider text-text/70 shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-colors duration-150 {on
 					? 'border-text/45 text-text'
 					: 'border-border'}"
 			>
 				{item.label}
-			</div>
-		</div>
+			</span>
+		</button>
 	{/each}
 </div>
 
@@ -348,7 +427,9 @@
 	type="button"
 	aria-label={t('common_nav_menu')}
 	title={t('common_nav_menu')}
-	class="pointer-events-auto fixed z-100 hidden touch-none items-center justify-center rounded-full border border-border bg-fg text-text/70 shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-colors duration-150 select-none active:bg-accent/10 pointer-coarse:flex"
+	class="pointer-events-auto fixed z-100 hidden touch-none items-center justify-center rounded-full border border-border bg-fg text-text/70 shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-colors duration-150 select-none active:bg-accent/10 pointer-coarse:flex {sheetopen
+		? 'pointer-events-none opacity-0'
+		: ''}"
 	style="width: {FAB}px; height: {FAB}px; right: calc({INSET}px + env(safe-area-inset-right, 0px)); bottom: calc({INSET}px + env(safe-area-inset-bottom, 0px));"
 	onpointerdown={onPointerDown}
 	onpointermove={onPointerMove}
@@ -364,6 +445,11 @@
 		transition:
 			transform 340ms cubic-bezier(0.22, 1, 0.36, 1),
 			opacity 240ms ease;
+	}
+
+	/* the first ring steps back when the second ring comes forward */
+	.face-dim {
+		opacity: 0.25;
 	}
 
 	@media (prefers-reduced-motion: reduce) {

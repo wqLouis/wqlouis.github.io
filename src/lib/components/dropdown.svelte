@@ -17,7 +17,18 @@
 	let xShift = 0;
 	let yShift = 0;
 
+	/** the shifts are measured again on every open — the menu must sit on
+	 *  the trigger, not where it was when the page loaded */
+	function measure() {
+		const objRect = trigger.getBoundingClientRect();
+		const dropRect = dropdown.getBoundingClientRect();
+
+		xShift = objRect.width / 2 - dropRect.width / 2;
+		yShift = objRect.height / 2 - dropRect.height / 2;
+	}
+
 	const openHandler = () => {
+		measure();
 		dropdown.style.left = `calc(${xShift}px + ${popOffset.x}%)`;
 		dropdown.style.bottom = `calc(${yShift}px + ${popOffset.y}%)`;
 		dropdown.classList.toggle('opacity-100', true);
@@ -50,11 +61,7 @@
 	}
 
 	onMount(() => {
-		const objRect = trigger.getBoundingClientRect();
-		const dropRect = dropdown.getBoundingClientRect();
-
-		xShift = objRect.width / 2 - dropRect.width / 2;
-		yShift = objRect.height / 2 - dropRect.height / 2;
+		measure();
 
 		dropdown.style.left = `${xShift}px`;
 		dropdown.style.bottom = `${yShift}px`;
@@ -75,15 +82,22 @@
 	});
 </script>
 
-<button
-	type="button"
-	onclick={toggle}
-	bind:this={trigger}
-	class="relative my-auto flex cursor-pointer items-center justify-center rounded-md border border-transparent transition-all {triggerClass}"
-	aria-expanded={isOpen}
-	aria-haspopup="true"
->
-	{@render children()}
+<!--
+	The menu is a sibling of the trigger, not a child of it: a button
+	inside a button is not a button, and the browser closes the outer one
+	as soon as it reads the inner one.
+-->
+<div class="relative my-auto inline-flex">
+	<button
+		type="button"
+		onclick={toggle}
+		bind:this={trigger}
+		class="flex cursor-pointer items-center justify-center rounded-md border border-transparent transition-all {triggerClass}"
+		aria-expanded={isOpen}
+		aria-haspopup="true"
+	>
+		{@render children()}
+	</button>
 
 	<div
 		bind:this={dropdown}
@@ -91,4 +105,4 @@
 	>
 		{@render menu()}
 	</div>
-</button>
+</div>
